@@ -1,0 +1,20 @@
+CREATE TABLE IF NOT EXISTS ddcet_admissions (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    sr_no INT,
+    institute_name VARCHAR(255),
+    city VARCHAR(100),
+    inst_type VARCHAR(50),
+    branch VARCHAR(255),
+    quota VARCHAR(50),
+    category VARCHAR(10),
+    first_marks DECIMAL(5,2),
+    first_rank INT,
+    last_marks DECIMAL(5,2),
+    last_rank INT,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    INDEX idx_institute (institute_name),
+    INDEX idx_branch (branch),
+    INDEX idx_category (category),
+    INDEX idx_quota (quota),
+    INDEX idx_last_rank (last_rank)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
