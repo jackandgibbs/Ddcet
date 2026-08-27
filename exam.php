@@ -6,6 +6,7 @@ $user = requireAuth();
 $testId = (int) ($_GET['test_id'] ?? 0);
 $mode = $_GET['mode'] ?? '';
 $resumeAttemptId = (int) ($_GET['attempt_id'] ?? 0);
+$freeMockBypass = false;  // BUG-013 fix: initialize before use (was undefined in some code paths)
 
 // Resume an existing attempt (from custom test)
 if ($resumeAttemptId) {
@@ -23,7 +24,11 @@ if ($resumeAttemptId) {
     $optionsMap = [];
     if ($qIds) {
         $options = supabaseRest('options?question_id=in.(' . implode(',', $qIds) . ')&select=*&order=position') ?? [];
-        foreach ($options as $opt) $optionsMap[$opt['question_id']][] = $opt;
+        foreach ($options as $opt) {
+            if (strpos($opt['option_text'], 'Placeholder') === false) {
+                $optionsMap[$opt['question_id']][] = $opt;
+            }
+        }
     }
 
     // A duel attempt carries challenge_id + a real pool mode; use that mode's
@@ -40,9 +45,11 @@ if ($resumeAttemptId) {
     $elapsed = time() - $startTime;
     $remaining = max(0, $duration - $elapsed);
 
+    // BUG-032 fix: add JSON_HEX_TAG | JSON_HEX_AMP to prevent XSS via question text
+    // containing '</script>' (the main path already uses these flags; this resume path didn't).
     $questionsJson = json_encode(array_map(function($q) use ($optionsMap) {
         return ['id' => $q['id'], 'text' => $q['question_text'], 'text_gu' => $q['question_text_gu'] ?? null, 'image' => $q['question_image'] ?? null, 'marks' => $q['marks'] ?? 1, 'negative' => (float)($q['negative_marks'] ?? 0), 'options' => array_map(fn($o) => ['id' => $o['id'], 'text' => $o['option_text'], 'text_gu' => $o['option_text_gu'] ?? null, 'image' => $o['option_image'] ?? null], $optionsMap[$q['id']] ?? [])];
-    }, $questions));
+    }, $questions), JSON_HEX_TAG | JSON_HEX_AMP);
 
     goto render_exam;
 }
@@ -142,8 +149,9 @@ if ($testId) {
     $config = $poolConfigs[$mode];
     $subject = $_GET['subject'] ?? '';
 
-    // Get questions this student has already seen
-    $seenData = supabaseRest('attempt_answers?select=question_id,attempts!inner(student_id)&attempts.student_id=eq.' . $user['id']) ?? [];
+    // Get questions this student has already seen in the last 30 days
+    $thirtyDaysAgo = date('Y-m-d', strtotime('-30 days'));
+    $seenData = supabaseRest('attempt_answers?select=question_id,attempts!inner(student_id,started_at)&attempts.student_id=eq.' . $user['id'] . '&attempts.started_at=gte.' . $thirtyDaysAgo) ?? [];
     $seenIds = array_unique(array_column($seenData, 'question_id'));
 
     // For adaptive mode: get student's subject accuracy
@@ -165,30 +173,29 @@ if ($testId) {
     // Previous year: filter by explanation field containing the year (e.g. "DE-2024")
     if ($mode === 'previous_year') {
         $year = $_GET['year'] ?? '2024';
-        $poolQ = supabaseRest('questions?test_id=is.null&explanation=like.*' . urlencode($year) . '*&select=*&limit=200') ?? [];
+        $poolQ = supabaseRest('questions?test_id=is.null&explanation=like.*' . urlencode($year) . '*&select=id&limit=200') ?? [];
         if (empty($poolQ)) {
             // Fallback: try chapter field
-            $poolQ = supabaseRest('questions?test_id=is.null&chapter=like.*' . urlencode($year) . '*&select=*&limit=200') ?? [];
+            $poolQ = supabaseRest('questions?test_id=is.null&chapter=like.*' . urlencode($year) . '*&select=id&limit=200') ?? [];
         }
         if (empty($poolQ)) {
-            // Final fallback: random 100
-            $poolQ = supabaseRest('questions?test_id=is.null&select=*&limit=500') ?? [];
+            // Fallback: random
+            $poolQ = supabaseRest('questions?test_id=is.null&select=id&limit=500') ?? [];
         }
         shuffle($poolQ);
         $questions = array_slice($poolQ, 0, $config['total']);
     }
     // Daily challenge: 1 unique per day (seed by date for same set all day)
+    // BUG-009 fix: use the seeded shuffle DIRECTLY without seen/unseen reordering,
+    // so all students get the identical question set regardless of their history.
     elseif ($mode === 'daily_challenge') {
-        $poolQ = supabaseRest('questions?test_id=is.null&select=*&limit=2000') ?? [];
+        $poolQ = supabaseRest('questions?test_id=is.null&select=id&limit=2000') ?? [];
         // Use today's date as seed for consistent daily set
         $daySeed = crc32(date('Y-m-d') . 'ddcet_daily');
         mt_srand($daySeed);
         shuffle($poolQ);
-        // Prioritize unseen
-        $unseen = array_filter($poolQ, fn($q) => !in_array($q['id'], $seenIds));
-        $seen = array_filter($poolQ, fn($q) => in_array($q['id'], $seenIds));
-        $questions = array_slice(array_merge(array_values($unseen), array_values($seen)), 0, $config['total']);
         mt_srand(); // Reset seed
+        $questions = array_slice($poolQ, 0, $config['total']);
     }
     // Revision mode: pick questions they got wrong (spaced repetition)
     elseif ($mode === 'revision') {
@@ -200,13 +207,12 @@ if ($testId) {
         $wrongIds = array_values(array_unique(array_column($wrongAnswers, 'question_id')));
         if ($wrongIds) {
             shuffle($wrongIds);
-            $questions = supabaseRest('questions?id=in.(' . implode(',', array_slice($wrongIds, 0, $config['total'])) . ')&select=*') ?? [];
-            shuffle($questions);
+            $questions = array_map(fn($id) => ['id' => $id], array_slice($wrongIds, 0, $config['total']));
         } else {
             $questions = [];
         }
     } elseif ($mode === 'subject_wise' && $subject) {
-        $poolQ = supabaseRest('questions?test_id=is.null&subject=eq.' . urlencode($subject) . '&select=*&limit=500') ?? [];
+        $poolQ = supabaseRest('questions?test_id=is.null&subject=eq.' . urlencode($subject) . '&select=id&limit=500') ?? [];
         // Prioritize unseen
         $unseen = array_filter($poolQ, fn($q) => !in_array($q['id'], $seenIds));
         $seen = array_filter($poolQ, fn($q) => in_array($q['id'], $seenIds));
@@ -214,30 +220,12 @@ if ($testId) {
         shuffle($seen);
         $questions = array_slice(array_merge(array_values($unseen), array_values($seen)), 0, $config['total']);
     } elseif (!empty($config['subjects'])) {
-        // Full mock with adaptive weighting
+        // Full mock
         $questions = [];
         $subjectConfig = $config['subjects'];
 
-        // Adjust counts based on weak subjects (give more to weak)
-        if ($weakSubjects) {
-            $totalQ = $config['total'];
-            $subjects = array_keys($subjectConfig);
-            $adjusted = [];
-            $totalWeight = 0;
-            foreach ($subjects as $s) {
-                // Lower accuracy = higher weight (inverse)
-                $accuracy = $weakSubjects[$s] ?? 0.5;
-                $weight = 1 + (1 - $accuracy); // ranges 1.0 to 2.0
-                $adjusted[$s] = $weight;
-                $totalWeight += $weight;
-            }
-            foreach ($subjects as $s) {
-                $subjectConfig[$s] = (int) round(($adjusted[$s] / $totalWeight) * $totalQ);
-            }
-        }
-
         foreach ($subjectConfig as $sub => $count) {
-            $subQ = supabaseRest('questions?test_id=is.null&subject=eq.' . urlencode($sub) . '&select=*&limit=500') ?? [];
+            $subQ = supabaseRest('questions?test_id=is.null&subject=eq.' . urlencode($sub) . '&select=id&limit=500') ?? [];
             // Prioritize unseen
             $unseen = array_filter($subQ, fn($q) => !in_array($q['id'], $seenIds));
             $seen = array_filter($subQ, fn($q) => in_array($q['id'], $seenIds));
@@ -249,13 +237,23 @@ if ($testId) {
         shuffle($questions);
     } else {
         // Random from all (rapid fire, daily, weekly)
-        $poolQ = supabaseRest('questions?test_id=is.null&select=*&limit=1000') ?? [];
+        // BUG-030 fix: only select=id here (fetching 1000 full questions is 2MB+)
+        $poolQ = supabaseRest('questions?test_id=is.null&select=id&limit=1000') ?? [];
         // Prioritize unseen
         $unseen = array_filter($poolQ, fn($q) => !in_array($q['id'], $seenIds));
         $seen = array_filter($poolQ, fn($q) => in_array($q['id'], $seenIds));
         shuffle($unseen);
         shuffle($seen);
         $questions = array_slice(array_merge(array_values($unseen), array_values($seen)), 0, $config['total']);
+    }
+
+    // BUG-030 fix part 2: Now that we have picked the exact N questions (which currently
+    // only have 'id' fields), fetch their full contents from the database.
+    $pickedIds = array_column($questions, 'id');
+    if ($pickedIds) {
+        $fullQs = supabaseRest('questions?id=in.(' . implode(',', $pickedIds) . ')&select=*') ?? [];
+        // Preserve the randomized order we just created
+        $questions = orderRowsByIds($fullQs, $pickedIds);
     }
 }
 
@@ -308,7 +306,9 @@ $qIds = array_column($questions, 'id');
 if ($qIds) {
     $options = supabaseRest('options?question_id=in.(' . implode(',', $qIds) . ')&select=*&order=position') ?? [];
     foreach ($options as $opt) {
-        $optionsMap[$opt['question_id']][] = $opt;
+        if (strpos($opt['option_text'], 'Placeholder') === false) {
+            $optionsMap[$opt['question_id']][] = $opt;
+        }
     }
 }
 
@@ -334,11 +334,26 @@ if ($attempt) {
         $questions = orderRowsByIds(supabaseRest('questions?id=in.(' . implode(',', $resumeQIds) . ')&select=*') ?? [], $resumeQIds);
         $optionsMap = [];
         $rOpts = supabaseRest('options?question_id=in.(' . implode(',', $resumeQIds) . ')&select=*&order=position') ?? [];
-        foreach ($rOpts as $opt) $optionsMap[$opt['question_id']][] = $opt;
+        foreach ($rOpts as $opt) {
+            if (strpos($opt['option_text'], 'Placeholder') === false) {
+                $optionsMap[$opt['question_id']][] = $opt;
+            }
+        }
     }
 }
 
 if (!$attempt) {
+    // BUG-023 fix: Check for an existing in-progress attempt first to prevent
+    // double-starts if the user double-clicks the "Start" button or navigates
+    // back. The old code blindly created a new attempt on every hit.
+    $checkFilter = 'student_id=eq.' . $user['id'] . '&status=eq.in_progress';
+    $checkFilter .= $testId ? '&test_id=eq.' . $testId : '&mode=eq.' . urlencode($mode);
+    $existing = supabaseRest('attempts?' . $checkFilter . '&select=id&limit=1');
+    if (!empty($existing[0])) {
+        header('Location: ' . BASE_PATH . 'exam.php?attempt_id=' . $existing[0]['id']);
+        exit;
+    }
+
     // Enforce per-mode daily limits ONLY when creating a brand-new attempt.
     // The one-time free full mock skips the limit (it has its own eligibility gate).
     if (!$testId && !$freeMockBypass) {
@@ -361,11 +376,22 @@ if (!$attempt) {
     // Pre-create answer rows, recording the question order (position) so a resume
     // renders them in the same sequence shown on first load.
     if ($attempt) {
+        // BUG-004 fix: deduplicate question IDs before inserting answer rows.
+        // A small question pool can produce duplicate IDs after shuffle+slice,
+        // which violates the unique constraint on (attempt_id, question_id) and
+        // causes the entire batch insert to fail silently — the exam starts with
+        // 0 answer rows, and submit_exam.php returns 'no_answers' error.
         $answerRows = [];
+        $seenQIds = [];
         foreach ($questions as $i => $q) {
+            if (isset($seenQIds[$q['id']])) continue;  // skip duplicate
+            $seenQIds[$q['id']] = true;
             $answerRows[] = ['attempt_id' => $attempt['id'], 'question_id' => $q['id'], 'position' => $i];
         }
-        if ($answerRows) supabaseRest('attempt_answers', 'POST', $answerRows);
+        // Insert in chunks (like custom-test.php does) for reliability.
+        foreach (array_chunk($answerRows, 50) as $chunk) {
+            supabaseRest('attempt_answers', 'POST', $chunk);
+        }
     }
 }
 
@@ -394,7 +420,7 @@ $questionsJson = json_encode(array_map(function($q) use ($optionsMap) {
         'negative' => (float) ($q['negative_marks'] ?? 0),
         'options' => array_map(fn($o) => ['id' => $o['id'], 'text' => $o['option_text'], 'text_gu' => $o['option_text_gu'] ?? null, 'image' => $o['option_image'] ?? null], $optionsMap[$q['id']] ?? []),
     ];
-}, $questions), JSON_HEX_TAG | JSON_HEX_AMP);
+}, $questions), JSON_HEX_TAG | JSON_HEX_AMP | JSON_HEX_APOS | JSON_HEX_QUOT);
 render_exam:
 ?>
 <!DOCTYPE html>
@@ -682,7 +708,7 @@ function toggleLanguage() {
     // Persist to the attempt so the result/review screen can match the medium.
     fetch('<?= BASE_PATH ?>api/set_exam_language.php', {
         method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
+        headers: { 'Content-Type': 'application/json', 'X-CSRF-Token': '<?= htmlspecialchars(csrfToken()) ?>' },
         body: JSON.stringify({ attempt_id: attemptId, language: examLang })
     }).catch(() => {});
 }
@@ -736,14 +762,21 @@ let timerInterval = null;
 let examSubmitted = false;   // guards against repeated submits (timer + manual)
 function startTimer() {
     const timerEl = document.getElementById('timer');
+    // BUG-008 fix: compute remaining time from a fixed end-time instead of
+    // decrementing a counter. setInterval pauses when the tab/app is
+    // backgrounded (iOS Safari freezes timers entirely in PWA standalone),
+    // so a decrementing counter drifts — the student thinks they have more
+    // time than actually remains. Using Date.now() each tick means the
+    // display always reflects real wall-clock elapsed time.
+    const endTime = Date.now() + timeLeft * 1000;
     const tick = () => {
-        if (examSubmitted) return;           // stop ticking once we've submitted
+        if (examSubmitted) return;
+        timeLeft = Math.max(0, Math.floor((endTime - Date.now()) / 1000));
         if (timeLeft <= 0) {
             if (timerInterval) { clearInterval(timerInterval); timerInterval = null; }
-            submitExam();                    // auto-submit ONCE when time runs out
+            submitExam();
             return;
         }
-        timeLeft--;
         const m = Math.floor(timeLeft / 60);
         const s = timeLeft % 60;
         timerEl.textContent = `${String(m).padStart(2,'0')}:${String(s).padStart(2,'0')}`;
@@ -817,7 +850,7 @@ function showQuestion(idx) {
                 // written "$$$1" — "$$1" would emit a literal "1" and drop the
                 // mantissa (turning "3 x 10^8" into "1 x 10^8").
                 t = t.replace(/(\d+)\s*[x×]\s*10\^(-?\d+)/g, '$$$1 \\times 10^{$2}$$');
-                t = t.replace(/(?<![a-zA-Z])(\d+)\/(\d+)(?![a-zA-Z])/g, '$\\frac{$1}{$2}$');
+                t = t.replace(/(^|[^a-zA-Z])(\d+)\/(\d+)(?![a-zA-Z])/g, '$1$$\\frac{$2}{$3}$$');
                 t = t.replace(/√\s*(\d+(?:\.\d+)?)/g, '$\\sqrt{$1}$');
                 t = t.replace(/±/g, '$\\pm$');
                 t = t.replace(/×/g, '$\\times$');
@@ -826,6 +859,9 @@ function showQuestion(idx) {
                 t = t.replace(/≥/g, '$\\geq$');
                 t = t.replace(/≠/g, '$\\neq$');
                 t = t.replace(/∞/g, '$\\infty$');
+                t = t.replace(/∑/g, '$\\sum$');
+                t = t.replace(/π/g, '$\\pi$');
+                t = t.replace(/∫/g, '$\\int$');
                 t = t.replace(/\/°C/g, '/$^\\circ$C');
                 t = t.replace(/°C/g, '$^\\circ$C');
                 t = t.replace(/°/g, '$^\\circ$');
@@ -877,14 +913,35 @@ function renderPalette() {
         html += `<button class="palette-btn ${cls}" onclick="showQuestion(${i})">${i+1}</button>`;
     });
     document.getElementById('palette').innerHTML = html;
+    // BUG-033 fix: close the mobile sidebar when a question is selected from palette.
+    document.querySelectorAll('.palette-btn').forEach(btn => {
+        btn.addEventListener('click', () => {
+            const sidebar = document.querySelector('.exam-sidebar');
+            if (sidebar) sidebar.classList.remove('mobile-open');
+        });
+    });
 }
 
 // Save answer via AJAX
+// BUG-015 fix: add error handling so the student knows if a save fails
+// (network flap, expired session, etc.). The old fire-and-forget fetch
+// silently swallowed errors — the student saw their selection highlighted
+// locally but the server had no record.
 function saveAnswer(qId, optId) {
     fetch('<?= BASE_PATH ?>api/save_answer.php', {
         method: 'POST',
-        headers: {'Content-Type': 'application/json'},
+        headers: {'Content-Type': 'application/json', 'X-CSRF-Token': '<?= htmlspecialchars(csrfToken()) ?>'},
         body: JSON.stringify({ attempt_id: attemptId, question_id: qId, option_id: optId, is_flagged: !!flags[qId], time_spent: questionTimes[qId] || 0 })
+    }).then(r => {
+        if (r.status === 401) {
+            showToast('Session expired. Please login again.', 'error');
+            return;
+        }
+        if (!r.ok) {
+            showToast('Failed to save answer. Check your connection.', 'error');
+        }
+    }).catch(() => {
+        showToast('Network error — answer may not be saved.', 'error');
     });
 }
 
@@ -929,7 +986,7 @@ function submitExam() {
 
     fetch('<?= BASE_PATH ?>api/submit_exam.php', {
         method: 'POST',
-        headers: {'Content-Type': 'application/json'},
+        headers: {'Content-Type': 'application/json', 'X-CSRF-Token': '<?= htmlspecialchars(csrfToken()) ?>'},
         body: JSON.stringify({ attempt_id: attemptId, tab_switches: tabSwitches, question_times: questionTimes })
     }).then(r => {
         if (r.status === 401) { showToast('Session expired. Please login again.', 'error'); setTimeout(() => window.location.href = '<?= BASE_PATH ?>auth/login.php', 2000); return null; }
@@ -957,7 +1014,7 @@ function trackTabSwitches() {
             document.getElementById('tabWarning').classList.add('show');
             fetch('<?= BASE_PATH ?>api/save_answer.php', {
                 method: 'POST',
-                headers: {'Content-Type': 'application/json'},
+                headers: {'Content-Type': 'application/json', 'X-CSRF-Token': '<?= htmlspecialchars(csrfToken()) ?>'},
                 body: JSON.stringify({ attempt_id: attemptId, log_tab_switch: true, tab_switches: tabSwitches })
             });
         }
@@ -982,35 +1039,21 @@ let calcExpr = '';
 function toggleCalculator() { document.getElementById('calculator').classList.toggle('show'); }
 function calcInput(v) { calcExpr += v; document.getElementById('calcDisplay').textContent = calcExpr; }
 function calcClear() { calcExpr = ''; document.getElementById('calcDisplay').textContent = '0'; }
-// Safe arithmetic evaluator (no eval()). Tokenize digits/decimals and + - * /,
-// then evaluate with proper precedence via shunting-yard. Anything unexpected
-// yields 'Error' instead of executing arbitrary JS.
+// Safe arithmetic evaluator
+// BUG-024 fix: support negative numbers and parentheses. The old shunting-yard
+// parser didn't support unary minus, failing on expressions like "5 * -2".
+// Instead, strictly whitelist allowed characters and use Function().
 function calcEval() {
     try { calcExpr = String(safeEval(calcExpr)); } catch(e) { calcExpr = 'Error'; }
     document.getElementById('calcDisplay').textContent = calcExpr;
 }
 function safeEval(expr) {
-    const tokens = expr.match(/(\d+\.?\d*|\.\d+|[+\-*/])/g);
-    if (!tokens || tokens.join('') !== expr.replace(/\s+/g, '')) throw new Error('bad');
-    const prec = { '+': 1, '-': 1, '*': 2, '/': 2 };
-    const out = [], ops = [];
-    for (const t of tokens) {
-        if (/^[\d.]/.test(t)) { out.push(parseFloat(t)); }
-        else {
-            while (ops.length && prec[ops[ops.length - 1]] >= prec[t]) out.push(ops.pop());
-            ops.push(t);
-        }
-    }
-    while (ops.length) out.push(ops.pop());
-    const st = [];
-    for (const t of out) {
-        if (typeof t === 'number') { st.push(t); continue; }
-        const b = st.pop(), a = st.pop();
-        if (a === undefined || b === undefined) throw new Error('bad');
-        st.push(t === '+' ? a + b : t === '-' ? a - b : t === '*' ? a * b : a / b);
-    }
-    if (st.length !== 1 || !isFinite(st[0])) throw new Error('bad');
-    return Math.round(st[0] * 1e10) / 1e10;
+    // Only allow digits, operators, parens, and spaces
+    if (!/^[0-9+\-*/().\s]+$/.test(expr)) throw new Error('bad');
+    // Using Function is safe here because we guarantee no letters/variables exist in expr
+    const result = new Function('return (' + expr + ')')();
+    if (!isFinite(result)) throw new Error('bad');
+    return Math.round(result * 1e10) / 1e10;
 }
 
 // Scratch
@@ -1036,6 +1079,22 @@ function initCanvas() {
     canvas.addEventListener('mousemove', draw);
     canvas.addEventListener('mouseup', stopDraw);
     canvas.addEventListener('mouseout', stopDraw);
+
+    // BUG-011 fix: add touch support so the scratch pad pen mode works on
+    // mobile/tablet (iOS/Android). Without these, finger gestures scroll
+    // the page instead of drawing.
+    canvas.addEventListener('touchstart', function(e) {
+        e.preventDefault();
+        startDraw({ clientX: e.touches[0].clientX, clientY: e.touches[0].clientY });
+    }, { passive: false });
+    canvas.addEventListener('touchmove', function(e) {
+        e.preventDefault();
+        draw({ clientX: e.touches[0].clientX, clientY: e.touches[0].clientY });
+    }, { passive: false });
+    canvas.addEventListener('touchend', function(e) {
+        e.preventDefault();
+        stopDraw();
+    });
 }
 
 function switchMode(mode) {

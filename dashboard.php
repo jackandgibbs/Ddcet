@@ -3,17 +3,20 @@ require_once __DIR__ . '/config.php';
 require_once __DIR__ . '/includes/branches.php';
 $user = requireAuth();
 $pageTitle = 'Dashboard';
+// BUG-016: Chart.js is now loaded only on pages that need it (removed from global header)
+$extraHead = '<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>';
 
 // Stats via parallel REST API calls (all at once instead of sequential)
-$results = supabaseMulti([
-    'attempts?student_id=eq.' . $user['id'] . '&status=eq.completed&select=id,score,total_marks,completed_at,xp_earned,test_id&order=completed_at.desc',
-    'subscriptions?student_id=eq.' . $user['id'] . '&status=eq.active&expires_at=gt.' . urlencode(date('c')) . '&order=expires_at.desc&limit=1',
-    'tests?is_scheduled=eq.true&is_published=eq.true&select=id,title,series_label,opens_at,closes_at,results_at,results_published,is_free,min_plan&order=opens_at.desc&limit=10',
+// Stats via parallel REST API calls (all at once instead of sequential)
+$results = supabaseRestMulti([
+    'attempts' => 'attempts?student_id=eq.' . $user['id'] . '&status=eq.completed&select=id,score,total_marks,completed_at,xp_earned,test_id&order=completed_at.desc',
+    'subscriptions' => 'subscriptions?student_id=eq.' . $user['id'] . '&status=eq.active&expires_at=gt.' . urlencode(date('c')) . '&order=expires_at.desc&limit=1',
+    'tests' => 'tests?is_scheduled=eq.true&is_published=eq.true&select=id,title,series_label,opens_at,closes_at,results_at,results_published,is_free,min_plan&order=opens_at.desc&limit=10',
 ]);
 
-$attempts = $results[0] ?? [];
-$subscription = !empty($results[1]) ? $results[1][0] : null;
-$schedMocks = $results[2] ?? [];
+$attempts = $results['attempts'] ?? [];
+$subscription = !empty($results['subscriptions']) ? $results['subscriptions'][0] : null;
+$schedMocks = $results['tests'] ?? [];
 $attemptCount = count($attempts);
 
 $avgScorePercent = 0;

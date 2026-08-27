@@ -1,11 +1,13 @@
 <?php
 require_once __DIR__ . '/config.php';
 $user = requireAuth();
-$db = getDB();
+// BUG-040 fix: removed unused $db = getDB() call
 $pageTitle = 'Notifications';
 
 // Mark as read
+// BUG-010 fix: added requireCsrf() — the old handler had no CSRF protection.
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && ($_POST['action'] ?? '') === 'mark_read') {
+    requireCsrf();
     supabaseRest('notifications?student_id=eq.' . $user['id'] . '&is_read=eq.false', 'PATCH', ['is_read' => true]);
 }
 
@@ -20,7 +22,7 @@ include __DIR__ . '/includes/header.php';
 <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 16px;">
     <span style="color: var(--text-muted); font-size: 13px;"><?= $unreadCount ?> unread</span>
     <?php if ($unreadCount > 0): ?>
-    <form method="POST"><input type="hidden" name="action" value="mark_read"><button type="submit" class="btn btn-secondary btn-sm">Mark All Read</button></form>
+    <form method="POST"><input type="hidden" name="action" value="mark_read"><input type="hidden" name="csrf" value="<?= htmlspecialchars(csrfToken()) ?>"><button type="submit" class="btn btn-secondary btn-sm">Mark All Read</button></form>
     <?php endif; ?>
 </div>
 
@@ -36,7 +38,12 @@ include __DIR__ . '/includes/header.php';
             <?php if ($n['body']): ?><div style="font-size: 12px; color: var(--text-secondary); margin-top: 2px;"><?= htmlspecialchars($n['body']) ?></div><?php endif; ?>
         </div>
         <span style="font-size: 11px; color: var(--text-muted);"><?= date('d M, H:i', strtotime($n['created_at'])) ?></span>
-        <?php if ($n['link']): ?><a href="<?= htmlspecialchars($n['link']) ?>" class="btn btn-sm btn-secondary">View</a><?php endif; ?>
+        <?php
+        // BUG-014 fix: validate that notification links start with '/' or 'http'
+        // to prevent javascript: URI XSS attacks.
+        $link = $n['link'] ?? '';
+        $linkSafe = ($link !== '' && (str_starts_with($link, '/') || str_starts_with($link, 'http')));
+        if ($linkSafe): ?><a href="<?= htmlspecialchars($link) ?>" class="btn btn-sm btn-secondary">View</a><?php endif; ?>
     </div>
 </div>
 <?php endforeach; ?>

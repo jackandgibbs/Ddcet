@@ -40,7 +40,7 @@ $be02Total = array_sum(array_column($be02, 1));
 
 $pageTitle = 'DDCET Syllabus 2026 — BE-01 & BE-02 Topics & Weightage';
 $pageDesc  = 'Complete official GTU DDCET (Engineering) syllabus: BE-01 Basics of Science & Engineering and BE-02 Aptitude Test (Mathematics & Soft Skill), with topic-wise weightage and the exam pattern.';
-$canonical = APP_URL . '/syllabus.php';
+$canonical = APP_URL . BASE_PATH . 'syllabus.php';
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -55,7 +55,7 @@ $canonical = APP_URL . '/syllabus.php';
     <meta property="og:title" content="<?= htmlspecialchars($pageTitle) ?>">
     <meta property="og:description" content="<?= htmlspecialchars($pageDesc) ?>">
     <meta property="og:url" content="<?= htmlspecialchars($canonical) ?>">
-    <meta property="og:image" content="<?= APP_URL ?>/assets/icon-512.png">
+    <meta property="og:image" content="<?= APP_URL . BASE_PATH ?>assets/icon-512.png">
 
     <link rel="icon" href="assets/favicon.ico" sizes="any">
     <link rel="apple-touch-icon" href="assets/apple-touch-icon.png">

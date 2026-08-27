@@ -44,7 +44,11 @@ self.addEventListener('fetch', (event) => {
   if (url.origin !== self.location.origin) return;
 
   // Page navigations → network-first, offline fallback. Never cache HTML.
+  // BUG-001 fix: exclude /auth/ paths entirely — the callback redirect chain
+  // must always hit the real server, especially on iOS PWAs where the SW's
+  // offline fallback can trap the login flow and show a blank page.
   if (req.mode === 'navigate') {
+    if (url.pathname.includes('/auth/')) return;  // let browser handle natively
     event.respondWith(
       fetch(req).catch(() => caches.match(BASE + 'offline.html'))
     );

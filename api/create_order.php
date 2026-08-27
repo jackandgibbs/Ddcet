@@ -1,6 +1,7 @@
 <?php
 require_once __DIR__ . '/../config.php';
 $user = requireAuth();
+requireCsrf();
 
 header('Content-Type: application/json');
 
@@ -20,6 +21,7 @@ $plan = $data['plan'] ?? '';
 $PRICES = ['basic' => 149, 'pro' => 299, 'custom_test' => 29];
 
 if (!isset($PRICES[$plan])) {
+    http_response_code(400);
     echo json_encode(['error' => 'Invalid plan']);
     exit;
 }
@@ -97,6 +99,7 @@ $curlError = curl_error($ch);
 curl_close($ch);
 
 if ($curlError) {
+    http_response_code(502);
     echo json_encode(['error' => 'Curl error: ' . $curlError]);
     exit;
 }
@@ -104,6 +107,7 @@ if ($curlError) {
 $order = json_decode($response, true);
 
 if (empty($order['id'])) {
+    http_response_code(502);
     echo json_encode(['error' => 'Failed to create order: ' . ($order['error']['description'] ?? $response)]);
     exit;
 }
@@ -125,6 +129,7 @@ $payIns = supabaseRest('payments', 'POST', [
 // table — a missing row means the user would pay and get nothing (no subscription,
 // no receipt). Fail loudly here instead of charging silently.
 if (empty($payIns)) {
+    http_response_code(500);
     echo json_encode(['error' => 'Checkout is temporarily unavailable. Please try again shortly.']);
     exit;
 }

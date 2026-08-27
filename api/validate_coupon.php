@@ -4,6 +4,7 @@
 // the same code server-side via resolveCollegeCoupon() when the order is created.
 require_once __DIR__ . '/../config.php';
 requireAuth();
+requireCsrf();
 
 header('Content-Type: application/json');
 

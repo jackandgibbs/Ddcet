@@ -1,6 +1,8 @@
 <?php
 require_once __DIR__ . '/config.php';
+// BUG-027 fix: ensure only authenticated users can access the ad waiting room.
 $user = requireAuth();
+$pageTitle = 'Unlocking Test...';
 ?>
 <!DOCTYPE html>
 <html lang="en">

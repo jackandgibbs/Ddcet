@@ -7,7 +7,8 @@ if (currentUser()) {
     exit;
 }
 $examDate = new DateTime(DDCET_EXAM_DATE);
-$daysLeft = max(0, (int)(new DateTime())->diff($examDate)->days);
+$diff = (new DateTime())->diff($examDate);
+$daysLeft = $diff->invert ? 0 : $diff->days;
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -16,7 +17,7 @@ $daysLeft = max(0, (int)(new DateTime())->diff($examDate)->days);
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>DDCET Prep — Your Diploma to Degree Journey Starts Here</title>
     <meta name="description" content="DDCET Prep is the only platform built for Gujarat's Diploma-to-Degree Common Entrance Test. Real exam-pattern mock tests, a 2000+ MCQ question bank, AI college predictor, analytics and free daily challenges.">
-    <link rel="canonical" href="<?= APP_URL ?>">
+    <link rel="canonical" href="<?= APP_URL . BASE_PATH ?>">
     <meta name="theme-color" content="#4361ee">
 
     <!-- Open Graph / social -->
@@ -24,8 +25,8 @@ $daysLeft = max(0, (int)(new DateTime())->diff($examDate)->days);
     <meta property="og:site_name" content="DDCET Prep">
     <meta property="og:title" content="DDCET Prep — Crack DDCET with Smart Preparation">
     <meta property="og:description" content="Real exam-pattern mocks, 2000+ MCQs, AI college predictor, analytics and free daily challenges — built for Gujarat diploma students.">
-    <meta property="og:url" content="<?= APP_URL ?>">
-    <meta property="og:image" content="<?= APP_URL ?>/assets/icon-512.png">
+    <meta property="og:url" content="<?= APP_URL . BASE_PATH ?>">
+    <meta property="og:image" content="<?= APP_URL . BASE_PATH ?>assets/icon-512.png">
     <meta name="twitter:card" content="summary_large_image">
 
     <!-- Favicons & PWA -->
@@ -44,8 +45,8 @@ $daysLeft = max(0, (int)(new DateTime())->diff($examDate)->days);
         '@context' => 'https://schema.org',
         '@type'    => 'EducationalOrganization',
         'name'     => 'DDCET Prep',
-        'url'      => APP_URL,
-        'logo'     => APP_URL . '/assets/icon-512.png',
+        'url'      => APP_URL . BASE_PATH,
+        'logo'     => APP_URL . BASE_PATH . 'assets/icon-512.png',
         'description' => "Gujarat's dedicated preparation platform for the Diploma-to-Degree Common Entrance Test (DDCET).",
         'areaServed' => 'Gujarat, India',
     ], JSON_UNESCAPED_SLASHES | JSON_PRETTY_PRINT) ?>
@@ -311,7 +312,9 @@ $daysLeft = max(0, (int)(new DateTime())->diff($examDate)->days);
                 <span style="font-size: 13px; color: var(--text-sec);"><strong style="color: var(--text);">500+</strong> students already preparing</span>
             </div>
             <?php
-            $threeHoursAgo = urlencode(date('c', strtotime('-3 hours')));
+            // BUG-038 fix: round to the hour so the string doesn't change every second,
+            // which was breaking the cache key in config.php and querying the DB on every hit.
+            $threeHoursAgo = urlencode(date('Y-m-d\TH:00:00P', strtotime('-3 hours')));
             $liveTests = supabaseRest('attempts?status=eq.in_progress&started_at=gt.' . $threeHoursAgo . '&select=id');
             $liveCount = is_array($liveTests) ? count($liveTests) : 0;
             if ($liveCount > 0):
@@ -332,7 +335,7 @@ $daysLeft = max(0, (int)(new DateTime())->diff($examDate)->days);
                 </div>
                 <div style="font-size: 11px; color: var(--text-muted); margin-bottom: 8px;">Activity — Last 60 days</div>
                 <div class="dash-heatmap">
-                    <?php for($i=0;$i<60;$i++): $l=['','l1','l2','l3','l4'][rand(0,4)]; ?><div class="cell <?= $l ?>"></div><?php endfor; ?>
+                    <?php mt_srand(crc32(date('Y-m-d'))); for($i=0;$i<60;$i++): $l=['','l1','l2','l3','l4'][mt_rand(0,4)]; ?><div class="cell <?= $l ?>"></div><?php endfor; mt_srand(); ?>
                 </div>
             </div>
             <div class="float-badge b1"><span class="dot" style="background: var(--green);"></span>+25 XP Earned</div>
@@ -813,6 +816,13 @@ if ('serviceWorker' in navigator) {
         navigator.serviceWorker.register('<?= BASE_PATH ?>sw.js', { scope: '<?= BASE_PATH ?>' }).catch(() => {});
     });
 }
+
+// Auto-close mobile menu when clicking anchor links
+document.querySelectorAll('.nav-links a').forEach(link => {
+    link.addEventListener('click', () => {
+        document.querySelector('.nav-links').classList.remove('open');
+    });
+});
 </script>
 </body>
 </html>

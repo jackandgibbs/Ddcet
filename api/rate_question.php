@@ -2,6 +2,7 @@
 require_once __DIR__ . '/../config.php';
 header('Content-Type: application/json');
 $user = requireAuth();
+requireCsrf();
 
 $data = json_decode(file_get_contents('php://input'), true);
 $qId = (int) ($data['question_id'] ?? 0);

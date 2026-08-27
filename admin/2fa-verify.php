@@ -15,11 +15,12 @@ if (ADMIN_TOTP_SECRET === '') {
 }
 
 const OTP_MAX_TRY = 5;     // wrong codes before a short lockout
-const OTP_LOCK    = 30;    // seconds locked after too many wrong codes
 
 $error = null;
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    requireCsrf();
+    
     $lockedUntil = $_SESSION['admin_2fa_lock'] ?? 0;
     if (time() < $lockedUntil) {
         $error = 'Too many attempts. Please wait ' . ($lockedUntil - time()) . 's and try again.';
@@ -33,9 +34,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         }
         $_SESSION['admin_2fa_tries'] = ($_SESSION['admin_2fa_tries'] ?? 0) + 1;
         if ($_SESSION['admin_2fa_tries'] >= OTP_MAX_TRY) {
-            $_SESSION['admin_2fa_lock']  = time() + OTP_LOCK;
+            $multiplier = (int)($_SESSION['admin_2fa_lockouts'] ?? 0) + 1;
+            $_SESSION['admin_2fa_lockouts'] = $multiplier;
+            $lockDuration = 30 * (2 ** ($multiplier - 1)); // 30s, 60s, 120s...
+            $_SESSION['admin_2fa_lock']  = time() + $lockDuration;
             $_SESSION['admin_2fa_tries'] = 0;
-            $error = 'Too many incorrect codes. Locked for ' . OTP_LOCK . 's.';
+            $error = 'Too many incorrect codes. Locked for ' . $lockDuration . 's.';
         } else {
             $left  = OTP_MAX_TRY - $_SESSION['admin_2fa_tries'];
             $error = "Incorrect or expired code. {$left} attempt(s) left.";
@@ -80,6 +84,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         <?php if ($error): ?><div class="msg error-msg"><?= htmlspecialchars($error) ?></div><?php endif; ?>
 
         <form method="post" autocomplete="off">
+            <input type="hidden" name="csrf" value="<?= htmlspecialchars(csrfToken()) ?>">
             <label for="code">Authenticator code</label>
             <input id="code" name="code" inputmode="numeric" pattern="[0-9]*" maxlength="6" placeholder="000000" autofocus required>
             <button type="submit">Verify</button>

@@ -1,6 +1,7 @@
 <?php
 require_once __DIR__ . '/../config.php';
 $user = requireAuth();
+requireCsrf();
 
 $data = json_decode(file_get_contents('php://input'), true);
 $paymentId = $data['razorpay_payment_id'] ?? '';
@@ -44,17 +45,9 @@ $discCollegeId = (int) ($paymentRow[0]['discount_college_id'] ?? 0);
 $discPct = (int) ($paymentRow[0]['discount_percent'] ?? 0);
 if (!$alreadyCaptured && $discPct > 0) {
     if ($discOrgId > 0) {
-        $orgRow = supabaseRest('organizations?id=eq.' . $discOrgId . '&select=discount_redemptions&limit=1');
-        if (!empty($orgRow)) {
-            $newCount = (int) ($orgRow[0]['discount_redemptions'] ?? 0) + 1;
-            supabaseRest('organizations?id=eq.' . $discOrgId, 'PATCH', ['discount_redemptions' => $newCount]);
-        }
+        supabaseRpc('increment_discount_redemption', ['p_table' => 'organizations', 'p_id' => $discOrgId]);
     } elseif ($discCollegeId > 0) {
-        $colRow = supabaseRest('colleges?id=eq.' . $discCollegeId . '&select=discount_redemptions&limit=1');
-        if (!empty($colRow)) {
-            $newCount = (int) ($colRow[0]['discount_redemptions'] ?? 0) + 1;
-            supabaseRest('colleges?id=eq.' . $discCollegeId, 'PATCH', ['discount_redemptions' => $newCount]);
-        }
+        supabaseRpc('increment_discount_redemption', ['p_table' => 'colleges', 'p_id' => $discCollegeId]);
     }
 }
 

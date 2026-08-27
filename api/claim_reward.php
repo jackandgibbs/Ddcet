@@ -13,9 +13,7 @@ header('Content-Type: application/json');
 $user = currentUser();
 if (!$user) { http_response_code(401); echo json_encode(['error' => 'not_logged_in']); exit; }
 
-if (!csrfValid($_SERVER['HTTP_X_CSRF_TOKEN'] ?? null)) {
-    http_response_code(403); echo json_encode(['error' => 'bad_csrf']); exit;
-}
+requireCsrf();
 
 $data   = json_decode(file_get_contents('php://input'), true);
 $testId = (int) ($data['test_id'] ?? 0);

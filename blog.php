@@ -13,7 +13,7 @@ if ($slug !== '' && !$isSingle) {
 
 $pageTitle = $isSingle ? $post['title'] . ' — DDCET Prep Blog' : 'DDCET Prep Blog — Tips, Strategy & Study Plans';
 $pageDesc  = $isSingle ? $post['excerpt'] : 'Free DDCET preparation tips, exam-pattern guides, study plans and mock-test strategy for Gujarat diploma-to-degree students.';
-$canonical = APP_URL . '/blog.php' . ($isSingle ? '?post=' . urlencode($post['slug']) : '');
+$canonical = APP_URL . BASE_PATH . 'blog.php' . ($isSingle ? '?post=' . urlencode($post['slug']) : '');
 $fmtDate = fn($d) => date('M j, Y', strtotime($d));
 ?>
 <!DOCTYPE html>
@@ -29,7 +29,7 @@ $fmtDate = fn($d) => date('M j, Y', strtotime($d));
     <meta property="og:title" content="<?= htmlspecialchars($pageTitle) ?>">
     <meta property="og:description" content="<?= htmlspecialchars($pageDesc) ?>">
     <meta property="og:url" content="<?= htmlspecialchars($canonical) ?>">
-    <meta property="og:image" content="<?= APP_URL ?>/assets/icon-512.png">
+    <meta property="og:image" content="<?= APP_URL . BASE_PATH ?>assets/icon-512.png">
 
     <link rel="icon" href="assets/favicon.ico" sizes="any">
     <link rel="apple-touch-icon" href="assets/apple-touch-icon.png">
@@ -48,7 +48,7 @@ $fmtDate = fn($d) => date('M j, Y', strtotime($d));
         'datePublished' => $post['date'],
         'author'   => ['@type' => 'Person', 'name' => $post['author']],
         'publisher' => ['@type' => 'Organization', 'name' => 'DDCET Prep',
-                        'logo' => ['@type' => 'ImageObject', 'url' => APP_URL . '/assets/icon-512.png']],
+                        'logo' => ['@type' => 'ImageObject', 'url' => APP_URL . BASE_PATH . 'assets/icon-512.png']],
         'mainEntityOfPage' => $canonical,
     ], JSON_UNESCAPED_SLASHES | JSON_PRETTY_PRINT) ?>
     </script>
@@ -58,13 +58,13 @@ $fmtDate = fn($d) => date('M j, Y', strtotime($d));
         '@context' => 'https://schema.org',
         '@type'    => 'Blog',
         'name'     => 'DDCET Prep Blog',
-        'url'      => APP_URL . '/blog.php',
+        'url'      => APP_URL . BASE_PATH . 'blog.php',
         'blogPost' => array_map(fn($p) => [
             '@type' => 'BlogPosting',
             'headline' => $p['title'],
             'description' => $p['excerpt'],
             'datePublished' => $p['date'],
-            'url' => APP_URL . '/blog.php?post=' . $p['slug'],
+            'url' => APP_URL . BASE_PATH . 'blog.php?post=' . $p['slug'],
         ], blogPosts()),
     ], JSON_UNESCAPED_SLASHES | JSON_PRETTY_PRINT) ?>
     </script>

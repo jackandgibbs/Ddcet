@@ -154,6 +154,7 @@ document.querySelectorAll('.avatar-tile').forEach(function (tile) {
 <!-- Edit Profile -->
 <?php
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && ($_POST['action'] ?? '') === 'update_profile') {
+    requireCsrf();
     $updateData = [];
     if (!empty($_POST['semester'])) $updateData['semester'] = (int)$_POST['semester'];
     if (!empty($_POST['department'])) $updateData['department'] = trim($_POST['department']);
@@ -168,6 +169,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && ($_POST['action'] ?? '') === 'updat
 <div class="card" style="margin-top: 20px;">
     <div class="card-header"><h3>Edit Profile</h3></div>
     <form method="POST">
+        <input type="hidden" name="csrf" value="<?= htmlspecialchars(csrfToken()) ?>">
         <input type="hidden" name="action" value="update_profile">
         <div style="display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 12px;">
             <div class="form-group">

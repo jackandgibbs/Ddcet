@@ -1,9 +1,10 @@
 <?php
 require_once __DIR__ . '/config.php';
 $user = requireAuth();
-$db = getDB();
+// BUG-040 fix: removed unused $db = getDB() call
 $pageTitle = 'Test Result';
-
+// BUG-016: Chart.js is now loaded only on pages that need it (removed from global header)
+$extraHead = '<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>';
 $attemptId = (int) ($_GET['attempt_id'] ?? 0);
 if (!$attemptId) { header('Location: ' . BASE_PATH . 'dashboard.php'); exit; }
 
@@ -454,11 +455,36 @@ include __DIR__ . '/includes/header.php';
         <?php endforeach; ?>
         </div>
 
-        <?php if ($ans['explanation']): ?>
-            <div class="mathy" style="background: var(--bg-primary); border-radius: 6px; padding: 12px; font-size: 13px; color: var(--text-secondary); line-height: 1.6;">
-                <strong style="color: var(--accent);">Explanation:</strong> <?= htmlspecialchars($ans['explanation']) ?>
-            </div>
-        <?php endif; ?>
+        <?php 
+            $hasExp = !empty($ans['explanation']);
+            $isAi = $hasExp && (str_starts_with($ans['explanation'], '✨') || str_starts_with($ans['explanation'], '&#10024;'));
+            $expHtml = '';
+            if ($hasExp) {
+                $expHtml = htmlspecialchars($ans['explanation']);
+                if ($isAi) {
+                    $expHtml = preg_replace('/\*\*(.*?)\*\*/', '<strong>$1</strong>', $expHtml);
+                    $expHtml = nl2br($expHtml);
+                }
+            }
+        ?>
+        <div id="ai-exp-<?= $ans['question_id'] ?>" style="background: var(--bg-primary); border-radius: 6px; padding: 12px; font-size: 13px; color: var(--text-secondary); line-height: 1.6;">
+            <?php if ($hasExp): ?>
+                <div style="display: flex; justify-content: space-between; align-items: flex-start; gap: 10px;">
+                    <div class="mathy" style="flex: 1;">
+                        <?php if (!$isAi): ?><strong style="color: var(--accent);">Explanation:</strong><?php endif; ?>
+                        <?= $expHtml ?>
+                    </div>
+                    <?php if (!$isAi): ?>
+                        <button class="btn btn-sm" style="background: linear-gradient(135deg, #10b981, #3b82f6); color: #fff; border: none; padding: 4px 12px; font-weight: 600; white-space: nowrap; flex-shrink: 0;" onclick="askAI(<?= $ans['question_id'] ?>)">Ask AI ✨</button>
+                    <?php endif; ?>
+                </div>
+            <?php else: ?>
+                <div style="display: flex; align-items: center; justify-content: space-between;">
+                    <span style="color: var(--text-muted);">No explanation available.</span>
+                    <button class="btn btn-sm" style="background: linear-gradient(135deg, #10b981, #3b82f6); color: #fff; border: none; padding: 4px 12px; font-weight: 600;" onclick="askAI(<?= $ans['question_id'] ?>)">Ask AI ✨</button>
+                </div>
+            <?php endif; ?>
+        </div>
 
         <!-- Difficulty Rating -->
         <div style="margin-top: 10px; display: flex; gap: 8px; align-items: center;">
@@ -618,6 +644,41 @@ function copyShareText() {
         });
     });
 })();
+
+function askAI(questionId) {
+    const box = document.getElementById('ai-exp-' + questionId);
+    if (!box) return;
+    
+    box.innerHTML = `<div style="display: flex; align-items: center; gap: 10px; width: 100%;"><span class="spinner" style="width:16px;height:16px;border:2px solid var(--accent);border-top-color:transparent;border-radius:50%;animation:spin 1s linear infinite;"></span> <span>AI is thinking...</span></div>`;
+    
+    fetch('<?= BASE_PATH ?>api/get_explanation.php', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json', 'X-CSRF-Token': '<?= htmlspecialchars(csrfToken()) ?>' },
+        body: JSON.stringify({ question_id: questionId })
+    })
+    .then(r => r.json())
+    .then(data => {
+        if (data.error) {
+            box.innerHTML = `<span style="color: var(--red);">Failed to generate: ${data.error}</span> <button class="btn btn-sm btn-secondary" onclick="askAI(${questionId})">Retry</button>`;
+        } else {
+            // Very simple markdown bold to <strong> parsing, and \n to <br>
+            let formatted = data.explanation.replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>').replace(/\n/g, '<br>');
+            box.innerHTML = `<strong style="color: var(--accent);">Explanation:</strong> <span class="explanation-content mathy" style="margin-left: 8px;">${formatted}</span>`;
+            if (window.renderMathInElement) {
+                renderMathInElement(box, {
+                    delimiters: [
+                        {left: '$$', right: '$$', display: true},
+                        {left: '$', right: '$', display: false}
+                    ],
+                    throwOnError: false
+                });
+            }
+        }
+    })
+    .catch(() => {
+        box.innerHTML = `<span style="color: var(--red);">Network error.</span> <button class="btn btn-sm btn-secondary" onclick="askAI(${questionId})">Retry</button>`;
+    });
+}
 </script>
 
 <?php

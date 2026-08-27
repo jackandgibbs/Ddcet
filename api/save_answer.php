@@ -8,6 +8,7 @@ if (!$user) {
     echo json_encode(['error' => 'not_logged_in']);
     exit;
 }
+requireCsrf();
 
 $data = json_decode(file_get_contents('php://input'), true);
 $attemptId = (int) ($data['attempt_id'] ?? 0);
@@ -24,11 +25,8 @@ if (!$attempt) {
 // Log tab switch — increment SERVER-SIDE. The client number is not trusted;
 // it can only ask us to add one. This makes tab_switches a real signal.
 if (!empty($data['log_tab_switch'])) {
-    $newCount = (int) ($attempt['tab_switches'] ?? 0) + 1;
-    supabaseRest('attempts?id=eq.' . $attemptId, 'PATCH', [
-        'tab_switches' => $newCount,
-    ]);
-    echo json_encode(['ok' => true, 'tab_switches' => $newCount]);
+    $res = supabaseRpc('increment_tab_switches', ['p_attempt_id' => $attemptId]);
+    echo json_encode(['ok' => true, 'tab_switches' => $res]);
     exit;
 }
 

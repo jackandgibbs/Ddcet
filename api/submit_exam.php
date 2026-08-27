@@ -4,10 +4,11 @@ header('Content-Type: application/json');
 
 $user = currentUser();
 if (!$user) { http_response_code(401); echo json_encode(['error' => 'not_logged_in']); exit; }
+requireCsrf();
 
 $data = json_decode(file_get_contents('php://input'), true);
 $attemptId = (int) ($data['attempt_id'] ?? 0);
-if (!$attemptId) { echo json_encode(['error' => 'no_attempt_id']); exit; }
+if (!$attemptId) { http_response_code(400); echo json_encode(['error' => 'no_attempt_id']); exit; }
 
 // Verify ownership — pull timing + mode so we can enforce the clock server-side.
 $attempts = supabaseRest('attempts?id=eq.' . $attemptId . '&student_id=eq.' . $user['id'] . '&status=eq.in_progress&select=id,started_at,mode,test_id,tab_switches,challenge_id&limit=1');
@@ -20,7 +21,7 @@ if (!$attempt) {
 
 // Get all answers in ONE call
 $answers = supabaseRest('attempt_answers?attempt_id=eq.' . $attemptId . '&select=id,question_id,selected_option_id,time_spent_seconds') ?? [];
-if (empty($answers)) { echo json_encode(['error' => 'no_answers']); exit; }
+if (empty($answers)) { http_response_code(400); echo json_encode(['error' => 'no_answers']); exit; }
 
 // Get ALL correct options for these questions in ONE call
 $qIds = array_column($answers, 'question_id');
@@ -79,18 +80,25 @@ $xp = 10 + ($correct * 2);
 // Real percentile: compare this score against peers' completed attempts of the
 // same test/mode. percentile = % of peers who scored <= this score. With too
 // few peers (<5) we leave it null rather than show a misleading number.
+// BUG-019 fix: use supabaseCount() instead of fetching all peer rows. The old
+// code fetched all rows (which PostgREST truncated at 1000 anyway) and did an
+// O(N) array_filter in PHP, wasting bandwidth and memory.
 $percentile = null;
-$peerFilter = 'status=eq.completed&select=score';
+$peerFilterBase = 'status=eq.completed';
 if (!empty($attempt['test_id'])) {
-    $peerFilter .= '&test_id=eq.' . (int)$attempt['test_id'];
+    $peerFilterBase .= '&test_id=eq.' . (int)$attempt['test_id'];
 } elseif ($durationMode) {
-    $peerFilter .= '&mode=eq.' . urlencode($durationMode) . '&test_id=is.null';
+    $peerFilterBase .= '&mode=eq.' . urlencode($durationMode) . '&test_id=is.null';
+} else {
+    $peerFilterBase = ''; // No peers to compare to
 }
-$peers = supabaseRest('attempts?' . $peerFilter) ?? [];
-$peerScores = array_map(fn($a) => (float)($a['score'] ?? 0), $peers);
-if (count($peerScores) >= 5) {
-    $atOrBelow = count(array_filter($peerScores, fn($s) => $s <= $score));
-    $percentile = round(($atOrBelow / count($peerScores)) * 100, 2);
+
+if ($peerFilterBase) {
+    $totalPeers = supabaseCount('attempts?' . $peerFilterBase);
+    if ($totalPeers >= 5) {
+        $peersAtOrBelow = supabaseCount('attempts?' . $peerFilterBase . '&score=lte.' . $score);
+        $percentile = round(($peersAtOrBelow / $totalPeers) * 100, 2);
+    }
 }
 
 // ONE update for attempt (total_marks = questions × 2)
@@ -103,31 +111,15 @@ $attemptPatch = [
 if ($percentile !== null) $attemptPatch['percentile'] = $percentile;
 supabaseRest('attempts?id=eq.' . $attemptId, 'PATCH', $attemptPatch);
 
-// ONE update for student XP
-$studentData = supabaseRest('students?id=eq.' . $user['id'] . '&select=xp,streak,last_active_date,daily_streak,daily_streak_date&limit=1');
-$curXp = (int)($studentData[0]['xp'] ?? 0);
-$curStreak = (int)($studentData[0]['streak'] ?? 0);
-$lastActive = $studentData[0]['last_active_date'] ?? null;
+// ONE update for student XP (Atomic RPC)
 $today = date('Y-m-d');
-$newStreak = ($lastActive === date('Y-m-d', strtotime('-1 day'))) ? $curStreak + 1 : (($lastActive === $today) ? $curStreak : 1);
-
-$studentPatch = [
-    'xp' => $curXp + $xp, 'streak' => $newStreak, 'last_active_date' => $today,
-];
-
-// Daily-Challenge habit streak: a separate consecutive-day counter that only
-// advances when the user completes the once-a-day Daily Challenge. Completing it
-// again the same day is a no-op (it's capped 1/day anyway); a one-day gap resets.
-if ($durationMode === 'daily_challenge') {
-    $curDaily  = (int)($studentData[0]['daily_streak'] ?? 0);
-    $lastDaily = $studentData[0]['daily_streak_date'] ?? null;
-    if ($lastDaily !== $today) {
-        $studentPatch['daily_streak'] = ($lastDaily === date('Y-m-d', strtotime('-1 day'))) ? $curDaily + 1 : 1;
-        $studentPatch['daily_streak_date'] = $today;
-    }
-}
-
-supabaseRest('students?id=eq.' . $user['id'], 'PATCH', $studentPatch);
+$isDaily = ($durationMode === 'daily_challenge');
+supabaseRpc('increment_student_xp', [
+    'p_student_id' => (int) $user['id'],
+    'p_xp' => $xp,
+    'p_is_daily_challenge' => $isDaily,
+    'p_today' => $today
+]);
 
 // XP log
 supabaseRest('xp_log', 'POST', [

@@ -10,6 +10,7 @@ if (!$user) {
     echo json_encode(['error' => 'not_logged_in']);
     exit;
 }
+requireCsrf();
 
 $data = json_decode(file_get_contents('php://input'), true) ?: [];
 $attemptId = (int) ($data['attempt_id'] ?? 0);

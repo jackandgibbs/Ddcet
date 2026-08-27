@@ -18,10 +18,15 @@ RewriteRule ^database/ - [F,L]
 Options -Indexes
 
 # Security headers
+# BUG-001/BUG-041 fix: CSP is now defined ONLY in config.php (the single source
+# of truth). The .htaccess duplicate was removed because dual CSP headers caused
+# iOS Safari to enforce the stricter of the two, blocking Supabase and Razorpay.
 <IfModule mod_headers.c>
     Header set X-Content-Type-Options "nosniff"
     Header set X-Frame-Options "SAMEORIGIN"
-    Header set X-XSS-Protection "1; mode=block"
+    Header set Strict-Transport-Security "max-age=31536000; includeSubDomains" env=HTTPS
+    Header set Referrer-Policy "strict-origin-when-cross-origin"
+    Header set Permissions-Policy "camera=(), microphone=(), geolocation=()"
 </IfModule>
 
 # Correct MIME types for PWA / fonts

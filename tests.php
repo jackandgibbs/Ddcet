@@ -1,7 +1,7 @@
 <?php
 require_once __DIR__ . '/config.php';
 $user = requireAuth();
-$db = getDB();
+// BUG-040 fix: removed unused $db = getDB() call
 $pageTitle = 'Test Modes';
 
 $subscription = getSubscription();

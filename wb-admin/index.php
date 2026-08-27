@@ -9,8 +9,13 @@ if (!empty($_SESSION['admin_logged_in'])) {
 
 $error = '';
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    $username = $_POST['username'] ?? '';
-    $password = $_POST['password'] ?? '';
+    requireCsrf();
+    
+    if (!rateLimit('wb_admin_login', 5, 300)) {
+        $error = 'Too many login attempts. Please wait 5 minutes.';
+    } else {
+        $username = $_POST['username'] ?? '';
+        $password = $_POST['password'] ?? '';
 
     // Credentials come from .env (WB_ADMIN_USERNAME / WB_ADMIN_PASSWORD_HASH).
     // Username compared in constant time; password verified against a bcrypt hash.
@@ -35,7 +40,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         header('Location: ' . BASE_PATH . 'admin/index.php');
         exit;
     }
-    $error = 'Invalid credentials';
+        $error = 'Invalid credentials';
+    }
 }
 ?>
 <!DOCTYPE html>
@@ -66,8 +72,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     <div class="card">
         <h1><span>DDCET</span> Admin</h1>
         <p class="sub">Enter credentials to access the admin panel.</p>
-        <?php if ($error): ?><div class="error"><?= $error ?></div><?php endif; ?>
+        <?php if ($error): ?><div class="error"><?= htmlspecialchars($error) ?></div><?php endif; ?>
         <form method="POST">
+            <input type="hidden" name="csrf" value="<?= htmlspecialchars(csrfToken()) ?>">
             <div class="form-group">
                 <label>Username</label>
                 <input type="text" name="username" required autofocus>

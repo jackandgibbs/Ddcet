@@ -14,16 +14,24 @@ header('Expires: 0');
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <base href="/Dddcet/">
+    <!-- BUG-018 fix: removed hardcoded <base href="/Dddcet/"> which broke hash
+         anchors (e.g. #subjectSection) and non-root deployments. All relative
+         URLs already use BASE_PATH where needed. -->
     <title><?= htmlspecialchars($pageTitle ?? 'Dashboard') ?> - <?= APP_NAME ?></title>
     <meta name="theme-color" content="#4361ee">
     <link rel="icon" href="assets/favicon.ico" sizes="any">
     <link rel="icon" type="image/png" sizes="32x32" href="assets/favicon-32.png">
     <link rel="apple-touch-icon" href="assets/apple-touch-icon.png">
     <link rel="manifest" href="manifest.webmanifest">
-    <link rel="stylesheet" href="assets/css/style.css?v=<?= time() ?>">
-    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700;800&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <!-- BUG-022 fix: use a static version string instead of time() so the CSS
+         can be cached by browsers/CDNs. Bump this on deploy. -->
+    <link rel="stylesheet" href="<?= BASE_PATH ?>assets/css/style.css?v=2026.08.27">
+    <!-- BUG-017 fix: removed Google Fonts CDN link — fonts are already
+         self-hosted via assets/fonts/fonts.css (loaded by the CSS).
+         Loading both doubled font download size (~400KB extra on 3G). -->
+    <!-- BUG-016 fix: Chart.js removed from global header — only dashboard.php
+         and result.php need it. Pages that need Chart.js include it via
+         $extraHead to avoid loading 200KB of unused JS on every page. -->
     <!-- Site-wide math rendering (KaTeX). DDCET is Physics/Maths heavy, so
          formulas render anywhere content shows, not just inside the exam. -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css">
@@ -92,14 +100,7 @@ header('Expires: 0');
             window.location.href = 'auth/logout.php';
         }
     }
-    history.pushState(null, null, location.href);
-    window.onpopstate = function() {
-        if (confirm('Are you sure you want to logout?')) {
-            window.location.href = 'auth/logout.php';
-        } else {
-            history.pushState(null, null, location.href);
-        }
-    };
+
     <?php if (isset($_SESSION['show_login_success'])): unset($_SESSION['show_login_success']); ?>
     window.addEventListener('DOMContentLoaded', function() { showToast('Successfully logged in'); });
     <?php endif; ?>

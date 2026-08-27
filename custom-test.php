@@ -22,7 +22,7 @@ $testStarted = false;
 $error = '';
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && ($_POST['action'] ?? '') === 'generate') {
     // --- CSRF ---
-    if (!csrfValid($_POST['csrf_token'] ?? null)) {
+    if (!csrfValid($_POST['csrf'] ?? null)) {
         $error = 'Your session expired. Please reload the page and try again.';
         goto render_page;
     }
@@ -124,7 +124,7 @@ include __DIR__ . '/includes/header.php';
 <div class="card">
     <form method="POST" id="customTestForm" data-subscribed="<?= getSubscription() ? '1' : '0' ?>">
         <input type="hidden" name="action" value="generate">
-        <input type="hidden" name="csrf_token" value="<?= htmlspecialchars(csrfToken()) ?>">
+        <input type="hidden" name="csrf" value="<?= htmlspecialchars(csrfToken()) ?>">
 
         <!-- Subject Selection -->
         <div class="form-group">

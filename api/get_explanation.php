@@ -1,0 +1,84 @@
+<?php
+require_once __DIR__ . '/../config.php';
+require_once __DIR__ . '/../includes/gemini.php';
+$user = requireAuth();
+
+header('Content-Type: application/json');
+
+if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
+    echo json_encode(['error' => 'Method not allowed']);
+    exit;
+}
+
+$input = json_decode(file_get_contents('php://input'), true);
+$questionId = (int)($input['question_id'] ?? 0);
+
+if (!$questionId) {
+    echo json_encode(['error' => 'Invalid question ID']);
+    exit;
+}
+
+// 1. Fetch question and check if explanation already exists
+$questionData = supabaseRest('questions?id=eq.' . $questionId . '&select=*');
+if (empty($questionData)) {
+    echo json_encode(['error' => 'Question not found']);
+    exit;
+}
+$question = $questionData[0];
+
+if (!empty($question['explanation']) && (str_starts_with($question['explanation'], '✨') || str_starts_with($question['explanation'], '&#10024;'))) {
+    echo json_encode(['success' => true, 'explanation' => $question['explanation']]);
+    exit;
+}
+
+// 2. Fetch options to provide context to the AI
+$options = supabaseRest('options?question_id=eq.' . $questionId . '&select=*');
+if (empty($options)) {
+    echo json_encode(['error' => 'Options not found']);
+    exit;
+}
+
+$optionsText = [];
+$correctOption = 'Unknown';
+foreach ($options as $opt) {
+    // Skip phantom placeholders just in case
+    if (strpos($opt['option_text'], 'Placeholder') !== false) continue;
+    
+    $optStr = "- " . $opt['option_text'];
+    if (!empty($opt['is_correct'])) {
+        $optStr .= " (Correct Answer)";
+        $correctOption = $opt['option_text'];
+    }
+    $optionsText[] = $optStr;
+}
+
+// 3. Build Prompt for Gemini
+$sysInstruction = "You are an expert tutor for the Gujarat Diploma-to-Degree Common Entrance Test (DDCET). Your goal is to explain the correct answer to multiple choice questions in a clear, concise, and highly educational step-by-step manner. Use LaTeX for math enclosed in $ (inline) or $$ (block). Do not use \\( or \\). Keep the explanation under 250 words and focus on the conceptual 'why'. Do not just restate the question.";
+
+$prompt = "Please explain the solution for the following question.\n\n";
+$prompt .= "**Question:**\n" . $question['question_text'] . "\n\n";
+if (!empty($question['question_text_gu'])) {
+    $prompt .= "**Question (Gujarati):**\n" . $question['question_text_gu'] . "\n\n";
+}
+$prompt .= "**Options:**\n" . implode("\n", $optionsText) . "\n\n";
+$prompt .= "**Task:**\nExplain step-by-step why the correct answer is '$correctOption'.";
+
+// 4. Call Gemini
+$aiExplanation = callGemini($prompt, $sysInstruction);
+
+if (str_starts_with($aiExplanation, 'Error:')) {
+    echo json_encode(['error' => $aiExplanation]);
+    exit;
+}
+
+// Prefix to indicate AI generation
+$aiExplanation = "✨ **AI Explanation:**\n\n" . $aiExplanation;
+
+// 5. Save back to database
+$update = supabaseRest('questions?id=eq.' . $questionId, 'PATCH', ['explanation' => $aiExplanation]);
+if ($update === null) {
+    appLog('error', 'Failed to save AI explanation to DB', ['question_id' => $questionId]);
+    // We still return it to the user so they can see it
+}
+
+echo json_encode(['success' => true, 'explanation' => $aiExplanation]);

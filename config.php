@@ -1,6 +1,25 @@
 <?php
+// Session hardening — must come BEFORE session_start().
+ini_set('session.cookie_httponly', '1');
+ini_set('session.cookie_samesite', 'Lax');
+ini_set('session.use_strict_mode', '1');
+// BUG-036 fix: auto-detect HTTPS instead of hardcoding '0'.
+$isSecure = (!empty($_SERVER['HTTPS']) && $_SERVER['HTTPS'] !== 'off') || (isset($_SERVER['HTTP_X_FORWARDED_PROTO']) && $_SERVER['HTTP_X_FORWARDED_PROTO'] === 'https');
+ini_set('session.cookie_secure', $isSecure ? '1' : '0');
+
 session_start();
 date_default_timezone_set('Asia/Kolkata');
+
+// Security headers — applied to every response that includes config.php.
+// CSP allows inline styles/scripts (legacy codebase), CDN assets, and Razorpay.
+if (!headers_sent()) {
+    // BUG-001 fix: add Supabase domain to connect-src so client-side fetch() works
+    // on all browsers (iOS Safari enforces CSP strictly). This is the SINGLE CSP
+    // source of truth — the .htaccess duplicate is removed.
+    header("Content-Security-Policy: default-src 'self'; script-src 'self' 'unsafe-inline' https://cdn.jsdelivr.net https://checkout.razorpay.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com https://cdn.jsdelivr.net; font-src 'self' https://fonts.gstatic.com; img-src 'self' data: https:; connect-src 'self' https://api.razorpay.com https://lumberjack.razorpay.com https://*.supabase.co");
+    header("Referrer-Policy: strict-origin-when-cross-origin");
+    header("Permissions-Policy: camera=(), microphone=(), geolocation=()");
+}
 
 // Load .env
 $envFile = __DIR__ . '/.env';
@@ -21,6 +40,9 @@ if (file_exists($envFile)) {
 }
 
 // Constants
+define('SUPABASE_URL', $_ENV['SUPABASE_URL'] ?? '');
+define('SUPABASE_KEY', $_ENV['SUPABASE_KEY'] ?? '');
+define('GEMINI_API_KEY', $_ENV['GEMINI_API_KEY'] ?? '');
 define('APP_URL', $_ENV['APP_URL'] ?? 'http://localhost:8000');
 define('APP_NAME', $_ENV['APP_NAME'] ?? 'DDCET Prep');
 define('DDCET_EXAM_DATE', $_ENV['DDCET_EXAM_DATE'] ?? '2027-06-15');
@@ -35,9 +57,6 @@ function redirect(string $path): void {
     }
     exit;
 }
-
-define('SUPABASE_URL', $_ENV['SUPABASE_URL'] ?? '');
-define('SUPABASE_KEY', $_ENV['SUPABASE_KEY'] ?? '');
 
 define('GOOGLE_CLIENT_ID', $_ENV['GOOGLE_CLIENT_ID'] ?? '');
 define('GOOGLE_CLIENT_SECRET', $_ENV['GOOGLE_CLIENT_SECRET'] ?? '');
@@ -82,6 +101,17 @@ define('WB_ADMIN_PASSWORD_HASH', $_ENV['WB_ADMIN_PASSWORD_HASH'] ?? '');
 
 // Test Mode
 define('TEST_MODE', false);
+
+/* ============================================================================
+ * Logging — lightweight, zero-dependency error log.
+ * Writes to PHP's configured error_log (syslog / file). Every supabaseRest()
+ * failure and every caught exception should call this.
+ * ==========================================================================*/
+function appLog(string $level, string $msg, array $ctx = []): void {
+    $entry = '[' . date('Y-m-d H:i:s') . '] [' . strtoupper($level) . '] ' . $msg;
+    if ($ctx) $entry .= ' ' . json_encode($ctx, JSON_UNESCAPED_SLASHES);
+    error_log($entry);
+}
 
 /**
  * Simple file cache for GET requests (5 second TTL)
@@ -129,11 +159,21 @@ function supabaseRest(string $path, string $method = 'GET', ?array $data = null,
         'Authorization: Bearer ' . SUPABASE_KEY,
         'Content-Type: application/json',
     ];
+    // BUG-006 fix: merge Prefer directives into a single header to avoid
+    // duplication (some proxies/edge functions only read the last Prefer header).
+    $preferParts = [];
     if (in_array($method, ['POST', 'PATCH', 'PUT'])) {
-        $headers[] = 'Prefer: return=representation';
+        $preferParts[] = 'return=representation';
     }
     if (!empty($extra['prefer'])) {
-        $headers[] = 'Prefer: ' . $extra['prefer'];
+        // The extra may already contain return=representation; deduplicate.
+        foreach (explode(',', $extra['prefer']) as $p) {
+            $p = trim($p);
+            if ($p !== '' && !in_array($p, $preferParts)) $preferParts[] = $p;
+        }
+    }
+    if ($preferParts) {
+        $headers[] = 'Prefer: ' . implode(', ', $preferParts);
     }
 
     // Reuse the persistent handle; curl_reset() clears per-call options but keeps
@@ -163,7 +203,10 @@ function supabaseRest(string $path, string $method = 'GET', ?array $data = null,
     $httpCode = curl_getinfo($ch, CURLINFO_HTTP_CODE);
     // NOTE: intentionally NOT curl_close()'d — the handle is reused next call.
 
-    if ($httpCode >= 400) return null;
+    if ($httpCode >= 400) {
+        appLog('error', 'supabaseRest failed', ['path' => $path, 'method' => $method, 'http' => $httpCode]);
+        return null;
+    }
     $decoded = json_decode($response, true);
     $result = is_array($decoded) ? $decoded : [];
 
@@ -172,6 +215,91 @@ function supabaseRest(string $path, string $method = 'GET', ?array $data = null,
 
     return $result;
 }
+
+/**
+ * Execute multiple GET requests concurrently using curl_multi.
+ * Accepts an associative array: ['key1' => 'path1', 'key2' => 'path2']
+ * Returns an associative array of results with the same keys.
+ * Uses a persistent pool of cURL handles to maintain HTTP keep-alive across requests.
+ */
+function supabaseRestMulti(array $requests, array $extra = []): array {
+    $results = [];
+    $noCache = !empty($extra['no_cache']);
+    $pending = [];
+    
+    foreach ($requests as $key => $path) {
+        if (!$noCache) {
+            $cached = cacheGet($path);
+            if ($cached !== null) {
+                $results[$key] = $cached;
+                continue;
+            }
+        }
+        $pending[$key] = $path;
+    }
+    
+    if (empty($pending)) return $results;
+    
+    static $multi = null;
+    static $pool = [];
+    if ($multi === null) $multi = curl_multi_init();
+    
+    while (count($pool) < count($pending)) {
+        $pool[] = curl_init();
+    }
+    
+    $handles = [];
+    $poolIdx = 0;
+    foreach ($pending as $key => $path) {
+        $ch = $pool[$poolIdx++];
+        curl_reset($ch);
+        $url = SUPABASE_URL . '/rest/v1/' . ltrim($path, '/');
+        curl_setopt_array($ch, [
+            CURLOPT_URL => $url,
+            CURLOPT_RETURNTRANSFER => true,
+            CURLOPT_HTTPHEADER => [
+                'apikey: ' . SUPABASE_KEY,
+                'Authorization: Bearer ' . SUPABASE_KEY,
+                'Content-Type: application/json',
+            ],
+            CURLOPT_TIMEOUT => 8,
+            CURLOPT_CONNECTTIMEOUT => 3,
+            CURLOPT_TCP_KEEPALIVE => 1,
+            CURLOPT_DNS_CACHE_TIMEOUT => 300,
+            CURLOPT_TCP_NODELAY => 1,
+            CURLOPT_ENCODING => '',
+        ]);
+        curl_multi_add_handle($multi, $ch);
+        $handles[$key] = ['ch' => $ch, 'path' => $path];
+    }
+    
+    $running = null;
+    do {
+        curl_multi_exec($multi, $running);
+        curl_multi_select($multi);
+    } while ($running > 0);
+    
+    foreach ($handles as $key => $meta) {
+        $ch = $meta['ch'];
+        $httpCode = curl_getinfo($ch, CURLINFO_HTTP_CODE);
+        $response = curl_multi_getcontent($ch);
+        
+        if ($httpCode >= 400 || $response === false) {
+            appLog('error', 'supabaseRestMulti failed', ['path' => $meta['path'], 'http' => $httpCode]);
+            $results[$key] = null;
+        } else {
+            $decoded = json_decode($response, true);
+            $res = is_array($decoded) ? $decoded : [];
+            if (!$noCache) cacheSet($meta['path'], $res);
+            $results[$key] = $res;
+        }
+        curl_multi_remove_handle($multi, $ch);
+    }
+    
+    return $results;
+}
+
+
 
 /**
  * Count rows matching a PostgREST filter WITHOUT transferring them. Uses
@@ -190,9 +318,15 @@ function supabaseCount(string $path, array $extra = []): ?int {
         if ($cached !== null) return (int)($cached['count'] ?? 0);
     }
 
+    // BUG-012 fix: use a dedicated persistent handle for count queries instead
+    // of curl_init()+curl_close() every call (saves TLS handshake on repeated
+    // calls within the same request — dashboard calls this 3-4 times).
+    static $countCh = null;
+    if ($countCh === null) $countCh = curl_init();
     $url = SUPABASE_URL . '/rest/v1/' . ltrim($reqPath, '/');
-    $ch = curl_init($url);
-    curl_setopt_array($ch, [
+    curl_reset($countCh);
+    curl_setopt_array($countCh, [
+        CURLOPT_URL => $url,
         CURLOPT_RETURNTRANSFER => true,
         CURLOPT_HEADER => true,   // we need the Content-Range response header
         CURLOPT_NOBODY => false,
@@ -203,10 +337,13 @@ function supabaseCount(string $path, array $extra = []): ?int {
         ],
         CURLOPT_TIMEOUT => 8,
         CURLOPT_CONNECTTIMEOUT => 3,
+        CURLOPT_TCP_KEEPALIVE => 1,
+        CURLOPT_DNS_CACHE_TIMEOUT => 300,
+        CURLOPT_ENCODING => '',
     ]);
-    $response = curl_exec($ch);
-    $httpCode = curl_getinfo($ch, CURLINFO_HTTP_CODE);
-    curl_close($ch);
+    $response = curl_exec($countCh);
+    $httpCode = curl_getinfo($countCh, CURLINFO_HTTP_CODE);
+    // NOTE: intentionally NOT curl_close()'d — reused next call.
 
     if ($response === false || $httpCode >= 400) return null;
 
@@ -245,7 +382,20 @@ function supabaseMulti(array $paths): array {
     $results = [];
     foreach ($handles as $i => $ch) {
         $response = curl_multi_getcontent($ch);
-        $results[$i] = json_decode($response, true) ?? [];
+        $httpCode = curl_getinfo($ch, CURLINFO_HTTP_CODE);
+        if ($httpCode >= 400) {
+            appLog('error', 'supabaseMulti failed', ['http' => $httpCode, 'response' => $response]);
+            $results[$i] = [];
+        } else {
+            $decoded = json_decode($response, true);
+            $results[$i] = is_array($decoded) ? $decoded : [];
+            // If it decoded to an associative array with an error (e.g. Supabase returned 200 with an error object, though rare), ensure it's a list if it's meant to be a list? 
+            // Most endpoints return lists. If it's associative and not empty, and lacks 'message' or 'error', we'll just keep it.
+            // A safer approach: if isset($decoded['message']) or isset($decoded['error']) it's an error object.
+            if (isset($results[$i]['message']) || isset($results[$i]['error'])) {
+                $results[$i] = [];
+            }
+        }
         curl_multi_remove_handle($mh, $ch);
         curl_close($ch);
     }
@@ -445,10 +595,7 @@ class SupaStatement {
                 }
             }
         }
-        // Handle SET col = col + :param (increment)
-        if (preg_match_all('/(\w+)\s*=\s*\w+\s*\+\s*:(\w+)/i', $setClause, $incs, PREG_SET_ORDER)) {
-            // REST API doesn't support increment directly, skip these for now
-        }
+        
         // Handle SET col = value (literal)
         if (preg_match_all("/(\w+)\s*=\s*(?:TRUE|FALSE|NULL|CURRENT_DATE|NOW\(\))/i", $setClause, $lits, PREG_SET_ORDER)) {
             foreach ($lits as $l) {
@@ -458,6 +605,21 @@ class SupaStatement {
                 elseif (str_contains($val, 'NULL')) $data[$l[1]] = null;
                 elseif (str_contains($val, 'CURRENT_DATE')) $data[$l[1]] = date('Y-m-d');
                 elseif (str_contains($val, 'NOW()')) $data[$l[1]] = date('c');
+            }
+        }
+
+        // BUG-021 fix: actually perform the increment by fetching the current row first.
+        // The REST API doesn't support atomic increments, so we read-modify-write.
+        if (preg_match_all('/(\w+)\s*=\s*\w+\s*\+\s*:(\w+)/i', $setClause, $incs, PREG_SET_ORDER)) {
+            $current = supabaseRest($table . '?' . $filter . '&select=*&limit=1');
+            if (!empty($current[0])) {
+                foreach ($incs as $i) {
+                    $col = $i[1];
+                    $param = ':' . $i[2];
+                    if (isset($this->params[$param])) {
+                        $data[$col] = (float)($current[0][$col] ?? 0) + (float)$this->params[$param];
+                    }
+                }
             }
         }
 
@@ -475,52 +637,77 @@ class SupaStatement {
         return [];
     }
 
+    private function parseCond(string $cond): string {
+        $cond = trim($cond);
+        if (empty($cond)) return '';
+        if (preg_match("/^(\w+)\s*=\s*'([^']+)'/", $cond, $m)) return $m[1] . '=eq.' . $m[2];
+        if (preg_match('/^(\w+)\s*=\s*(\d+)/', $cond, $m)) return $m[1] . '=eq.' . $m[2];
+        if (preg_match('/^(\w+)\s*=\s*TRUE/i', $cond, $m)) return $m[1] . '=eq.true';
+        if (preg_match('/^(\w+)\s*=\s*FALSE/i', $cond, $m)) return $m[1] . '=eq.false';
+        if (preg_match("/^(\w+)\s*>\s*'([^']+)'/", $cond, $m)) return $m[1] . '=gt.' . $m[2];
+        if (preg_match("/^(\w+)\s*>\s*NOW\(\)/i", $cond, $m)) return $m[1] . '=gt.' . date('c');
+        if (preg_match('/^NOT\s+(\w+)/i', $cond, $m)) return $m[1] . '=eq.false';
+        if (preg_match("/^(\w+)\s*!=\s*(\d+)/", $cond, $m)) return $m[1] . '=neq.' . $m[2];
+        if (preg_match('/^(\w+)\s+IS\s+NULL/i', $cond, $m)) return $m[1] . '=is.null';
+        if (preg_match('/^(\w+)\s+IS\s+NOT\s+NULL/i', $cond, $m)) return $m[1] . '=not.is.null';
+        if (preg_match("/^(\w+)\.(\w+)\s*=\s*'([^']+)'/", $cond, $m)) return $m[2] . '=eq.' . $m[3];
+        return '';
+    }
+
     private function whereToFilter(string $where): string {
         if (empty($where)) return '';
-        $parts = [];
         
-        // Split on AND (simple approach)
-        $conditions = preg_split('/\s+AND\s+/i', $where);
-        foreach ($conditions as $cond) {
-            $cond = trim($cond);
-            if (empty($cond)) continue;
+        // BUG-020 fix: parse OR blocks like `(col = 'val' OR col = 'val2')`
+        // into PostgREST syntax: `or=(col.eq.val,col.eq.val2)`
+        if (preg_match_all('/\(([^)]+)\)/', $where, $orBlocks, PREG_OFFSET_CAPTURE)) {
+            $parts = [];
+            $lastIdx = 0;
+            foreach ($orBlocks[0] as $i => $match) {
+                $blockStr = $match[0];
+                $blockOffset = $match[1];
+                $inner = $orBlocks[1][$i][0];
+                
+                // Parse the AND conditions before this OR block
+                $pre = trim(substr($where, $lastIdx, $blockOffset - $lastIdx));
+                if (str_ends_with(strtoupper($pre), ' AND')) $pre = substr($pre, 0, -4);
+                if ($pre) {
+                    foreach (preg_split('/\s+AND\s+/i', $pre) as $cond) {
+                        $p = $this->parseCond($cond);
+                        if ($p) $parts[] = $p;
+                    }
+                }
+                
+                // Parse the OR conditions inside the block
+                $orParts = [];
+                foreach (preg_split('/\s+OR\s+/i', $inner) as $cond) {
+                    $p = $this->parseCond($cond);
+                    if ($p) $orParts[] = $p;
+                }
+                if ($orParts) {
+                    $parts[] = 'or=(' . implode(',', $orParts) . ')';
+                }
+                
+                $lastIdx = $blockOffset + strlen($blockStr);
+            }
             
-            // col = value
-            if (preg_match("/^(\w+)\s*=\s*'([^']+)'/", $cond, $m)) {
-                $parts[] = $m[1] . '=eq.' . $m[2];
-            } elseif (preg_match('/^(\w+)\s*=\s*(\d+)/', $cond, $m)) {
-                $parts[] = $m[1] . '=eq.' . $m[2];
-            } elseif (preg_match('/^(\w+)\s*=\s*TRUE/i', $cond, $m)) {
-                $parts[] = $m[1] . '=eq.true';
-            } elseif (preg_match('/^(\w+)\s*=\s*FALSE/i', $cond, $m)) {
-                $parts[] = $m[1] . '=eq.false';
+            // Parse any trailing AND conditions
+            $post = trim(substr($where, $lastIdx));
+            if (str_starts_with(strtoupper($post), 'AND ')) $post = substr($post, 4);
+            if ($post) {
+                foreach (preg_split('/\s+AND\s+/i', $post) as $cond) {
+                    $p = $this->parseCond($cond);
+                    if ($p) $parts[] = $p;
+                }
             }
-            // col > value / col < value
-            elseif (preg_match("/^(\w+)\s*>\s*'([^']+)'/", $cond, $m)) {
-                $parts[] = $m[1] . '=gt.' . $m[2];
-            } elseif (preg_match("/^(\w+)\s*>\s*NOW\(\)/i", $cond, $m)) {
-                $parts[] = $m[1] . '=gt.' . date('c');
-            }
-            // NOT col
-            elseif (preg_match('/^NOT\s+(\w+)/i', $cond, $m)) {
-                $parts[] = $m[1] . '=eq.false';
-            }
-            // col != value
-            elseif (preg_match("/^(\w+)\s*!=\s*(\d+)/", $cond, $m)) {
-                $parts[] = $m[1] . '=neq.' . $m[2];
-            }
-            // col IS NULL
-            elseif (preg_match('/^(\w+)\s+IS\s+NULL/i', $cond, $m)) {
-                $parts[] = $m[1] . '=is.null';
-            }
-            // col IS NOT NULL
-            elseif (preg_match('/^(\w+)\s+IS\s+NOT\s+NULL/i', $cond, $m)) {
-                $parts[] = $m[1] . '=not.is.null';
-            }
-            // status = 'value'
-            elseif (preg_match("/^(\w+)\.(\w+)\s*=\s*'([^']+)'/", $cond, $m)) {
-                $parts[] = $m[2] . '=eq.' . $m[3];
-            }
+            
+            return implode('&', $parts);
+        }
+
+        // Simple approach without OR blocks
+        $parts = [];
+        foreach (preg_split('/\s+AND\s+/i', $where) as $cond) {
+            $p = $this->parseCond($cond);
+            if ($p) $parts[] = $p;
         }
         return implode('&', $parts);
     }
@@ -593,6 +780,28 @@ function requireAuth(): array {
         header('Location: ' . BASE_PATH . 'auth/login.php');
         exit;
     }
+
+    // BUG-007 fix: periodically refresh the session from the DB (every 5 min)
+    // so profile changes, bans, XP updates, and admin grants take effect
+    // without requiring a re-login.
+    $lastRefresh = $_SESSION['_user_refreshed_at'] ?? 0;
+    if (!TEST_MODE && (time() - $lastRefresh) > 300) {
+        $fresh = supabaseRest('students?id=eq.' . (int)$user['id'] . '&select=*&limit=1');
+        if (!empty($fresh[0])) {
+            // Check ban immediately.
+            if (!empty($fresh[0]['is_banned'])) {
+                session_destroy();
+                header('Location: ' . BASE_PATH . 'auth/login.php?error=banned');
+                exit;
+            }
+            // Preserve admin flag (comes from the admins table, set at login).
+            $fresh[0]['is_admin'] = $user['is_admin'] ?? false;
+            $_SESSION['user'] = $fresh[0];
+            $user = $fresh[0];
+        }
+        $_SESSION['_user_refreshed_at'] = time();
+    }
+
     return $user;
 }
 
@@ -991,7 +1200,10 @@ function emailTemplate(string $heading, string $bodyHtml, string $ctaText = '', 
  * links in non-transactional mail — no login needed, but unforgeable).
  */
 function mailToken(int $studentId, string $purpose = 'unsub'): string {
-    return substr(hash_hmac('sha256', $purpose . ':' . $studentId, CRON_SECRET), 0, 32);
+    // If CRON_SECRET is empty (not yet configured), derive a fallback key so
+    // tokens are not trivially forgeable with an empty HMAC key.
+    $key = CRON_SECRET !== '' ? CRON_SECRET : hash('sha256', SUPABASE_KEY . ':mail_fallback');
+    return substr(hash_hmac('sha256', $purpose . ':' . $studentId, $key), 0, 32);
 }
 
 /** Footer snippet with a one-click, tokenised unsubscribe link for marketing mail. */
@@ -1046,21 +1258,17 @@ function mockResultsOut(array $test): bool {
  * Returns ['rank'=>int, 'total'=>int, 'percentile'=>float].
  */
 function mockAIR(int $testId, float $score): ?array {
-    $rows = supabaseRest('attempts?test_id=eq.' . $testId
-        . '&status=eq.completed&select=score') ?? [];
-    $total = count($rows);
-    if ($total === 0) return null;
+    // Use count-based queries instead of fetching all rows into memory.
+    $base = 'attempts?test_id=eq.' . $testId . '&status=eq.completed';
+    $total = supabaseCount($base);
+    if ($total === null || $total === 0) return null;
 
-    $better = 0; $atOrBelow = 0;
-    foreach ($rows as $r) {
-        $s = (float)($r['score'] ?? 0);
-        if ($s > $score)  $better++;
-        if ($s <= $score) $atOrBelow++;
-    }
+    // Standard competition ranking: count everyone strictly ahead.
+    $better = supabaseCount($base . '&score=gt.' . $score) ?? 0;
     return [
         'rank'       => $better + 1,
         'total'      => $total,
-        'percentile' => round(($atOrBelow / $total) * 100, 1),
+        'percentile' => round((($total - $better) / $total) * 100, 1),
     ];
 }
 
@@ -1193,15 +1401,16 @@ function globalRank(int $studentId, ?int $knownXp = null): ?int {
  */
 function collegeRank(int $studentId, ?int $collegeId): ?array {
     if (!$collegeId) return null;
-    $peers = supabaseRest('students?is_banned=eq.false&college_id=eq.' . (int)$collegeId
-        . '&select=id,xp&order=xp.desc&limit=2000') ?? [];
-    if (!$peers) return null;
-    $rank = 0; $total = count($peers); $found = false;
-    foreach ($peers as $i => $p) {
-        if ((int)$p['id'] === $studentId) { $rank = $i + 1; $found = true; break; }
-    }
-    if (!$found) return null;
-    return ['rank' => $rank, 'total' => $total];
+    // Get this student's XP first.
+    $me = supabaseRest('students?id=eq.' . $studentId . '&select=xp&limit=1');
+    if (empty($me)) return null;
+    $myXp = (int)($me[0]['xp'] ?? 0);
+    // Count peers in same college with higher XP (standard competition ranking).
+    $base = 'students?is_banned=eq.false&college_id=eq.' . (int)$collegeId;
+    $total = supabaseCount($base);
+    if ($total === null || $total === 0) return null;
+    $ahead = supabaseCount($base . '&xp=gt.' . $myXp) ?? 0;
+    return ['rank' => $ahead + 1, 'total' => $total];
 }
 
 /**
@@ -1211,18 +1420,21 @@ function collegeRank(int $studentId, ?int $collegeId): ?array {
  */
 function dailyChallengeRank(int $studentId): ?array {
     $today = date('Y-m-d');
-    $rows = supabaseRest('attempts?mode=eq.daily_challenge&status=eq.completed'
-        . '&started_at=gte.' . $today . '&select=student_id,score&order=score.desc') ?? [];
-    if (!$rows) return null;
-    $myScore = null;
-    foreach ($rows as $r) {
-        if ((int)($r['student_id'] ?? 0) === $studentId) { $myScore = (float)$r['score']; break; }
-    }
-    if ($myScore === null) return null;
-    $better = 0;
-    foreach ($rows as $r) { if ((float)($r['score'] ?? 0) > $myScore) $better++; }
-    return ['rank' => $better + 1, 'total' => count($rows), 'score' => $myScore];
+    // Get this student's best daily challenge score today.
+    $me = supabaseRest('attempts?mode=eq.daily_challenge&status=eq.completed'
+        . '&student_id=eq.' . $studentId . '&started_at=gte.' . $today
+        . '&select=score&order=score.desc&limit=1');
+    if (empty($me)) return null;
+    $myScore = (float)($me[0]['score'] ?? 0);
+    // Count-based ranking instead of fetching all rows.
+    $base = 'attempts?mode=eq.daily_challenge&status=eq.completed&started_at=gte.' . $today;
+    $total = supabaseCount($base);
+    if ($total === null || $total === 0) return null;
+    $better = supabaseCount($base . '&score=gt.' . $myScore) ?? 0;
+    return ['rank' => $better + 1, 'total' => $total, 'score' => $myScore];
 }
+
+require_once __DIR__ . '/includes/rpc.php';
 
 /* ============================================================================
  * CSRF protection
