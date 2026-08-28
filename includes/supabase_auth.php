@@ -58,7 +58,8 @@ function supabaseRequest($endpoint, $method = 'GET', $data = null, $token = null
 function getSupabaseAuthUrl() {
     $params = http_build_query([
         'provider' => 'google',
-        'redirect_to' => APP_URL . BASE_PATH . 'auth/callback.php',
+        // 'redirect_to' => APP_URL . BASE_PATH . 'auth/callback.php',
+            'redirect_to' => APP_URL . '/auth/callback.php',
     ]);
     return SUPABASE_URL . '/auth/v1/authorize?' . $params;
 }
