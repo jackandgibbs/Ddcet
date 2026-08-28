@@ -143,17 +143,17 @@ include __DIR__ . '/includes/header.php';
         <!-- Difficulty -->
         <div class="form-group" style="margin-top: 20px;">
             <label style="font-weight: 600; margin-bottom: 10px; display: block;">Difficulty</label>
-            <div style="display: flex; gap: 10px;">
-                <label style="display: flex; align-items: center; gap: 6px; background: var(--bg-primary); padding: 10px 16px; border-radius: 8px; cursor: pointer; border: 2px solid var(--border);">
+            <div style="display: flex; gap: 10px; flex-wrap: wrap;">
+                <label style="display: flex; align-items: center; gap: 6px; background: var(--bg-primary); padding: 10px 16px; border-radius: 8px; cursor: pointer; border: 2px solid var(--border); white-space: nowrap; flex: 1; min-width: 80px; justify-content: center;">
                     <input type="radio" name="difficulty" value="all" checked style="accent-color: var(--accent);"> <span style="font-size: 13px;">All</span>
                 </label>
-                <label style="display: flex; align-items: center; gap: 6px; background: var(--bg-primary); padding: 10px 16px; border-radius: 8px; cursor: pointer; border: 2px solid var(--border);">
+                <label style="display: flex; align-items: center; gap: 6px; background: var(--bg-primary); padding: 10px 16px; border-radius: 8px; cursor: pointer; border: 2px solid var(--border); white-space: nowrap; flex: 1; min-width: 80px; justify-content: center;">
                     <input type="radio" name="difficulty" value="easy" style="accent-color: var(--green);"> <span style="font-size: 13px;">Easy</span>
                 </label>
-                <label style="display: flex; align-items: center; gap: 6px; background: var(--bg-primary); padding: 10px 16px; border-radius: 8px; cursor: pointer; border: 2px solid var(--border);">
+                <label style="display: flex; align-items: center; gap: 6px; background: var(--bg-primary); padding: 10px 16px; border-radius: 8px; cursor: pointer; border: 2px solid var(--border); white-space: nowrap; flex: 1; min-width: 80px; justify-content: center;">
                     <input type="radio" name="difficulty" value="medium" style="accent-color: var(--orange);"> <span style="font-size: 13px;">Medium</span>
                 </label>
-                <label style="display: flex; align-items: center; gap: 6px; background: var(--bg-primary); padding: 10px 16px; border-radius: 8px; cursor: pointer; border: 2px solid var(--border);">
+                <label style="display: flex; align-items: center; gap: 6px; background: var(--bg-primary); padding: 10px 16px; border-radius: 8px; cursor: pointer; border: 2px solid var(--border); white-space: nowrap; flex: 1; min-width: 80px; justify-content: center;">
                     <input type="radio" name="difficulty" value="hard" style="accent-color: var(--red);"> <span style="font-size: 13px;">Hard</span>
                 </label>
             </div>
