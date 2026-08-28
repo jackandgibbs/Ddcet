@@ -47,7 +47,12 @@ define('GEMINI_API_KEY', $_ENV['GEMINI_API_KEY'] ?? '');
 define('APP_URL', $_ENV['APP_URL'] ?? 'http://localhost:8000');
 define('APP_NAME', $_ENV['APP_NAME'] ?? 'DDCET Prep');
 define('DDCET_EXAM_DATE', $_ENV['DDCET_EXAM_DATE'] ?? '2027-06-15');
-define('BASE_PATH', '/Dddcet/');
+// define('BASE_PATH', '/Dddcet/');
+// define('BASE_PATH', '/');
+define(
+    'BASE_PATH',
+    $_ENV['BASE_PATH'] ?? '/'
+);
 
 function redirect(string $path): void {
     $path = ltrim($path, '/');
