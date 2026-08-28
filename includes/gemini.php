@@ -49,8 +49,20 @@ function callGemini($prompt, string $systemInstruction = '') {
     curl_close($ch);
 
     if ($httpCode >= 400 || $response === false) {
+        $errorMsg = 'Failed connecting to AI service.';
+        if ($response) {
+            $errData = json_decode($response, true);
+            if (isset($errData['error']['message'])) {
+                $msg = $errData['error']['message'];
+                if ($httpCode === 429) {
+                    $errorMsg = 'API Rate limit exceeded. Please wait a minute and try again.';
+                } else {
+                    $errorMsg = $msg;
+                }
+            }
+        }
         appLog('error', 'Gemini API failed', ['http' => $httpCode, 'response' => $response, 'curl_error' => $curlError]);
-        return "Error: Failed connecting to AI service. " . $curlError;
+        return "Error: " . $errorMsg;
     }
 
     $data = json_decode($response, true);

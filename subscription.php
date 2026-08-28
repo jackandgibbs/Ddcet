@@ -162,7 +162,10 @@ function applyCoupon() {
     if (!code) { couponPct = 0; couponCode = ''; msg.textContent = ''; renderPrices(); return; }
     fetch('api/validate_coupon.php', {
         method: 'POST',
-        headers: {'Content-Type': 'application/json'},
+        headers: {
+            'Content-Type': 'application/json',
+            'X-CSRF-Token': '<?= htmlspecialchars(csrfToken()) ?>'
+        },
         body: JSON.stringify({ coupon: code })
     })
     .then(r => r.json())
@@ -186,7 +189,10 @@ document.addEventListener('DOMContentLoaded', renderPrices);
 function initPayment(plan) {
     fetch('api/create_order.php', {
         method: 'POST',
-        headers: {'Content-Type': 'application/json'},
+        headers: {
+            'Content-Type': 'application/json',
+            'X-CSRF-Token': '<?= htmlspecialchars(csrfToken()) ?>'
+        },
         // Send the coupon code; the server re-validates it (never trusts a price).
         body: JSON.stringify({ plan: plan, coupon: couponCode })
     })
@@ -204,7 +210,10 @@ function initPayment(plan) {
             handler: function(response) {
                 fetch('api/verify_payment.php', {
                     method: 'POST',
-                    headers: {'Content-Type': 'application/json'},
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'X-CSRF-Token': '<?= htmlspecialchars(csrfToken()) ?>'
+                    },
                     body: JSON.stringify({
                         razorpay_payment_id: response.razorpay_payment_id,
                         razorpay_order_id: response.razorpay_order_id,

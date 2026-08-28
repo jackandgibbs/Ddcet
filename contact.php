@@ -64,7 +64,7 @@ include __DIR__ . '/includes/header.php';
     </div>
 <?php endif; ?>
 
-<div style="display: grid; grid-template-columns: 1fr 1.2fr; gap: 20px; align-items: start;">
+<div class="grid-1-mobile" style="display: grid; grid-template-columns: 1fr 1.2fr; gap: 20px; align-items: start;">
 
     <!-- Submit a query -->
     <div class="card">

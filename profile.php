@@ -78,6 +78,15 @@ include __DIR__ . '/includes/header.php';
                 <?php if (!empty($profile['department'])): ?><span class="tag"><?= htmlspecialchars($profile['department']) ?></span><?php endif; ?>
                 <?php if (!empty($profile['semester'])): ?><span class="tag">Sem <?= $profile['semester'] ?></span><?php endif; ?>
             </div>
+            
+            <?php if ($profileId === (int) $user['id']): ?>
+            <div style="margin-top: 16px; padding-top: 16px; border-top: 1px solid var(--border); font-size: 13px; color: var(--text-secondary); display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 12px;">
+                <?php if (!empty($profile['surname'])): ?><div><strong>Surname:</strong> <?= htmlspecialchars($profile['surname']) ?></div><?php endif; ?>
+                <?php if (!empty($profile['phone'])): ?><div><strong>Phone:</strong> <?= htmlspecialchars($profile['phone']) ?></div><?php endif; ?>
+                <?php if (!empty($profile['email'])): ?><div><strong>Email:</strong> <?= htmlspecialchars($profile['email']) ?></div><?php endif; ?>
+                <?php if (!empty($profile['branch'])): ?><div><strong>Branch:</strong> <?= htmlspecialchars($profile['branch']) ?></div><?php endif; ?>
+            </div>
+            <?php endif; ?>
         </div>
     </div>
 </div>

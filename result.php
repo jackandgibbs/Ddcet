@@ -306,6 +306,25 @@ include __DIR__ . '/includes/header.php';
     </div>
 </div>
 
+<!-- Ask AI About Your Report -->
+<div class="card" id="aiReportCard" style="margin-bottom: 20px; border: 1px solid rgba(99, 102, 241, 0.3); overflow: hidden;">
+    <div style="display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 12px;">
+        <div style="display: flex; align-items: center; gap: 12px;">
+            <div style="width: 40px; height: 40px; border-radius: 12px; background: linear-gradient(135deg, #10b981, #3b82f6); display: flex; align-items: center; justify-content: center; color: #fff; font-size: 20px; flex-shrink: 0;">
+                <?= icon('cpu', 22) ?>
+            </div>
+            <div>
+                <h3 style="margin: 0; font-size: 15px;">AI Performance Analysis</h3>
+                <p style="margin: 0; font-size: 12px; color: var(--text-muted);">Get a detailed, personalized assessment of your performance powered by AI</p>
+            </div>
+        </div>
+        <button id="analyzeReportBtn" class="btn btn-sm" onclick="analyzeReport()" style="background: linear-gradient(135deg, #10b981, #3b82f6); color: #fff; border: none; padding: 8px 20px; font-weight: 700; font-size: 13px; border-radius: 8px; white-space: nowrap;">
+            <?= icon('zap', 14) ?> Analyze My Report ✨
+        </button>
+    </div>
+    <div id="aiReportResult" style="display: none; margin-top: 16px; padding-top: 16px; border-top: 1px solid var(--border);"></div>
+</div>
+
 <?php if ($projection): $best = $projection['best']; $next = $projection['next']; ?>
 <!-- College projection — turns the score into the seat they actually want -->
 <div class="card" id="projection" style="margin-bottom:20px; border-color:var(--accent);">
@@ -375,7 +394,7 @@ include __DIR__ . '/includes/header.php';
 <?php else: ?>
 
 <!-- Comparison & Time Analysis -->
-<div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin-bottom: 24px;">
+<div class="grid-1-mobile" style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin-bottom: 24px;">
     <!-- Comparison -->
     <div class="card">
         <div class="card-header"><h3>Compare</h3></div>
@@ -423,7 +442,7 @@ include __DIR__ . '/includes/header.php';
         foreach ($options as $o) { if ($o['is_correct']) { $correctOpt = $o; break; } }
     ?>
     <div style="border-bottom: 1px solid var(--border); padding: 20px 0; <?= $idx === 0 ? 'padding-top: 0;' : '' ?>">
-        <div style="display: flex; align-items: center; gap: 12px; margin-bottom: 8px;">
+        <div style="display: flex; align-items: center; gap: 12px; margin-bottom: 8px; flex-wrap: wrap;">
             <span style="font-family: var(--font-mono); color: var(--text-muted); font-size: 12px;">Q<?= $idx + 1 ?></span>
             <?php if ($ans['is_correct'] === true): ?>
                 <span class="badge badge-green"><?= icon('check', 12) ?> Correct</span>
@@ -487,7 +506,7 @@ include __DIR__ . '/includes/header.php';
         </div>
 
         <!-- Difficulty Rating -->
-        <div style="margin-top: 10px; display: flex; gap: 8px; align-items: center;">
+        <div style="margin-top: 10px; display: flex; gap: 8px; align-items: center; flex-wrap: wrap;">
             <span style="font-size: 11px; color: var(--text-muted);">Rate difficulty:</span>
             <button class="btn btn-sm btn-secondary rate-btn" data-qid="<?= $ans['question_id'] ?>" data-rating="too_easy">Too Easy</button>
             <button class="btn btn-sm btn-secondary rate-btn" data-qid="<?= $ans['question_id'] ?>" data-rating="fair">Fair</button>
@@ -677,6 +696,97 @@ function askAI(questionId) {
     })
     .catch(() => {
         box.innerHTML = `<span style="color: var(--red);">Network error.</span> <button class="btn btn-sm btn-secondary" onclick="askAI(${questionId})">Retry</button>`;
+    });
+}
+
+// Ask AI About Your Report functionality
+function analyzeReport() {
+    const btn = document.getElementById('analyzeReportBtn');
+    const resultBox = document.getElementById('aiReportResult');
+    
+    // Show loading state
+    btn.innerHTML = `<span class="spinner" style="width:14px;height:14px;border:2px solid #fff;border-top-color:transparent;border-radius:50%;animation:spin 1s linear infinite;display:inline-block;vertical-align:middle;margin-right:6px;"></span> Analyzing...`;
+    btn.disabled = true;
+    resultBox.style.display = 'block';
+    resultBox.innerHTML = `
+        <div style="display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 20px 0; color: var(--text-muted);">
+            <div class="spinner" style="width:30px;height:30px;border:3px solid var(--accent);border-top-color:transparent;border-radius:50%;animation:spin 1s linear infinite;margin-bottom:12px;"></div>
+            <p style="margin:0;font-size:14px;">The AI is reviewing your test data...</p>
+            <p style="margin:5px 0 0;font-size:12px;opacity:0.7;">This usually takes about 3-5 seconds</p>
+        </div>
+    `;
+    
+    // Scroll to the card so the user sees the loading state
+    document.getElementById('aiReportCard').scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+    
+    fetch('<?= BASE_PATH ?>api/analyze_report.php', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json', 'X-CSRF-Token': '<?= htmlspecialchars(csrfToken()) ?>' },
+        body: JSON.stringify({ attempt_id: <?= $attemptId ?> })
+    })
+    .then(r => r.json())
+    .then(data => {
+        btn.innerHTML = `<?= icon('refresh-cw', 14) ?> Analyze Again`;
+        btn.disabled = false;
+        
+        if (data.error) {
+            resultBox.innerHTML = `
+                <div style="background: rgba(231,76,60,0.1); border: 1px solid var(--red); border-radius: 8px; padding: 16px; color: var(--red);">
+                    <div style="font-weight: 700; margin-bottom: 6px;">Failed to generate analysis</div>
+                    <div style="font-size: 13px;">${data.error}</div>
+                </div>
+            `;
+        } else {
+            // Simple markdown parser
+            let html = data.analysis;
+            
+            // Format headers
+            html = html.replace(/^##\s+(.*)$/gm, '<h4 style="margin: 20px 0 10px; color: var(--text-primary); font-size: 16px; border-bottom: 1px solid var(--border); padding-bottom: 6px;">$1</h4>');
+            html = html.replace(/^#\s+(.*)$/gm, '<h3 style="margin: 24px 0 12px; color: var(--text-primary);">$1</h3>');
+            
+            // Format lists (handle both - and * bullets, even if inline)
+            html = html.replace(/(?:^|\s)(?:-|\*)\s(.*?)(?=(?:\s(?:-|\*)\s|$))/gm, '<li style="margin-bottom: 6px;">$1</li>');
+            html = html.replace(/(<li.*?>.*?<\/li>)+/g, match => `<ul style="margin: 10px 0 16px; padding-left: 20px;">${match}</ul>`);
+            
+            // Format bold
+            html = html.replace(/\*\*(.*?)\*\*/g, '<strong style="color: var(--text-primary);">$1</strong>');
+            
+            // Format paragraphs (newlines)
+            html = html.split('\n\n').map(p => {
+                if (p.trim().startsWith('<h') || p.trim().startsWith('<ul')) return p;
+                return `<p style="margin: 0 0 16px; line-height: 1.6;">${p.replace(/\n/g, '<br>')}</p>`;
+            }).join('');
+            
+            resultBox.innerHTML = `
+                <div class="ai-analysis-content" style="font-size: 14px; color: var(--text-secondary);">
+                    ${html}
+                </div>
+                <div style="margin-top: 16px; font-size: 11px; color: var(--text-muted); text-align: right; opacity: 0.7;">
+                    Analysis generated by Google Gemini AI
+                </div>
+            `;
+            
+            // Let the KaTeX renderer process any math if there happens to be any
+            if (window.renderMathInElement) {
+                renderMathInElement(resultBox, {
+                    delimiters: [
+                        {left: '$$', right: '$$', display: true},
+                        {left: '$', right: '$', display: false}
+                    ],
+                    throwOnError: false
+                });
+            }
+        }
+    })
+    .catch(err => {
+        btn.innerHTML = `<?= icon('refresh-cw', 14) ?> Try Again`;
+        btn.disabled = false;
+        resultBox.innerHTML = `
+            <div style="background: rgba(231,76,60,0.1); border: 1px solid var(--red); border-radius: 8px; padding: 16px; color: var(--red);">
+                <div style="font-weight: 700; margin-bottom: 6px;">Network Error</div>
+                <div style="font-size: 13px;">Could not connect to the analysis server. Please check your internet connection and try again.</div>
+            </div>
+        `;
     });
 }
 </script>

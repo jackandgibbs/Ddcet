@@ -8,15 +8,14 @@ if (currentUser()) {
 }
 
 $googleAuthUrl = getSupabaseAuthUrl();
-$isConfigured = !empty(SUPABASE_URL) && !empty(SUPABASE_KEY);
-$errorMsg = $_GET['error'] ?? null;
+$colleges = supabaseRest('colleges?select=id,name,city&order=name') ?? [];
 ?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Login — <?= APP_NAME ?></title>
+    <title>Register — <?= APP_NAME ?></title>
     <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700;800&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
     <style>
         :root { --bg: #f8f9fa; --card: #ffffff; --accent: #4361ee; --green: #10b981; --text: #1a1a2e; --text-sec: #6c757d; --text-muted: #adb5bd; --border: #e9ecef; --radius: 12px; --font: 'DM Sans', sans-serif; --mono: 'DM Mono', monospace; }
@@ -26,41 +25,34 @@ $errorMsg = $_GET['error'] ?? null;
         .login-left { background: linear-gradient(135deg, #1a1a2e, #2d1b69); padding: 48px; display: flex; flex-direction: column; justify-content: center; color: #fff; }
         .login-left h2 { font-size: 28px; font-weight: 800; margin-bottom: 12px; line-height: 1.2; }
         .login-left p { font-size: 14px; opacity: 0.8; line-height: 1.7; margin-bottom: 32px; }
-        .login-stats { display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px; }
-        .login-stat { background: rgba(255,255,255,0.1); backdrop-filter: blur(10px); border-radius: 10px; padding: 16px; text-align: center; }
-        .login-stat .val { font-family: var(--mono); font-size: 22px; font-weight: 700; }
-        .login-stat .lbl { font-size: 11px; opacity: 0.7; margin-top: 2px; }
         
-        .login-right { padding: 48px; display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; }
+        .login-right { padding: 48px; display: flex; flex-direction: column; justify-content: center; align-items: center; }
         .login-right h1 { font-size: 24px; font-weight: 800; margin-bottom: 4px; }
         .login-right h1 span { color: var(--accent); }
-        .login-right .subtitle { color: var(--text-sec); font-size: 14px; margin-bottom: 24px; }
+        .login-right .subtitle { color: var(--text-sec); font-size: 14px; margin-bottom: 24px; text-align: center; }
         
-        .error-msg { background: #fef2f2; color: #dc2626; padding: 12px 16px; border-radius: 8px; margin-bottom: 20px; font-size: 13px; width: 100%; border: 1px solid #fecaca; }
-        .warning-msg { background: #fffbeb; color: #d97706; padding: 12px 16px; border-radius: 8px; margin-bottom: 20px; font-size: 12px; width: 100%; border: 1px solid #fde68a; }
-        
-        /* OTP Form Styles */
-        .auth-form { width: 100%; max-width: 320px; display: flex; flex-direction: column; gap: 16px; margin-bottom: 24px; }
+        /* Form Styles */
+        .auth-form { width: 100%; max-width: 380px; display: flex; flex-direction: column; gap: 14px; margin-bottom: 24px; }
+        .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
         .input-group { display: flex; flex-direction: column; text-align: left; gap: 6px; }
         .input-group label { font-size: 13px; font-weight: 600; color: var(--text); }
-        .form-control { width: 100%; padding: 12px 14px; border: 1px solid var(--border); border-radius: 8px; font-family: var(--font); font-size: 14px; outline: none; transition: border-color 0.2s; }
+        .form-control { width: 100%; padding: 12px 14px; border: 1px solid var(--border); border-radius: 8px; font-family: var(--font); font-size: 14px; outline: none; transition: border-color 0.2s; background: var(--bg); }
         .form-control:focus { border-color: var(--accent); }
-        .btn-primary { background: var(--accent); color: #fff; border: none; padding: 14px; border-radius: 8px; font-size: 15px; font-weight: 600; cursor: pointer; transition: background 0.2s; font-family: var(--font); }
+        .btn-primary { background: var(--accent); color: #fff; border: none; padding: 14px; border-radius: 8px; font-size: 15px; font-weight: 700; cursor: pointer; transition: background 0.2s; font-family: var(--font); width: 100%; margin-top: 8px; }
         .btn-primary:hover { background: #324fc7; }
         .btn-primary:disabled { background: #a5b4fc; cursor: not-allowed; }
         
-        .divider { display: flex; align-items: center; width: 100%; max-width: 320px; margin-bottom: 24px; color: var(--text-muted); font-size: 13px; }
+        .divider { display: flex; align-items: center; width: 100%; max-width: 380px; margin-bottom: 24px; color: var(--text-muted); font-size: 13px; }
         .divider::before, .divider::after { content: ""; flex: 1; border-bottom: 1px solid var(--border); }
         .divider::before { margin-right: 16px; }
         .divider::after { margin-left: 16px; }
 
-        .google-btn { display: inline-flex; align-items: center; justify-content: center; gap: 12px; width: 100%; max-width: 320px; background: var(--card); color: var(--text); padding: 14px; border-radius: 8px; font-weight: 600; font-size: 15px; transition: all 0.2s; border: 1px solid var(--border); box-shadow: 0 2px 8px rgba(0,0,0,0.04); text-decoration: none; }
+        .google-btn { display: inline-flex; align-items: center; justify-content: center; gap: 12px; width: 100%; max-width: 380px; background: var(--card); color: var(--text); padding: 14px; border-radius: 8px; font-weight: 600; font-size: 15px; transition: all 0.2s; border: 1px solid var(--border); box-shadow: 0 2px 8px rgba(0,0,0,0.04); text-decoration: none; }
         .google-btn:hover { transform: translateY(-2px); box-shadow: 0 8px 24px rgba(0,0,0,0.08); border-color: var(--accent); }
         .google-btn svg { width: 20px; height: 20px; }
         
-        .footer-text { margin-top: 24px; font-size: 13px; color: var(--text-sec); }
+        .footer-text { margin-top: 24px; font-size: 13px; color: var(--text-sec); text-align: center; }
         .footer-text a { color: var(--accent); font-weight: 600; text-decoration: none; }
-        .footer-text a:hover { text-decoration: underline; }
         
         .back-link { position: absolute; top: 24px; left: 24px; font-size: 13px; color: var(--text-sec); text-decoration: none; font-weight: 500;}
         .back-link:hover { color: var(--accent); }
@@ -94,77 +86,96 @@ $errorMsg = $_GET['error'] ?? null;
         container.appendChild(toast);
         setTimeout(() => { toast.style.opacity = '0'; toast.style.transform = 'translateX(100%)'; toast.style.transition = 'all 0.3s'; setTimeout(() => toast.remove(), 300); }, duration);
     }
-    <?php if (isset($_SESSION['show_logout_success'])): unset($_SESSION['show_logout_success']); ?>
-    window.addEventListener('DOMContentLoaded', function() { showToast('Successfully logged out'); });
-    <?php endif; ?>
-    history.pushState(null, null, location.href);
-    window.onpopstate = function() { history.go(1); };
     </script>
     
     <div class="login-wrapper">
         <div class="login-left">
             <h2>Your DDCET Prep Journey Starts Here</h2>
             <p>Join 500+ students already preparing smarter with AI-powered analytics, real-pattern mock tests, and a competitive community.</p>
-            <div class="login-stats">
-                <div class="login-stat"><div class="val">500+</div><div class="lbl">Students</div></div>
-                <div class="login-stat"><div class="val">2000+</div><div class="lbl">Questions</div></div>
-                <div class="login-stat"><div class="val">142</div><div class="lbl">Tests</div></div>
-                <div class="login-stat"><div class="val">95%</div><div class="lbl">Satisfaction</div></div>
-            </div>
         </div>
         <div class="login-right">
-            <img src="<?= BASE_PATH ?>assets/logo.png" alt="" style="height: 32px; margin-bottom: 8px;">
-            <h1><span>DDCET</span> Prep</h1>
-            <p class="subtitle">Sign in to start your preparation</p>
+            <h1 style="margin-bottom: 8px;">Create Account</h1>
+            <p class="subtitle">Join DDCET Prep to access tests & analytics</p>
 
-            <?php if (!$isConfigured): ?>
-                <div class="warning-msg">Supabase not configured. Check SUPABASE_URL and SUPABASE_KEY in .env</div>
-            <?php endif; ?>
-
-            <?php if ($errorMsg): ?>
-                <div class="error-msg">
-                    <?php
-                    $errors = [
-                        'token_failed' => 'Failed to exchange code for token',
-                        'no_token' => 'No access token received',
-                        'no_user' => 'Could not fetch user information',
-                        'banned' => 'Your account has been banned',
-                        'db_error' => 'Database error. Please try again.',
-                    ];
-                    echo $errors[$errorMsg] ?? 'Authentication failed. Please try again.';
-                    ?>
-                </div>
-            <?php endif; ?>
-
-            <div class="auth-form" id="loginForm">
-                <div id="identifierSection">
-                    <div class="input-group" style="margin-bottom: 16px;">
-                        <label for="identifier">Mobile Number or Email</label>
-                        <input type="text" id="identifier" class="form-control" placeholder="e.g. 9876543210 or email@domain.com">
+            <form class="auth-form" id="registerForm" onsubmit="return false;">
+                
+                <div id="detailsSection">
+                    <div class="form-row">
+                        <div class="input-group">
+                            <label>First Name *</label>
+                            <input type="text" id="name" class="form-control" placeholder="John" required>
+                        </div>
+                        <div class="input-group">
+                            <label>Surname *</label>
+                            <input type="text" id="surname" class="form-control" placeholder="Doe" required>
+                        </div>
+                    </div>
+                    
+                    <div class="input-group">
+                        <label>College *</label>
+                        <select id="college" class="form-control" required>
+                            <option value="">Select your college...</option>
+                            <?php foreach ($colleges as $c): ?>
+                                <option value="<?= $c['id'] ?>"><?= htmlspecialchars($c['name']) ?></option>
+                            <?php endforeach; ?>
+                        </select>
+                    </div>
+                    
+                    <div class="form-row">
+                        <div class="input-group">
+                            <label>Semester</label>
+                            <select id="semester" class="form-control">
+                                <option value="">Select...</option>
+                                <option value="1">1st Sem</option>
+                                <option value="2">2nd Sem</option>
+                                <option value="3">3rd Sem</option>
+                                <option value="4">4th Sem</option>
+                                <option value="5">5th Sem</option>
+                                <option value="6">6th Sem</option>
+                            </select>
+                        </div>
+                        <div class="input-group">
+                            <label>Branch</label>
+                            <select id="branch" class="form-control">
+                                <option value="">Select...</option>
+                                <option value="CE/IT">CE / IT</option>
+                                <option value="Mechanical">Mechanical</option>
+                                <option value="Civil">Civil</option>
+                                <option value="Electrical">Electrical</option>
+                                <option value="EC">EC</option>
+                                <option value="Chemical">Chemical</option>
+                            </select>
+                        </div>
+                    </div>
+                    
+                    <div class="input-group" style="margin-top: 4px;">
+                        <label>Mobile Number or Email *</label>
+                        <input type="text" id="identifier" name="identifier" class="form-control" placeholder="e.g. 9876543210 or email@domain.com" required>
                     </div>
                     
                     <div id="msg91-captcha"></div>
-                    <button type="button" class="btn-primary" id="btnSendOtp" onclick="requestMsg91Otp()" style="width: 100%;">Send OTP</button>
+                    <button type="button" class="btn-primary" id="btnSendOtp" onclick="requestMsg91Otp()" style="width: 100%;">Continue & Verify</button>
                 </div>
                 
                 <div id="otpSection">
                     <div class="input-group" style="margin-bottom: 16px;">
-                        <label for="otp">Enter 6-digit OTP</label>
+                        <label>Enter 6-digit OTP</label>
                         <input type="text" id="otp" class="form-control" placeholder="123456" maxlength="6" style="text-align: center; letter-spacing: 4px; font-family: var(--mono); font-size: 18px;">
-                        <div style="font-size: 11px; color: var(--text-muted); margin-top: 4px; text-align: right;">Code sent to <span id="sentTarget" style="font-weight: 600; color: var(--text);"></span> <a href="#" onclick="resetForm(); return false;" style="color: var(--accent);">Change</a></div>
+                        <div style="font-size: 11px; color: var(--text-muted); margin-top: 4px; text-align: right;">Code sent to <span id="sentTarget" style="font-weight: 600; color: var(--text);"></span> <a href="#" onclick="resetForm(); return false;" style="color: var(--accent);">Edit</a></div>
                     </div>
-                    <button type="button" class="btn-primary" id="btnVerifyOtp" onclick="verifyOtp()" style="width: 100%;">Verify & Login</button>
+                    <button type="button" class="btn-primary" id="btnVerifyOtp" onclick="verifyOtp()">Register & Login</button>
                 </div>
-            </div>
+                
+            </form>
 
             <div class="divider">OR</div>
 
-            <a href="<?= htmlspecialchars($googleAuthUrl) ?>" class="google-btn" <?= !$isConfigured ? 'onclick="showToast(\'Please configure Supabase credentials first.\', \'error\'); return false;"' : '' ?>>
+            <a href="<?= htmlspecialchars($googleAuthUrl) ?>" class="google-btn">
                 <svg viewBox="0 0 24 24"><path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"/><path fill="#34A853" d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"/><path fill="#FBBC05" d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z"/><path fill="#EA4335" d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z"/></svg>
                 Continue with Google
             </a>
             
-            <p class="footer-text">Don't have an account? <a href="<?= BASE_PATH ?>auth/register.php">Register here</a></p>
+            <p class="footer-text">Already have an account? <a href="<?= BASE_PATH ?>auth/login.php">Log in here</a></p>
         </div>
     </div>
     
@@ -177,36 +188,48 @@ $errorMsg = $_GET['error'] ?? null;
         success: async (data) => {
             // MSG91 verified successfully! Tell our backend.
             const identifier = document.getElementById('identifier').value.trim();
+            const payload = {
+                action: 'register',
+                identifier: identifier,
+                msg91_verified: true,
+                msg91_data: data,
+                name: document.getElementById('name').value.trim(),
+                surname: document.getElementById('surname').value.trim(),
+                college_id: document.getElementById('college').value,
+                semester: document.getElementById('semester').value,
+                branch: document.getElementById('branch').value
+            };
+            
             const btn = document.getElementById('btnVerifyOtp');
             btn.disabled = true;
-            btn.innerText = 'Logging in...';
+            btn.innerText = 'Registering...';
             
             try {
                 const res = await fetch('<?= BASE_PATH ?>api/auth_verify_otp.php', {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify({ identifier, action: 'login', msg91_verified: true, msg91_data: data })
+                    body: JSON.stringify(payload)
                 });
                 const responseData = await res.json();
                 
                 if (responseData.error) {
                     showToast(responseData.error, 'error');
                     btn.disabled = false;
-                    btn.innerText = 'Verify & Login';
+                    btn.innerText = 'Register & Login';
                 } else if (responseData.success && responseData.redirect) {
                     window.location.href = responseData.redirect;
                 }
             } catch (e) {
-                showToast('Network error while completing login. Please try again.', 'error');
+                showToast('Network error while completing registration. Please try again.', 'error');
                 btn.disabled = false;
-                btn.innerText = 'Verify & Login';
+                btn.innerText = 'Register & Login';
             }
         },
         failure: (error) => {
             showToast(error.message || 'Verification failed. Please check the OTP.', 'error');
             const btn = document.getElementById('btnVerifyOtp');
             btn.disabled = false;
-            btn.innerText = 'Verify & Login';
+            btn.innerText = 'Register & Login';
         }
     };
     </script>
@@ -214,9 +237,13 @@ $errorMsg = $_GET['error'] ?? null;
 
     <script>
     function requestMsg91Otp() {
+        const name = document.getElementById('name').value.trim();
+        const surname = document.getElementById('surname').value.trim();
+        const college = document.getElementById('college').value;
         const identifier = document.getElementById('identifier').value.trim();
-        if (!identifier) {
-            showToast('Please enter your mobile number or email.', 'error');
+        
+        if (!name || !surname || !college || !identifier) {
+            showToast('Please fill out all required fields marked with *.', 'error');
             return;
         }
         
@@ -245,11 +272,10 @@ $errorMsg = $_GET['error'] ?? null;
                 (error) => { console.error('OTP send error:', error); }
             );
             
-            // MSG91 sometimes swallows the success callback if captcha was silent.
-            // Since there are no errors, we optimistically switch to the OTP entry UI!
+            // Optimistically switch to the OTP entry UI
             setTimeout(() => {
                 showToast('OTP request fired.', 'success');
-                document.getElementById('identifierSection').style.display = 'none';
+                document.getElementById('detailsSection').style.display = 'none';
                 document.getElementById('otpSection').style.display = 'block';
                 document.getElementById('sentTarget').innerText = identifier;
                 document.getElementById('otp').focus();
@@ -259,7 +285,7 @@ $errorMsg = $_GET['error'] ?? null;
             console.error("Exception calling window.sendOtp:", e);
             showToast('An unexpected error occurred. Please check the console.', 'error');
             btn.disabled = false;
-            btn.innerText = 'Send OTP';
+            btn.innerText = 'Continue & Verify';
         }
     }
     
@@ -281,21 +307,13 @@ $errorMsg = $_GET['error'] ?? null;
     
     function resetForm() {
         document.getElementById('otpSection').style.display = 'none';
-        document.getElementById('identifierSection').style.display = 'block';
+        document.getElementById('detailsSection').style.display = 'block';
         document.getElementById('otp').value = '';
         
         const btn = document.getElementById('btnSendOtp');
         btn.disabled = false;
-        btn.innerText = 'Send OTP';
+        btn.innerText = 'Continue & Verify';
     }
-    
-    // Allow pressing Enter to submit
-    document.getElementById('identifier').addEventListener('keypress', function(e) {
-        if (e.key === 'Enter') sendOtp();
-    });
-    document.getElementById('otp').addEventListener('keypress', function(e) {
-        if (e.key === 'Enter') verifyOtp();
-    });
     </script>
 </body>
 </html>

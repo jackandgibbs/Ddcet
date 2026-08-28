@@ -19,6 +19,21 @@ if ($resumeAttemptId) {
     // Old rows have NULL position -> fall back to id order (prior behaviour).
     $aa = supabaseRest('attempt_answers?attempt_id=eq.' . $resumeAttemptId . '&select=question_id&order=position,id') ?? [];
     $qIds = array_column($aa, 'question_id');
+    
+    // Auto-cleanup for completely broken (0 answers) or abandoned expired pool attempts.
+    // If someone resumes a link to a dead test, clean it up and send them back to start fresh.
+    $mode = $attempt['mode'] ?? '';
+    $isPoolMode = empty($attempt['test_id']) && empty($attempt['challenge_id']);
+    $duration = $isPoolMode && isset($poolConfigs[$mode]) ? ($poolConfigs[$mode]['time'] ?? 60) * 60 : 0;
+    $elapsed = time() - strtotime($attempt['started_at']);
+    $isExpired = $duration > 0 && ($elapsed >= $duration + 120);
+    
+    if (empty($qIds) || ($isExpired && $isPoolMode)) {
+        supabaseRest('attempts?id=eq.' . $resumeAttemptId, 'DELETE');
+        header('Location: ' . BASE_PATH . 'tests.php');
+        exit;
+    }
+    
     $questions = $qIds ? orderRowsByIds(supabaseRest('questions?id=in.(' . implode(',', $qIds) . ')&select=*') ?? [], $qIds) : [];
     
     $optionsMap = [];
@@ -330,7 +345,18 @@ if ($testId) {
 if ($attempt) {
     $aaRows = supabaseRest('attempt_answers?attempt_id=eq.' . $attempt['id'] . '&select=question_id&order=position,id') ?? [];
     $resumeQIds = array_column($aaRows, 'question_id');
-    if ($resumeQIds) {
+    
+    $duration = ($test['duration_minutes'] ?? 60) * 60;
+    $elapsed = time() - strtotime($attempt['started_at']);
+    $isExpired = ($elapsed >= $duration + 120);
+    
+    // If the attempt is completely broken (0 answers) OR if it's an abandoned pool test 
+    // that ran out of time in the background, delete it so the student gets a fresh 
+    // practice test instead of being instantly auto-submitted by the JS timer.
+    if (empty($resumeQIds) || ($isExpired && empty($testId))) {
+        supabaseRest('attempts?id=eq.' . $attempt['id'], 'DELETE');
+        $attempt = null; // force creation of a new one below
+    } else {
         $questions = orderRowsByIds(supabaseRest('questions?id=in.(' . implode(',', $resumeQIds) . ')&select=*') ?? [], $resumeQIds);
         $optionsMap = [];
         $rOpts = supabaseRest('options?question_id=in.(' . implode(',', $resumeQIds) . ')&select=*&order=position') ?? [];
@@ -348,10 +374,19 @@ if (!$attempt) {
     // back. The old code blindly created a new attempt on every hit.
     $checkFilter = 'student_id=eq.' . $user['id'] . '&status=eq.in_progress';
     $checkFilter .= $testId ? '&test_id=eq.' . $testId : '&mode=eq.' . urlencode($mode);
-    $existing = supabaseRest('attempts?' . $checkFilter . '&select=id&limit=1');
+    // We order by started_at.desc to make sure we don't pick up the one we just deleted (if caching is aggressive)
+    $existing = supabaseRest('attempts?' . $checkFilter . '&select=id,started_at&order=started_at.desc&limit=1');
     if (!empty($existing[0])) {
-        header('Location: ' . BASE_PATH . 'exam.php?attempt_id=' . $existing[0]['id']);
-        exit;
+        // If it's a pool mode and it's heavily expired, don't redirect to it, just let the logic create a new one.
+        // (This catches any second/third abandoned attempts from history).
+        $exElapsed = time() - strtotime($existing[0]['started_at']);
+        $exDuration = ($test['duration_minutes'] ?? 60) * 60;
+        if (empty($testId) && $exElapsed >= $exDuration + 120) {
+            supabaseRest('attempts?id=eq.' . $existing[0]['id'], 'DELETE');
+        } else {
+            header('Location: ' . BASE_PATH . 'exam.php?attempt_id=' . $existing[0]['id']);
+            exit;
+        }
     }
 
     // Enforce per-mode daily limits ONLY when creating a brand-new attempt.
@@ -1197,7 +1232,7 @@ function updatePageInfo() {
     document.getElementById('pageInfo').textContent = `Page ${currentPage + 1} / ${scratchPages.length}`;
 }
 
-init();
+document.addEventListener('DOMContentLoaded', init);
 </script>
 </body>
 </html>

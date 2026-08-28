@@ -150,9 +150,8 @@ a:hover { color: var(--accent-hover); }
 /* Main Content */
 .main-content {
     margin-left: var(--sidebar-width);
-    flex: 1;
+    width: calc(100% - var(--sidebar-width));
     min-height: 100vh;
-    min-width: 0;
 }
 
 /* Navbar */
@@ -262,6 +261,8 @@ a:hover { color: var(--accent-hover); }
     display: flex;
     align-items: center;
     justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 12px;
     margin-bottom: 16px;
     padding-bottom: 14px;
     border-bottom: 1px solid rgba(238,240,245,.85);
@@ -588,9 +589,14 @@ tr:hover td { background: var(--accent-light); }
 ::-webkit-scrollbar-track { background: var(--bg-primary); }
 ::-webkit-scrollbar-thumb { background: #dee2e6; border-radius: 3px; }
 
+.mathy {
+    overflow-x: auto;
+    max-width: 100%;
+}
+
 /* Responsive */
 .sidebar.collapsed { transform: translateX(-100%); }
-.sidebar.collapsed + .main-content { margin-left: 0; }
+.sidebar.collapsed ~ .main-content { margin-left: 0; width: 100%; }
 
 /* Mobile sidebar backdrop (hidden on desktop) */
 .sidebar-overlay { display: none; }
@@ -600,7 +606,7 @@ tr:hover td { background: var(--accent-light); }
     .sidebar.open { transform: translateX(0); box-shadow: var(--shadow-lg); }
     .sidebar-overlay { position: fixed; inset: 0; background: rgba(0,0,0,0.45); z-index: 150; display: block; opacity: 0; pointer-events: none; transition: opacity 0.3s; }
     .sidebar-overlay.show { opacity: 1; pointer-events: auto; }
-    .main-content { margin-left: 0 !important; }
+    .main-content { margin-left: 0 !important; width: 100% !important; }
     .stats-grid { grid-template-columns: repeat(2, 1fr) !important; gap: 12px; }
     .stat-card { padding: 16px; border-radius: 14px; }
     .stat-card .stat-value { font-size: 24px; }
@@ -624,16 +630,15 @@ tr:hover td { background: var(--accent-light); }
     .btn { padding: 8px 14px; font-size: 12px; }
     .btn-sm { padding: 6px 12px; font-size: 11px; }
     .heatmap { overflow-x: auto; }
-    /* Force all inline grid layouts to single column on mobile */
-    [style*="grid-template-columns"] { grid-template-columns: 1fr !important; }
-    .stats-grid { grid-template-columns: repeat(2, 1fr) !important; }
+    /* Specific utility classes to override flex/grid on mobile where intended */
+    .mobile-wrap { flex-wrap: wrap !important; }
+    .mobile-stack { flex-direction: column !important; align-items: stretch !important; }
+    .grid-1-mobile { grid-template-columns: 1fr !important; }
     /* Prevent overflow */
     p, h1, h2, h3, h4, span, div { overflow-wrap: break-word; word-break: break-word; }
     .tag, .badge { font-size: 10px; padding: 3px 8px; }
     .sidebar-footer { padding: 12px 16px; }
     .menu-toggle { display: flex !important; }
-    /* Flex wrapping for button groups */
-    [style*="display: flex"] { flex-wrap: wrap !important; }
 }
 
 @keyframes spin { to { transform: rotate(360deg); } }

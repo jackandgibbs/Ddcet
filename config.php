@@ -13,10 +13,11 @@ date_default_timezone_set('Asia/Kolkata');
 // Security headers — applied to every response that includes config.php.
 // CSP allows inline styles/scripts (legacy codebase), CDN assets, and Razorpay.
 if (!headers_sent()) {
-    // BUG-001 fix: add Supabase domain to connect-src so client-side fetch() works
-    // on all browsers (iOS Safari enforces CSP strictly). This is the SINGLE CSP
-    // source of truth — the .htaccess duplicate is removed.
-    header("Content-Security-Policy: default-src 'self'; script-src 'self' 'unsafe-inline' https://cdn.jsdelivr.net https://checkout.razorpay.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com https://cdn.jsdelivr.net; font-src 'self' https://fonts.gstatic.com; img-src 'self' data: https:; connect-src 'self' https://api.razorpay.com https://lumberjack.razorpay.com https://*.supabase.co");
+    header("X-Content-Type-Options: nosniff");
+    header("X-Frame-Options: SAMEORIGIN");
+    header("X-XSS-Protection: 1; mode=block");
+    header("Strict-Transport-Security: max-age=31536000; includeSubDomains");
+    header("Content-Security-Policy: default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval' https://cdn.jsdelivr.net https://checkout.razorpay.com https://*.msg91.com https://*.hostnsoft.com https://*.hcaptcha.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com https://cdn.jsdelivr.net https://*.hcaptcha.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data: https:; connect-src 'self' https://api.razorpay.com https://lumberjack.razorpay.com https://*.supabase.co https://*.msg91.com https://*.hcaptcha.com https://*.hostnsoft.com; frame-src 'self' https://*.msg91.com https://api.razorpay.com https://*.hcaptcha.com;");
     header("Referrer-Policy: strict-origin-when-cross-origin");
     header("Permissions-Policy: camera=(), microphone=(), geolocation=()");
 }
