@@ -21,7 +21,9 @@ include __DIR__ . '/includes/header.php';
     flex-direction: column;
     height: calc(100dvh - 90px);
     max-width: 850px;
+    width: 100%;
     margin: 0 auto;
+    box-sizing: border-box;
     
     /* Modern glassy look */
     background: var(--bg-surface);
@@ -118,8 +120,14 @@ include __DIR__ . '/includes/header.php';
 }
 
 /* Markdown specific styling inside AI messages to prevent scrollbar bugs */
-.message.ai p { margin: 0 0 10px 0; }
+.message.ai p { margin: 0 0 10px 0; word-break: break-word; }
 .message.ai p:last-child { margin: 0; }
+.message.ai .katex-display {
+    overflow-x: auto;
+    overflow-y: hidden;
+    max-width: 100%;
+    padding: 10px 0;
+}
 .message.ai code { 
     background: rgba(120, 120, 120, 0.1); 
     padding: 2px 6px; 
@@ -127,6 +135,7 @@ include __DIR__ . '/includes/header.php';
     font-family: var(--font-mono); 
     font-size: 13px;
     color: var(--accent);
+    word-break: break-word;
 }
 .theme-dark .message.ai code { color: #a855f7; }
 .message.ai pre {
