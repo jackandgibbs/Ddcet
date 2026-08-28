@@ -100,16 +100,16 @@ include __DIR__ . '/includes/header.php';
 
 <div class="card" style="margin-bottom: 20px; border-color: var(--accent);">
     <div style="display: flex; align-items: center; justify-content: space-between;">
-        <div>
+        <div style="flex: 1; min-width: 0;">
             <h3 style="font-size: 16px; margin-bottom: 4px;">Custom Test Generator</h3>
             <p style="font-size: 13px; color: var(--text-secondary);">Pick your subjects, difficulty, and question count. Get a personalized test instantly.</p>
         </div>
-        <div style="text-align: right;">
+        <div style="text-align: right; flex-shrink: 0; margin-left: 12px;">
             <?php if (getSubscription()): ?>
                 <span class="badge badge-green">Free with Pro</span>
             <?php else: ?>
-                <span style="font-family: var(--font-mono); font-size: 20px; font-weight: 700; color: var(--accent);">₹29</span>
-                <div style="font-size: 11px; color: var(--text-muted);">per test</div>
+                <span style="font-family: var(--font-mono); font-size: 20px; font-weight: 700; color: var(--accent); white-space: nowrap;">₹29</span>
+                <div style="font-size: 11px; color: var(--text-muted); white-space: nowrap;">per test</div>
             <?php endif; ?>
         </div>
     </div>
