@@ -63,7 +63,20 @@ if (!empty($question['question_text_gu'])) {
 $prompt .= "**Options:**\n" . implode("\n", $optionsText) . "\n\n";
 $prompt .= "**Task:**\nExplain step-by-step why the correct answer is '$correctOption'.";
 
-// 4. Call Gemini
+// 4. Check AI credits if not Pro
+$isPro = isSubscribed('pro');
+$credits = 0;
+if (!$isPro) {
+    $studentData = supabaseRest('students?id=eq.' . $user['id'] . '&select=ai_credits');
+    $credits = (int)($studentData[0]['ai_credits'] ?? 0);
+    
+    if ($credits <= 0) {
+        echo json_encode(['error' => 'limit_reached']);
+        exit;
+    }
+}
+
+// 5. Call Gemini
 $aiExplanation = callGemini($prompt, $sysInstruction);
 
 if (str_starts_with($aiExplanation, 'Error:')) {
@@ -74,11 +87,15 @@ if (str_starts_with($aiExplanation, 'Error:')) {
 // Prefix to indicate AI generation
 $aiExplanation = "✨ **AI Explanation:**\n\n" . $aiExplanation;
 
-// 5. Save back to database
+// 6. Save back to database
 $update = supabaseRest('questions?id=eq.' . $questionId, 'PATCH', ['explanation' => $aiExplanation]);
 if ($update === null) {
     appLog('error', 'Failed to save AI explanation to DB', ['question_id' => $questionId]);
-    // We still return it to the user so they can see it
+}
+
+// 7. Decrement credit if not Pro
+if (!$isPro) {
+    supabaseRest('students?id=eq.' . $user['id'], 'PATCH', ['ai_credits' => $credits - 1]);
 }
 
 echo json_encode(['success' => true, 'explanation' => $aiExplanation]);
