@@ -74,6 +74,7 @@ header('Expires: 0');
             <a href="admin/mocks.php" class="<?= $currentPage === 'mocks' ? 'active' : '' ?>"><?= icon('trophy') ?> Mock Series</a>
             <a href="admin/resources.php" class="<?= $currentPage === 'resources' ? 'active' : '' ?>"><?= icon('book') ?> Resources</a>
             <a href="admin/materials.php" class="<?= $currentPage === 'materials' ? 'active' : '' ?>"><?= icon('book') ?> Study Materials</a>
+            <a href="admin/contributions.php" class="<?= $currentPage === 'contributions' ? 'active' : '' ?>"><?= icon('star') ?> Contributions</a>
             <a href="admin/community.php" class="<?= $currentPage === 'community' ? 'active' : '' ?>"><?= icon('chat') ?> Community</a>
             <a href="admin/doubts.php" class="<?= $currentPage === 'doubts' ? 'active' : '' ?>"><?= icon('question') ?> Doubts</a>
             <a href="admin/queries.php" class="<?= $currentPage === 'queries' ? 'active' : '' ?>"><?= icon('chat') ?> Queries</a>

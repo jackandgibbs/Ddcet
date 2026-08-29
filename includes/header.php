@@ -133,12 +133,14 @@ header('Expires: 0');
             <a href="materials.php" class="<?= $currentPage === 'materials' ? 'active' : '' ?>"><?= icon('book') ?> Study Material</a>
             <a href="flashcards.php" class="<?= $currentPage === 'flashcards' ? 'active' : '' ?>"><?= icon('cards') ?> Flashcards</a>
             <a href="bookmarks.php" class="<?= $currentPage === 'bookmarks' ? 'active' : '' ?>"><?= icon('bookmark') ?> Bookmarks</a>
+            <a href="contribute.php" class="<?= $currentPage === 'contribute' ? 'active' : '' ?>"><?= icon('trending-up') ?> Contribute</a>
 
             <div class="nav-section">Social</div>
             <a href="friends.php" class="<?= $currentPage === 'friends' ? 'active' : '' ?>"><?= icon('users') ?> Friends</a>
             <a href="challenges.php" class="<?= $currentPage === 'challenges' ? 'active' : '' ?>">⚔️ Challenges</a>
             <a href="profile.php" class="<?= $currentPage === 'profile' ? 'active' : '' ?>"><?= icon('user') ?> Profile</a>
             <a href="achievements.php" class="<?= $currentPage === 'achievements' ? 'active' : '' ?>"><?= icon('award') ?> Achievements</a>
+            <a href="contributors.php" class="<?= $currentPage === 'contributors' ? 'active' : '' ?>"><?= icon('star') ?> Hall of Fame</a>
             <a href="doubts.php" class="<?= $currentPage === 'doubts' ? 'active' : '' ?>"><?= icon('question') ?> Doubt Box</a>
 
             <?php if (!empty($user['is_institution'])): ?>
