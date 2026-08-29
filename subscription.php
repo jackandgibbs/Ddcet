@@ -21,7 +21,7 @@ if ($discountOrg && !empty($discountOrg['is_active'])) {
 }
 
 $plans = [
-    'basic' => ['name' => 'Basic', 'price' => 149, 'features' => ['Full Mock Tests', 'Rapid Fire & Subject Tests', 'Weekly Challenges', 'Community Read Access', 'Basic Analytics', '10 AI Tutor Requests/mo']],
+    'basic' => ['name' => 'Basic', 'price' => 149, 'features' => ['Full Mock Tests', 'Rapid Fire & Subject Tests', 'Weekly Challenges', 'Community Read Access', 'Basic Analytics', '50 AI Tutor Requests/mo']],
     'pro' => ['name' => 'Pro', 'price' => 299, 'features' => ['Everything in Basic', 'Previous Year Papers', 'Revision Mode', 'Challenge a Friend', 'Full Analytics & PDF Reports', 'Unlimited AI Explanations', 'Leaderboard Access', 'Priority Support']],
 ];
 
