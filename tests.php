@@ -169,12 +169,12 @@ if (isset($_GET['list']) && isset($_GET['mode'])):
     <div class="card-header"><h3>Subject-wise Practice</h3></div>
     <p style="color: var(--text-secondary); font-size: 13px; margin-bottom: 12px;">Pick a subject and get 30 random questions:</p>
     <div style="display: flex; gap: 8px; flex-wrap: wrap;">
-        <a href="exam.php?mode=subject_wise&subject=Physics" class="btn btn-outline btn-sm">Physics</a>
-        <a href="exam.php?mode=subject_wise&subject=Chemistry" class="btn btn-outline btn-sm">Chemistry</a>
-        <a href="exam.php?mode=subject_wise&subject=Maths" class="btn btn-outline btn-sm">Maths</a>
-        <a href="exam.php?mode=subject_wise&subject=English" class="btn btn-outline btn-sm">English</a>
-        <a href="exam.php?mode=subject_wise&subject=Computers" class="btn btn-outline btn-sm">Computers</a>
-        <a href="exam.php?mode=subject_wise&subject=Environment" class="btn btn-outline btn-sm">Environment</a>
+        <a href="exam.php?mode=subject_wise&subject=Physics&force_new=1" class="btn btn-outline btn-sm">Physics</a>
+        <a href="exam.php?mode=subject_wise&subject=Chemistry&force_new=1" class="btn btn-outline btn-sm">Chemistry</a>
+        <a href="exam.php?mode=subject_wise&subject=Maths&force_new=1" class="btn btn-outline btn-sm">Maths</a>
+        <a href="exam.php?mode=subject_wise&subject=English&force_new=1" class="btn btn-outline btn-sm">English</a>
+        <a href="exam.php?mode=subject_wise&subject=Computers&force_new=1" class="btn btn-outline btn-sm">Computers</a>
+        <a href="exam.php?mode=subject_wise&subject=Environment&force_new=1" class="btn btn-outline btn-sm">Environment</a>
     </div>
 </div>
 
@@ -201,7 +201,7 @@ if (isset($_GET['list']) && isset($_GET['mode'])):
                         <strong style="display: block; margin-bottom: 8px; font-size: 14px; color: var(--text-primary);"><?= htmlspecialchars($subj) ?></strong>
                         <div style="display: flex; gap: 8px; flex-wrap: wrap;">
                             <?php foreach ($topics as $chap => $val): ?>
-                                <a href="exam.php?mode=topic_wise&subject=<?= urlencode($subj) ?>&chapter=<?= urlencode($chap) ?>" class="btn btn-outline btn-sm"><?= htmlspecialchars($chap) ?></a>
+                                <a href="exam.php?mode=topic_wise&subject=<?= urlencode($subj) ?>&chapter=<?= urlencode($chap) ?>&force_new=1" class="btn btn-outline btn-sm"><?= htmlspecialchars($chap) ?></a>
                             <?php endforeach; ?>
                         </div>
                     </div>

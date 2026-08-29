@@ -10,6 +10,17 @@ $chapter = $_GET['chapter'] ?? '';
 $resumeAttemptId = (int) ($_GET['attempt_id'] ?? 0);
 $freeMockBypass = false;  // BUG-013 fix: initialize before use (was undefined in some code paths)
 
+// Fix for topic/subject switching: if user explicitly requested a new test, kill the old one
+if (!empty($_GET['force_new']) && !empty($mode)) {
+    supabaseRest('attempts?student_id=eq.' . $user['id'] . '&test_id=is.null&mode=eq.' . urlencode($mode) . '&status=eq.in_progress', 'DELETE');
+    $url = 'exam.php?mode=' . urlencode($mode);
+    if ($subject) $url .= '&subject=' . urlencode($subject);
+    if ($chapter) $url .= '&chapter=' . urlencode($chapter);
+    if ($testId) $url .= '&test_id=' . $testId;
+    header('Location: ' . $url);
+    exit;
+}
+
 // Resume an existing attempt (from custom test)
 if ($resumeAttemptId) {
     $existingAttempt = supabaseRest('attempts?id=eq.' . $resumeAttemptId . '&student_id=eq.' . $user['id'] . '&status=eq.in_progress&select=*&limit=1');
