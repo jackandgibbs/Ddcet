@@ -22,7 +22,7 @@ header('Expires: 0');
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <base href="/Dddcet/">
+    <base href="<?= htmlspecialchars(BASE_PATH) ?>">
     <title><?= htmlspecialchars($pageTitle ?? 'Institution') ?> — Institution Portal</title>
     <link rel="stylesheet" href="assets/css/style.css">
     <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700;800&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
