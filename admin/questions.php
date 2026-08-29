@@ -40,7 +40,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['action'])) {
 
 // Filters
 $filterTest = (int) ($_GET['test_id'] ?? 0);
-$filter = 'select=*&order=created_at.desc&limit=50';
+$filter = 'select=*&order=subject.asc,created_at.desc';
 if ($filterTest) $filter .= '&test_id=eq.' . $filterTest;
 $questions = supabaseRest('questions?' . $filter) ?? [];
 
@@ -101,7 +101,18 @@ include __DIR__ . '/includes/header.php';
         <table>
             <thead><tr><th>#</th><th>Question</th><th>Subject</th><th>Difficulty</th><th>Marks</th><th></th></tr></thead>
             <tbody>
-            <?php foreach ($questions as $q): ?>
+            <?php 
+            $currentSubject = '';
+            foreach ($questions as $q): 
+                if ($currentSubject !== ($q['subject'] ?? '')):
+                    $currentSubject = $q['subject'] ?? '';
+            ?>
+                <tr>
+                    <td colspan="6" style="background: var(--bg-alt); font-weight: 700; text-align: left; padding: 16px; border-bottom: 2px solid var(--accent); color: var(--accent);">
+                        <?= htmlspecialchars($currentSubject) ?: 'Unassigned Subject' ?>
+                    </td>
+                </tr>
+            <?php endif; ?>
                 <tr>
                     <td style="font-family: var(--font-mono);"><?= $q['id'] ?></td>
                     <td style="max-width: 300px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;"><?= htmlspecialchars(substr($q['question_text'], 0, 80)) ?></td>
