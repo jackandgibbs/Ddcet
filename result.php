@@ -493,14 +493,16 @@ include __DIR__ . '/includes/header.php';
                         <?php if (!$isAi): ?><strong style="color: var(--accent);">Explanation:</strong><?php endif; ?>
                         <?= $expHtml ?>
                     </div>
-                    <?php if (!$isAi): ?>
+                    <?php if (!$isAi && $isPro): ?>
                         <button class="btn btn-sm" style="background: linear-gradient(135deg, #10b981, #3b82f6); color: #fff; border: none; padding: 4px 12px; font-weight: 600; white-space: nowrap; flex-shrink: 0;" onclick="askAI(<?= $ans['question_id'] ?>)">Ask AI ✨</button>
                     <?php endif; ?>
                 </div>
             <?php else: ?>
                 <div style="display: flex; align-items: center; justify-content: space-between;">
                     <span style="color: var(--text-muted);">No explanation available.</span>
+                    <?php if ($isPro): ?>
                     <button class="btn btn-sm" style="background: linear-gradient(135deg, #10b981, #3b82f6); color: #fff; border: none; padding: 4px 12px; font-weight: 600;" onclick="askAI(<?= $ans['question_id'] ?>)">Ask AI ✨</button>
+                    <?php endif; ?>
                 </div>
             <?php endif; ?>
         </div>
