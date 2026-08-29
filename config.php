@@ -20,6 +20,7 @@ if (!headers_sent()) {
     header("Content-Security-Policy: default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval' https://cdn.jsdelivr.net https://checkout.razorpay.com https://*.msg91.com https://*.hostnsoft.com https://*.hcaptcha.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com https://cdn.jsdelivr.net https://*.hcaptcha.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data: https:; connect-src 'self' https://api.razorpay.com https://lumberjack.razorpay.com https://*.supabase.co https://*.msg91.com https://*.hcaptcha.com https://*.hostnsoft.com; frame-src 'self' https://*.msg91.com https://api.razorpay.com https://*.hcaptcha.com;");
     header("Referrer-Policy: strict-origin-when-cross-origin");
     header("Permissions-Policy: camera=(), microphone=(), geolocation=()");
+    header("Cache-Control: no-cache, no-store, must-revalidate");
 }
 
 // Load .env
