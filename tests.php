@@ -178,6 +178,45 @@ if (isset($_GET['list']) && isset($_GET['mode'])):
     </div>
 </div>
 
+<!-- Topic-wise Practice (Pro) -->
+<div class="card" style="margin-top: 24px;" id="topicSection">
+    <div class="card-header"><h3>Topic-wise Practice</h3><span class="badge badge-accent"><?= icon('lock', 12) ?> Pro</span></div>
+    <?php if ($userLevel >= 2): ?>
+        <p style="color: var(--text-secondary); font-size: 13px; margin-bottom: 12px;">Select a specific topic to practice (20 questions):</p>
+        <?php
+        $topicsData = supabaseRest('questions?select=subject,chapter&chapter=not.is.null&limit=3000') ?? [];
+        $topicsBySubject = [];
+        foreach ($topicsData as $row) {
+            if (!empty($row['subject']) && !empty($row['chapter'])) {
+                $topicsBySubject[$row['subject']][$row['chapter']] = true;
+            }
+        }
+        ?>
+        <?php if (empty($topicsBySubject)): ?>
+            <p style="color: var(--text-muted); font-size: 13px;">No topics available yet.</p>
+        <?php else: ?>
+            <div style="display: flex; flex-direction: column; gap: 16px;">
+                <?php foreach ($topicsBySubject as $subj => $topics): ?>
+                    <div>
+                        <strong style="display: block; margin-bottom: 8px; font-size: 14px; color: var(--text-primary);"><?= htmlspecialchars($subj) ?></strong>
+                        <div style="display: flex; gap: 8px; flex-wrap: wrap;">
+                            <?php foreach ($topics as $chap => $val): ?>
+                                <a href="exam.php?mode=topic_wise&subject=<?= urlencode($subj) ?>&chapter=<?= urlencode($chap) ?>" class="btn btn-outline btn-sm"><?= htmlspecialchars($chap) ?></a>
+                            <?php endforeach; ?>
+                        </div>
+                    </div>
+                <?php endforeach; ?>
+            </div>
+        <?php endif; ?>
+    <?php else: ?>
+        <div style="text-align: center; padding: 20px 0;">
+            <div style="font-size: 32px; margin-bottom: 12px; color: var(--accent);"><?= icon('lock', 32) ?></div>
+            <p style="color: var(--text-muted); font-size: 14px; margin-bottom: 16px;">Topic-wise testing is a Pro feature.</p>
+            <a href="subscription.php?need=pro" class="btn btn-primary btn-sm">Upgrade to Pro →</a>
+        </div>
+    <?php endif; ?>
+</div>
+
 <!-- Daily Challenge -->
 <div class="card" style="margin-top: 24px;">
     <div class="card-header"><h3>Daily Challenge</h3><span class="badge badge-green">Free</span></div>

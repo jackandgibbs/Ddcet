@@ -5,6 +5,8 @@ $user = requireAuth();
 
 $testId = (int) ($_GET['test_id'] ?? 0);
 $mode = $_GET['mode'] ?? '';
+$subject = $_GET['subject'] ?? '';
+$chapter = $_GET['chapter'] ?? '';
 $resumeAttemptId = (int) ($_GET['attempt_id'] ?? 0);
 $freeMockBypass = false;  // BUG-013 fix: initialize before use (was undefined in some code paths)
 
@@ -83,6 +85,7 @@ $poolConfigs = [
     'be02_paper' => ['total' => 50, 'time' => 75, 'subjects' => ddcetPoolDistribution('be02_paper')],
     'rapid_fire' => ['total' => 30, 'time' => 30, 'subjects' => null],
     'subject_wise' => ['total' => 30, 'time' => 30, 'subjects' => null],
+    'topic_wise' => ['total' => 20, 'time' => 20, 'subjects' => null],
     'daily_challenge' => ['total' => 10, 'time' => 10, 'subjects' => null],
     'weekly_challenge' => ['total' => 50, 'time' => 60, 'subjects' => null],
     'revision' => ['total' => 20, 'time' => 20, 'subjects' => null],
@@ -228,6 +231,14 @@ if ($testId) {
         }
     } elseif ($mode === 'subject_wise' && $subject) {
         $poolQ = supabaseRest('questions?test_id=is.null&subject=eq.' . urlencode($subject) . '&select=id&limit=500') ?? [];
+        // Prioritize unseen
+        $unseen = array_filter($poolQ, fn($q) => !in_array($q['id'], $seenIds));
+        $seen = array_filter($poolQ, fn($q) => in_array($q['id'], $seenIds));
+        shuffle($unseen);
+        shuffle($seen);
+        $questions = array_slice(array_merge(array_values($unseen), array_values($seen)), 0, $config['total']);
+    } elseif ($mode === 'topic_wise' && $subject && $chapter) {
+        $poolQ = supabaseRest('questions?test_id=is.null&subject=eq.' . urlencode($subject) . '&chapter=eq.' . urlencode($chapter) . '&select=id&limit=500') ?? [];
         // Prioritize unseen
         $unseen = array_filter($poolQ, fn($q) => !in_array($q['id'], $seenIds));
         $seen = array_filter($poolQ, fn($q) => in_array($q['id'], $seenIds));
