@@ -35,7 +35,7 @@ include __DIR__ . '/includes/header.php';
         </div>
         <?php if (!empty($d['body'])): ?><p style="font-size: 13px; color: var(--text-secondary); margin-bottom: 8px;"><?= htmlspecialchars($d['body']) ?></p><?php endif; ?>
         <?php if (empty($d['is_resolved'])): ?>
-        <form method="POST" style="display: flex; gap: 8px; align-items: center;">
+        <form method="POST" style="display: flex; gap: 8px; align-items: center; flex-wrap: wrap;">
             <input type="hidden" name="csrf" value="<?= htmlspecialchars(csrfToken()) ?>">
             <input type="hidden" name="action" value="answer">
             <input type="hidden" name="doubt_id" value="<?= $d['id'] ?>">

@@ -51,7 +51,7 @@ include __DIR__ . '/includes/header.php';
 
 <!-- Filters -->
 <div class="card" style="margin-bottom: 20px;">
-    <form method="GET" style="display: flex; gap: 12px; align-items: end;">
+    <form method="GET" style="display: flex; gap: 12px; align-items: end; flex-wrap: wrap;">
         <div class="form-group" style="margin-bottom: 0;">
             <label>Test</label>
             <select name="test_id" class="form-control" style="width: 250px;">

@@ -71,7 +71,7 @@ include __DIR__ . '/includes/header.php';
 
 <div class="card" style="margin-bottom: 20px;">
     <div class="card-header"><h3>Add College</h3></div>
-    <form method="POST" style="display: flex; gap: 12px; align-items: end;">
+    <form method="POST" style="display: flex; gap: 12px; align-items: end; flex-wrap: wrap;">
         <input type="hidden" name="csrf" value="<?= htmlspecialchars(csrfToken()) ?>">
         <input type="hidden" name="action" value="add">
         <div class="form-group" style="margin-bottom: 0;"><label>Name</label><input type="text" name="name" class="form-control" required></div>

@@ -47,7 +47,7 @@ include __DIR__ . '/includes/header.php';
 
 <div class="card" style="margin-bottom: 20px;">
     <div class="card-header"><h3>Question Pool: <?= $totalCount ?> questions</h3></div>
-    <div style="display: flex; gap: 12px; margin-top: 12px;">
+    <div style="display: flex; gap: 12px; margin-top: 12px; flex-wrap: wrap;">
         <form method="POST" onsubmit="return confirm('Remove duplicate questions?')">
             <input type="hidden" name="csrf" value="<?= htmlspecialchars(csrfToken()) ?>">
             <input type="hidden" name="action" value="dedup">
