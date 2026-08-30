@@ -36,14 +36,16 @@ function translateGuard($text) {
     $prompt = "Translate this text to Gujarati:\n\n" . $text;
     try {
         $gu = callGemini($prompt, $sysInstruction);
-        sleep(4); // Respect 15 RPM Free Tier limit
+        // User requested 30-35 requests per second.
+        // We will remove the artificial 4-second wait completely.
+        usleep(30000); // Tiny 30ms sleep to prevent local socket exhaustion
+        
         if (str_starts_with($gu, 'Error:')) {
-            // If we get a rate limit error, wait longer and retry once
+            // If we get a rate limit error, wait a few seconds and retry once
             if (str_contains($gu, '429')) {
-                echo "\n[Rate Limit] Pausing for 30 seconds...\n";
-                sleep(30);
+                echo "\n[Rate Limit] Too fast! Pausing for 5 seconds...\n";
+                sleep(5);
                 $gu = callGemini($prompt, $sysInstruction);
-                sleep(4);
                 if (str_starts_with($gu, 'Error:')) {
                     throw new RuntimeException($gu);
                 }
