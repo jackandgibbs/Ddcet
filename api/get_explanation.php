@@ -12,6 +12,7 @@ if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
 
 $input = json_decode(file_get_contents('php://input'), true);
 $questionId = (int)($input['question_id'] ?? 0);
+$lang = $input['language'] ?? 'en';
 
 if (!$questionId) {
     echo json_encode(['error' => 'Invalid question ID']);
@@ -26,34 +27,37 @@ if (empty($questionData)) {
 }
 $question = $questionData[0];
 
-if (!empty($question['explanation']) && (str_starts_with($question['explanation'], '✨') || str_starts_with($question['explanation'], '&#10024;'))) {
+// Return existing AI explanation if it's already there (and matches the requested language if Gujarati is asked)
+if ($lang === 'gu' && !empty($question['explanation_gu']) && (str_starts_with($question['explanation_gu'], '✨') || str_starts_with($question['explanation_gu'], '🤖'))) {
+    echo json_encode(['success' => true, 'explanation' => $question['explanation_gu']]);
+    exit;
+} elseif ($lang !== 'gu' && !empty($question['explanation']) && (str_starts_with($question['explanation'], '🤖') || str_starts_with($question['explanation'], '✨'))) {
     echo json_encode(['success' => true, 'explanation' => $question['explanation']]);
     exit;
 }
 
-// 2. Fetch options to provide context to the AI
-$options = supabaseRest('options?question_id=eq.' . $questionId . '&select=*');
-if (empty($options)) {
-    echo json_encode(['error' => 'Options not found']);
-    exit;
-}
-
-$optionsText = [];
+// 2. Fetch options
+$optionsData = supabaseRest('options?question_id=eq.' . $questionId . '&order=position.asc&select=*');
 $correctOption = 'Unknown';
-foreach ($options as $opt) {
-    // Skip phantom placeholders just in case
-    if (strpos($opt['option_text'], 'Placeholder') !== false) continue;
-    
-    $optStr = "- " . $opt['option_text'];
-    if (!empty($opt['is_correct'])) {
-        $optStr .= " (Correct Answer)";
-        $correctOption = $opt['option_text'];
+$optionsText = [];
+$labels = ['A', 'B', 'C', 'D'];
+
+foreach ($optionsData as $idx => $opt) {
+    $label = $labels[$idx] ?? '?';
+    if ($opt['is_correct']) {
+        $correctOption = $label;
     }
+    $optText = ($lang === 'gu' && !empty($opt['option_text_gu'])) ? $opt['option_text_gu'] : $opt['option_text'];
+    $optStr = "- $label: " . $optText;
+    if ($opt['is_correct']) $optStr .= " (Correct Answer)";
     $optionsText[] = $optStr;
 }
 
 // 3. Build Prompt for Gemini
 $sysInstruction = "You are an expert tutor for the Gujarat Diploma-to-Degree Common Entrance Test (DDCET). Your goal is to explain the correct answer to multiple choice questions in a clear, concise, and highly educational step-by-step manner. Use LaTeX for math enclosed in $ (inline) or $$ (block). Do not use \\( or \\). Keep the explanation under 250 words and focus on the conceptual 'why'. Do not just restate the question.";
+if ($lang === 'gu') {
+    $sysInstruction .= " IMPORTANT: YOU MUST WRITE YOUR ENTIRE RESPONSE IN THE GUJARATI LANGUAGE.";
+}
 
 $prompt = "Please explain the solution for the following question.\n\n";
 $prompt .= "**Question:**\n" . $question['question_text'] . "\n\n";
@@ -88,7 +92,8 @@ if (str_starts_with($aiExplanation, 'Error:')) {
 $aiExplanation = "✨ **AI Explanation:**\n\n" . $aiExplanation;
 
 // 6. Save back to database
-$update = supabaseRest('questions?id=eq.' . $questionId, 'PATCH', ['explanation' => $aiExplanation]);
+$patchField = ($lang === 'gu') ? 'explanation_gu' : 'explanation';
+$update = supabaseRest('questions?id=eq.' . $questionId, 'PATCH', [$patchField => $aiExplanation]);
 if ($update === null) {
     appLog('error', 'Failed to save AI explanation to DB', ['question_id' => $questionId]);
 }

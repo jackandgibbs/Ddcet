@@ -744,13 +744,42 @@ let timeLeft = totalTime;
 let examLang = '<?= (($attempt['language'] ?? 'en') === 'gu') ? 'gu' : 'en' ?>';
 try { const _l = localStorage.getItem('examLang_' + <?= $attemptId ?>); if (_l === 'gu' || _l === 'en') examLang = _l; } catch (e) {}
 let tabSwitches = <?= (int)($attempt['tab_switches'] ?? 0) ?>;
+let pendingTranslations = new Set();
+  
+  // Background pre-fetcher for translations
+  function checkTranslationQueue(startIdx) {
+      if (examLang !== 'gu') return;
+      for (let i = startIdx; i <= Math.min(startIdx + 3, questions.length - 1); i++) {
+          const q = questions[i];
+          if (!q.text_gu && !pendingTranslations.has(q.id)) {
+              pendingTranslations.add(q.id);
+              fetch('<?= BASE_PATH ?>api/translate_question.php', {
+                  method: 'POST',
+                  headers: { 'Content-Type': 'application/json', 'X-CSRF-Token': '<?= htmlspecialchars(csrfToken()) ?>' },
+                  body: JSON.stringify({ question_id: q.id })
+              })
+              .then(res => res.json())
+              .then(data => {
+                  if (data.success && data.question) {
+                      q.text_gu = data.question.text_gu;
+                      q.options.forEach(opt => {
+                          const translatedOpt = data.question.options.find(o => o.id === opt.id);
+                          if (translatedOpt) opt.text_gu = translatedOpt.text_gu;
+                      });
+                      if (currentQ === i) showQuestion(i);
+                  }
+              })
+              .catch(() => { pendingTranslations.delete(q.id); });
+          }
+      }
+  }
+
+  // Bilingual text pickers: show Gujarati when the student picked it AND it exists,
+  // otherwise fall back to the English text (so untranslated items still render).
+  function qText(q) { return (examLang === 'gu' && q.text_gu) ? q.text_gu : q.text; }
+  function oText(o) { return (examLang === 'gu' && o.text_gu) ? o.text_gu : o.text; }
 let questionStartTimes = {}; // questionId -> timestamp
 let questionTimes = {};      // questionId -> total seconds
-
-// Bilingual text pickers: show Gujarati when the student picked it AND it exists,
-// otherwise fall back to the English text (so untranslated items still render).
-function qText(q) { return (examLang === 'gu' && q.text_gu) ? q.text_gu : q.text; }
-function oText(o) { return (examLang === 'gu' && o.text_gu) ? o.text_gu : o.text; }
 
 function applyLangLabel() {
     const lbl = document.getElementById('langLabel');
@@ -872,6 +901,15 @@ function showQuestion(idx) {
 
     currentQ = idx;
     const q = questions[idx];
+
+    if (examLang === 'gu' && !q.text_gu) {
+        checkTranslationQueue(idx);
+        document.getElementById('questionPanel').innerHTML = `<div style="padding: 40px; text-align: center; color: var(--text-muted);"><div class="spinner" style="width:24px;height:24px;border:2px solid var(--accent);border-top-color:transparent;border-radius:50%;animation:spin 1s linear infinite; margin: 0 auto 12px;"></div>Translating to Gujarati...</div>`;
+        return; 
+    }
+    
+    checkTranslationQueue(idx + 1); // Queue the next ones in the background
+
     questionStartTimes[q.id] = Date.now();
 
     const keys = ['A','B','C','D','E','F'];

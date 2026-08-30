@@ -68,14 +68,35 @@ if ($qIds) {
     $allQ = supabaseRest('questions?id=in.(' . implode(',', $qIds) . ')&select=*') ?? [];
     foreach ($allQ as $q) $questionsData[$q['id']] = $q;
 }
+$lang = $attempt['language'] ?? 'en';
 foreach ($answers as &$a) {
     $q = $questionsData[$a['question_id']] ?? [];
-    $a['question_text'] = $q['question_text'] ?? '';
+    if ($lang === 'gu' && !empty($q['question_text_gu'])) {
+        $a['question_text'] = $q['question_text_gu'];
+    } else {
+        $a['question_text'] = $q['question_text'] ?? '';
+    }
     $a['subject'] = $q['subject'] ?? '';
-    $a['explanation'] = $q['explanation'] ?? '';
+    
+    if ($lang === 'gu' && !empty($q['explanation_gu'])) {
+        $a['explanation'] = $q['explanation_gu'];
+    } else {
+        $a['explanation'] = $q['explanation'] ?? '';
+    }
+    
     $a['difficulty'] = $q['difficulty'] ?? '';
     $a['marks'] = $q['marks'] ?? 1;
     $a['negative_marks'] = $q['negative_marks'] ?? 0;
+    
+    $options = supabaseRest('options?question_id=eq.' . $a['question_id'] . '&order=position.asc&select=id,option_text,option_text_gu,is_correct');
+    if ($lang === 'gu') {
+        foreach ($options as &$opt) {
+            if (!empty($opt['option_text_gu'])) {
+                $opt['option_text'] = $opt['option_text_gu'];
+            }
+        }
+    }
+    $a['options'] = $options;
 }
 unset($a);
 
@@ -675,7 +696,7 @@ function askAI(questionId) {
     fetch('<?= BASE_PATH ?>api/get_explanation.php', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json', 'X-CSRF-Token': '<?= htmlspecialchars(csrfToken()) ?>' },
-        body: JSON.stringify({ question_id: questionId })
+        body: JSON.stringify({ question_id: questionId, language: '<?= htmlspecialchars($attempt['language'] ?? 'en') ?>' })
     })
     .then(r => r.json())
     .then(data => {
