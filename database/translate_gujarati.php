@@ -36,8 +36,20 @@ function translateGuard($text) {
     $prompt = "Translate this text to Gujarati:\n\n" . $text;
     try {
         $gu = callGemini($prompt, $sysInstruction);
+        sleep(4); // Respect 15 RPM Free Tier limit
         if (str_starts_with($gu, 'Error:')) {
-            throw new RuntimeException($gu);
+            // If we get a rate limit error, wait longer and retry once
+            if (str_contains($gu, '429')) {
+                echo "\n[Rate Limit] Pausing for 30 seconds...\n";
+                sleep(30);
+                $gu = callGemini($prompt, $sysInstruction);
+                sleep(4);
+                if (str_starts_with($gu, 'Error:')) {
+                    throw new RuntimeException($gu);
+                }
+            } else {
+                throw new RuntimeException($gu);
+            }
         }
         return trim($gu);
     } catch (Throwable $e) {
@@ -88,7 +100,6 @@ while ($qDone < $cap) {
         echo "  q#{$q['id']}: " . mb_substr($gu, 0, 60) . "\n";
         if ($apply) supabaseRest('questions?id=eq.' . (int) $q['id'], 'PATCH', $patch);
         $qDone++;
-        sleep(4); // Rate limiting for Gemini Free Tier (15 RPM)
     }
     if (!$apply) break;
 }
@@ -115,7 +126,6 @@ while ($oDone < $cap) {
         echo "  o#{$o['id']}: " . mb_substr((string) $val, 0, 40) . "\n";
         if ($apply) supabaseRest('options?id=eq.' . (int) $o['id'], 'PATCH', ['option_text_gu' => $val]);
         $oDone++;
-        sleep(4); // Rate limiting
     }
     if (!$apply) break;
 }
