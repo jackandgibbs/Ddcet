@@ -591,9 +591,32 @@ render_exam:
         @media (min-width: 769px) {
             .mobile-bar { display: none; }
         }
+
+        #antiCheatOverlay {
+            display: none;
+            position: fixed;
+            top: 0; left: 0; width: 100vw; height: 100vh;
+            background: #000;
+            z-index: 999999;
+            color: #fff;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px;
+            font-weight: bold;
+            text-align: center;
+            padding: 20px;
+            flex-direction: column;
+        }
+        #antiCheatOverlay.show { display: flex; }
     </style>
 </head>
 <body>
+    <div id="antiCheatOverlay">
+        <div style="font-size:48px; margin-bottom:16px;">🚫</div>
+        Screen Capture / Background Window Detected.<br>
+        <span style="font-size:14px; color:#aaa; font-weight:normal; margin-top: 10px;">The exam screen has been hidden to prevent cheating. Please return to the exam tab.</span>
+    </div>
+
     <!-- Header -->
     <div class="exam-header">
         <div class="title"><?= htmlspecialchars($test['title']) ?></div>
@@ -1101,6 +1124,23 @@ function trackTabSwitches() {
     document.addEventListener('cut', e => e.preventDefault());
     document.addEventListener('contextmenu', e => e.preventDefault());
     document.addEventListener('selectstart', e => e.preventDefault());
+
+    // Block Circle-to-Search / System overlay screenshots (blur event)
+    window.addEventListener('blur', function() {
+        document.getElementById('antiCheatOverlay').classList.add('show');
+    });
+    window.addEventListener('focus', function() {
+        document.getElementById('antiCheatOverlay').classList.remove('show');
+    });
+
+    // Block PrintScreen key
+    window.addEventListener('keyup', (e) => {
+        if (e.key === 'PrintScreen') {
+            try { navigator.clipboard.writeText(''); } catch(err) {} // Attempt to clear clipboard
+            document.getElementById('antiCheatOverlay').classList.add('show');
+            setTimeout(() => document.getElementById('antiCheatOverlay').classList.remove('show'), 2000);
+        }
+    });
 
     // Tab switch detection
     document.addEventListener('visibilitychange', function() {
