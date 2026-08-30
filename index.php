@@ -339,7 +339,7 @@ $daysLeft = $diff->invert ? 0 : $diff->days;
                 </div>
             </div>
             <div class="float-badge b1"><span class="dot" style="background: var(--green);"></span>+25 XP Earned</div>
-            <div class="float-badge b2"><span class="dot" style="background: var(--orange);"></span>🔥 7 Day Streak</div>
+            <div class="float-badge b2"><span class="dot" style="background: var(--orange);"></span><?= icon('flame', 16) ?> 7 Day Streak</div>
         </div>
     </div>
 </section>
@@ -409,7 +409,7 @@ $daysLeft = $diff->invert ? 0 : $diff->days;
                 <div class="show-card">
                     <div class="sc-top"><div class="sc-icon" style="background:rgba(16,185,129,0.1);color:var(--green);"><svg fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="6"/><circle cx="12" cy="12" r="2"/></svg></div><h3>Daily Challenge</h3><span class="sc-tag tag-free">Free</span></div>
                     <p>A fresh free test every single day. Build an unbreakable streak and keep your momentum till exam day.</p>
-                    <div class="sc-mini"><span class="sc-chip">🔥 Streak tracker</span><span class="sc-chip">Always free</span></div>
+                    <div class="sc-mini"><span class="sc-chip"><?= icon('flame', 14) ?> Streak tracker</span><span class="sc-chip">Always free</span></div>
                 </div>
                 <div class="show-card">
                     <div class="sc-top"><div class="sc-icon" style="background:rgba(139,92,246,0.1);color:var(--purple);"><svg fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><path d="M12 2v4M12 18v4M4.93 4.93l2.83 2.83M16.24 16.24l2.83 2.83M2 12h4M18 12h4M4.93 19.07l2.83-2.83M16.24 7.76l2.83-2.83"/></svg></div><h3>Weekly Challenge</h3><span class="sc-tag tag-pro">Pro</span></div>
@@ -481,7 +481,7 @@ $daysLeft = $diff->invert ? 0 : $diff->days;
                 <div class="show-card">
                     <div class="sc-top"><div class="sc-icon" style="background:rgba(139,92,246,0.1);color:var(--purple);"><svg fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><circle cx="12" cy="8" r="7"/><path d="M8.21 13.89L7 23l5-3 5 3-1.21-9.12"/></svg></div><h3>Leagues & Ranks</h3><span class="sc-tag tag-new">Gamified</span></div>
                     <p>Bronze to Gold — get promoted as you score, and battle to stay at the top of your league each season.</p>
-                    <div class="sc-mini"><span class="sc-chip">🥇 Tiers</span><span class="sc-chip">Promotions</span></div>
+                    <div class="sc-mini"><span class="sc-chip"><?= icon('medal', 14) ?> Tiers</span><span class="sc-chip">Promotions</span></div>
                 </div>
                 <div class="show-card">
                     <div class="sc-top"><div class="sc-icon" style="background:rgba(16,185,129,0.1);color:var(--green);"><svg fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><circle cx="12" cy="8" r="6"/><path d="M9 22h6M12 14v8"/></svg></div><h3>XP, Badges & Achievements</h3><span class="sc-tag tag-free">Free</span></div>
@@ -496,7 +496,7 @@ $daysLeft = $diff->invert ? 0 : $diff->days;
                 <div class="show-card">
                     <div class="sc-top"><div class="sc-icon" style="background:rgba(139,92,246,0.1);color:var(--purple);"><svg fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><path d="M20 12V8H6a2 2 0 01-2-2c0-1.1.9-2 2-2h12v4"/><path d="M4 6v12c0 1.1.9 2 2 2h14v-4"/><path d="M18 12a2 2 0 000 4h4v-4z"/></svg></div><h3>Top-10 Mock Rewards</h3><span class="sc-tag tag-new">Win</span></div>
                     <p>Finish in the Top 10 of a free scheduled mock and claim 1 month of Pro — completely free.</p>
-                    <div class="sc-mini"><span class="sc-chip">🎁 Real rewards</span><span class="sc-chip">Earn Pro</span></div>
+                    <div class="sc-mini"><span class="sc-chip"><?= icon('gift', 14) ?> Real rewards</span><span class="sc-chip">Earn Pro</span></div>
                 </div>
             </div>
         </div>

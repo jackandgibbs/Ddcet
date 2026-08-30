@@ -31,7 +31,7 @@ if ($ok) {
 <body>
     <div class="box">
         <?php if ($ok): ?>
-            <h1>You're unsubscribed ✅</h1>
+            <h1>You're unsubscribed <?= icon('check-circle', 32) ?></h1>
             <p>You won't receive reminder or challenge emails from <?= htmlspecialchars(APP_NAME) ?> anymore. Important account emails (like payment receipts) may still be sent.</p>
             <p style="font-size:12px;color:#999;">Changed your mind? You can re-enable email reminders from your profile settings.</p>
         <?php else: ?>

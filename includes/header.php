@@ -137,7 +137,7 @@ header('Expires: 0');
 
             <div class="nav-section">Social</div>
             <a href="friends.php" class="<?= $currentPage === 'friends' ? 'active' : '' ?>"><?= icon('users') ?> Friends</a>
-            <a href="challenges.php" class="<?= $currentPage === 'challenges' ? 'active' : '' ?>">⚔️ Challenges</a>
+            <a href="challenges.php" class="<?= $currentPage === 'challenges' ? 'active' : '' ?>"><?= icon('swords', 16) ?> Challenges</a>
             <a href="profile.php" class="<?= $currentPage === 'profile' ? 'active' : '' ?>"><?= icon('user') ?> Profile</a>
             <a href="achievements.php" class="<?= $currentPage === 'achievements' ? 'active' : '' ?>"><?= icon('award') ?> Achievements</a>
             <a href="contributors.php" class="<?= $currentPage === 'contributors' ? 'active' : '' ?>"><?= icon('star') ?> Hall of Fame</a>

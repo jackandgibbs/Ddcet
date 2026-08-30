@@ -28,10 +28,10 @@ if (empty($questionData)) {
 $question = $questionData[0];
 
 // Return existing AI explanation if it's already there (and matches the requested language if Gujarati is asked)
-if ($lang === 'gu' && !empty($question['explanation_gu']) && (str_starts_with($question['explanation_gu'], '✨') || str_starts_with($question['explanation_gu'], '🤖'))) {
+if ($lang === 'gu' && !empty($question['explanation_gu']) && str_starts_with($question['explanation_gu'], '[AI]')) {
     echo json_encode(['success' => true, 'explanation' => $question['explanation_gu']]);
     exit;
-} elseif ($lang !== 'gu' && !empty($question['explanation']) && (str_starts_with($question['explanation'], '🤖') || str_starts_with($question['explanation'], '✨'))) {
+} elseif ($lang !== 'gu' && !empty($question['explanation']) && str_starts_with($question['explanation'], '[AI]')) {
     echo json_encode(['success' => true, 'explanation' => $question['explanation']]);
     exit;
 }
@@ -89,7 +89,7 @@ if (str_starts_with($aiExplanation, 'Error:')) {
 }
 
 // Prefix to indicate AI generation
-$aiExplanation = "✨ **AI Explanation:**\n\n" . $aiExplanation;
+$aiExplanation = "[AI] **AI Explanation:**\n\n" . $aiExplanation;
 
 // 6. Save back to database
 $patchField = ($lang === 'gu') ? 'explanation_gu' : 'explanation';

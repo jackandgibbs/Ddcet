@@ -63,7 +63,7 @@ if ($resumeAttemptId) {
     // official duration and a duel title. Otherwise it's a custom test.
     $challengeId = (int) ($attempt['challenge_id'] ?? 0);
     if ($challengeId && !empty($attempt['mode'])) {
-        $test = ['title' => '⚔️ Friend Duel · ' . modeLabel($attempt['mode']), 'duration_minutes' => modeDurationMinutes($attempt['mode']), 'total_marks' => count($questions)];
+        $test = ['title' => icon('swords', 16) . ' Friend Duel · ' . modeLabel($attempt['mode']), 'duration_minutes' => modeDurationMinutes($attempt['mode']), 'total_marks' => count($questions)];
     } else {
         $test = ['title' => 'Custom Test', 'duration_minutes' => max(10, count($questions) * 1.5), 'total_marks' => count($questions)];
     }
@@ -612,7 +612,7 @@ render_exam:
 </head>
 <body>
     <div id="antiCheatOverlay">
-        <div style="font-size:48px; margin-bottom:16px;">🚫</div>
+        <div style="font-size:48px; margin-bottom:16px;"><?= icon('warning', 48) ?></div>
         Screen Capture / Background Window Detected.<br>
         <span style="font-size:14px; color:#aaa; font-weight:normal; margin-top: 10px;">The exam screen has been hidden to prevent cheating. Please return to the exam tab.</span>
     </div>

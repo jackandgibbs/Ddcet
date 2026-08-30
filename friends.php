@@ -167,7 +167,7 @@ include __DIR__ . '/includes/header.php';
                     <td><span class="tag"><?= htmlspecialchars($f['level']) ?></span></td>
                     <td style="font-family: var(--font-mono); color: var(--accent);"><?= number_format($f['xp']) ?></td>
                     <td style="font-family: var(--font-mono);"><?= icon('fire', 14) ?> <?= $f['streak'] ?></td>
-                    <td><a href="challenges.php?friend=<?= (int) $f['id'] ?>" class="btn btn-dark btn-sm">⚔️ Challenge</a></td>
+                    <td><a href="challenges.php?friend=<?= (int) $f['id'] ?>" class="btn btn-dark btn-sm"><?= icon('swords', 14) ?> Challenge</a></td>
                 </tr>
             <?php endforeach; ?>
             </tbody>

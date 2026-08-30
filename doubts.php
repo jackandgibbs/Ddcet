@@ -1,7 +1,7 @@
 <?php
 require_once __DIR__ . '/config.php';
 $user = requireAuth();
-$pageTitle = 'AI Doubt Assistant ✨';
+$pageTitle = 'AI Doubt Assistant ' . icon('sparkles', 16);
 include __DIR__ . '/includes/header.php';
 ?>
 

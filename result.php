@@ -221,7 +221,7 @@ include __DIR__ . '/includes/header.php';
     <div style="flex:1; min-width:180px;">
         <div style="font-size:15px; font-weight:700;">
             <?php if ($dailyStreak > 0): ?>
-                Day <?= $dailyStreak ?> streak <span style="font-size:13px;">🔥</span> ·
+                Day <?= $dailyStreak ?> streak <span style="font-size:13px;"><?= icon('flame', 14) ?></span> ·
             <?php endif; ?>
             Ranked <span style="color:var(--accent); font-family:var(--font-mono);">#<?= number_format($dailyRank['rank']) ?></span> today
         </div>
@@ -235,7 +235,7 @@ include __DIR__ . '/includes/header.php';
 <!-- Top 10 of a FREE mock → 1 month Pro free -->
 <div class="card" id="rewardCard" style="margin-bottom:16px; background:linear-gradient(135deg,#0f2027,#203a43,#2c5364); color:#fff; border:none;">
     <div style="display:flex; align-items:center; gap:14px; flex-wrap:wrap;">
-        <span style="font-size:30px;"><?= $air['rank'] === 1 ? '🥇' : ($air['rank'] === 2 ? '🥈' : ($air['rank'] === 3 ? '🥉' : '🏅')) ?></span>
+        <span style="font-size:30px;"><?= $air['rank'] === 1 ? icon('gold', 30) : ($air['rank'] === 2 ? icon('silver', 30) : ($air['rank'] === 3 ? icon('bronze', 30) : icon('medal', 30))) ?></span>
         <div style="flex:1; min-width:200px;">
             <div style="font-size:17px; font-weight:800;">Top 10 finish — #<?= $air['rank'] ?> All-India!</div>
             <div style="font-size:13px; opacity:0.85;">You cracked the Top 10 of a free mock. That earns you <strong>1 month of Pro, free</strong> — full solutions, every series, analytics.</div>
@@ -292,7 +292,7 @@ include __DIR__ . '/includes/header.php';
 <?php if (($attempt['mode'] ?? '') === 'full_mock' && !$duel && !isSubscribed()): ?>
 <div class="card" style="margin-bottom:20px; background:linear-gradient(135deg,#1a1a2e,#2d1b69); color:#fff; border:none; display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap; gap:14px;">
     <div>
-        <div style="font-size:18px; font-weight:800;">That was your free mock 🎯</div>
+        <div style="font-size:18px; font-weight:800;">That was your free mock <?= icon('target', 18) ?></div>
         <div style="font-size:13px; opacity:0.9;">Unlock unlimited full mocks, previous-year papers and detailed analytics — from just ₹149/year.</div>
     </div>
     <a href="subscription.php" class="btn btn-orange btn-sm" style="white-space:nowrap;">Unlock everything →</a>
@@ -340,7 +340,7 @@ include __DIR__ . '/includes/header.php';
             </div>
         </div>
         <button id="analyzeReportBtn" class="btn btn-sm" onclick="analyzeReport()" style="background: linear-gradient(135deg, #10b981, #3b82f6); color: #fff; border: none; padding: 8px 20px; font-weight: 700; font-size: 13px; border-radius: 8px; white-space: nowrap;">
-            <?= icon('zap', 14) ?> Analyze My Report ✨
+            <?= icon('zap', 14) ?> Analyze My Report <?= icon('sparkles', 14) ?>
         </button>
     </div>
     <div id="aiReportResult" style="display: none; margin-top: 16px; padding-top: 16px; border-top: 1px solid var(--border);"></div>
@@ -397,7 +397,7 @@ include __DIR__ . '/includes/header.php';
 <?php if ($defendRank): ?>
 <!-- "Defend your college rank" — converts standing into an upgrade reason -->
 <div class="card" style="margin-bottom:20px; display:flex; align-items:center; gap:14px; flex-wrap:wrap; background:linear-gradient(135deg,#2d1b69,#1a1a2e); color:#fff; border:none;">
-    <span style="font-size:26px;"><?= $defendRank === 1 ? '👑' : '🛡️' ?></span>
+    <span style="font-size:26px;"><?= $defendRank === 1 ? icon('crown', 26) : icon('shield', 26) ?></span>
     <div style="flex:1; min-width:200px;">
         <div style="font-size:16px; font-weight:800;">You're #<?= $defendRank ?> in your college</div>
         <div style="font-size:13px; opacity:0.85;">Rivals are practising with the full Pro series. Go Pro to defend your rank with unlimited mocks, solutions and analytics.</div>
@@ -497,10 +497,14 @@ include __DIR__ . '/includes/header.php';
 
         <?php 
             $hasExp = !empty($ans['explanation']);
-            $isAi = $hasExp && (str_starts_with($ans['explanation'], '✨') || str_starts_with($ans['explanation'], '&#10024;'));
+            $isAi = $hasExp && (str_starts_with($ans['explanation'], '[AI]') || str_starts_with($ans['explanation'], '✨') || str_starts_with($ans['explanation'], '&#10024;') || str_starts_with($ans['explanation'], '🤖'));
             $expHtml = '';
             if ($hasExp) {
                 $expHtml = htmlspecialchars($ans['explanation']);
+                // Strip [AI] tag
+                $expHtml = str_replace('[AI] ', '', $expHtml);
+                $expHtml = str_replace('[AI]', '', $expHtml);
+                
                 if ($isAi) {
                     $expHtml = preg_replace('/\*\*(.*?)\*\*/', '<strong>$1</strong>', $expHtml);
                     $expHtml = nl2br($expHtml);
@@ -515,14 +519,14 @@ include __DIR__ . '/includes/header.php';
                         <?= $expHtml ?>
                     </div>
                     <?php if (!$isAi && $isPro): ?>
-                        <button class="btn btn-sm" style="background: linear-gradient(135deg, #10b981, #3b82f6); color: #fff; border: none; padding: 4px 12px; font-weight: 600; white-space: nowrap; flex-shrink: 0;" onclick="askAI(<?= $ans['question_id'] ?>)">Ask AI ✨</button>
+                        <button class="btn btn-sm" style="background: linear-gradient(135deg, #10b981, #3b82f6); color: #fff; border: none; padding: 4px 12px; font-weight: 600; white-space: nowrap; flex-shrink: 0;" onclick="askAI(<?= $ans['question_id'] ?>)">Ask AI <?= icon('sparkles', 14) ?></button>
                     <?php endif; ?>
                 </div>
             <?php else: ?>
                 <div style="display: flex; align-items: center; justify-content: space-between;">
                     <span style="color: var(--text-muted);">No explanation available.</span>
                     <?php if ($isPro): ?>
-                    <button class="btn btn-sm" style="background: linear-gradient(135deg, #10b981, #3b82f6); color: #fff; border: none; padding: 4px 12px; font-weight: 600;" onclick="askAI(<?= $ans['question_id'] ?>)">Ask AI ✨</button>
+                    <button class="btn btn-sm" style="background: linear-gradient(135deg, #10b981, #3b82f6); color: #fff; border: none; padding: 4px 12px; font-weight: 600;" onclick="askAI(<?= $ans['question_id'] ?>)">Ask AI <?= icon('sparkles', 14) ?></button>
                     <?php endif; ?>
                 </div>
             <?php endif; ?>
@@ -623,8 +627,8 @@ $extraScripts = ob_get_clean();
 // otherwise the score percentage. One string drives WhatsApp + copy.
 $shareTitle = $testInfo['series_label'] ?? ($attempt['title'] ?? 'Mock Test');
 $shareText  = $air
-    ? "I ranked #{$air['rank']} of " . number_format($air['total']) . " in the {$shareTitle} on DDCET Prep! 🎯 Think you can beat my All-India Rank? "
-    : "I scored {$scorePercent}% on DDCET Mock Test! 🎯 Can you beat me? Start preparing: ";
+    ? "I ranked #{$air['rank']} of " . number_format($air['total']) . " in the {$shareTitle} on DDCET Prep! Think you can beat my All-India Rank? "
+    : "I scored {$scorePercent}% on DDCET Mock Test! Can you beat me? Start preparing: ";
 $shareText .= APP_URL . BASE_PATH;
 ?>
 <!-- Share Card -->
@@ -675,7 +679,7 @@ function copyShareText() {
             var action = document.getElementById('rewardAction');
             if (d && d.ok) {
                 if (action) action.innerHTML = '<span class="badge badge-green">✓ Pro unlocked</span>';
-                if (typeof showToast === 'function') showToast('1 month of Pro unlocked 🎉', 'success');
+                if (typeof showToast === 'function') showToast('1 month of Pro unlocked', 'success');
             } else {
                 btn.disabled = false; btn.textContent = 'Claim 1 month Pro →';
                 if (typeof showToast === 'function') showToast('Could not claim — ' + ((d && d.error) || 'try again') + '.', 'error');
