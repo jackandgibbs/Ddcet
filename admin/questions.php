@@ -11,7 +11,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['action'])) {
             'subject' => $_POST['subject'],
             'chapter' => $_POST['chapter'] ?? null,
             'question_text' => $_POST['question_text'],
+            'question_text_gu' => $_POST['question_text_gu'] ?: null,
             'explanation' => $_POST['explanation'] ?? null,
+            'explanation_gu' => $_POST['explanation_gu'] ?: null,
             'difficulty' => $_POST['difficulty'],
             'marks' => (int) $_POST['marks'],
             'negative_marks' => (float) $_POST['negative_marks'],
@@ -24,6 +26,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['action'])) {
                     supabaseRest('options', 'POST', [
                         'question_id' => $qId,
                         'option_text' => $_POST["option_$i"],
+                        'option_text_gu' => $_POST["option_{$i}_gu"] ?: null,
                         'is_correct' => ((int)$_POST['correct_option']) === $i,
                         'position' => $i,
                     ]);
@@ -77,20 +80,33 @@ include __DIR__ . '/includes/header.php';
             <div class="form-group"><label>Chapter</label><input type="text" name="chapter" class="form-control" placeholder="Algebra"></div>
             <div class="form-group"><label>Difficulty</label><select name="difficulty" class="form-control"><option value="easy">Easy</option><option value="medium" selected>Medium</option><option value="hard">Hard</option></select></div>
         </div>
-        <div class="form-group"><label>Question Text</label><textarea name="question_text" class="form-control" rows="3" required></textarea></div>
-        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 12px;">
-            <div class="form-group"><label>Option A</label><input type="text" name="option_1" class="form-control" required></div>
-            <div class="form-group"><label>Option B</label><input type="text" name="option_2" class="form-control" required></div>
-            <div class="form-group"><label>Option C</label><input type="text" name="option_3" class="form-control" required></div>
-            <div class="form-group"><label>Option D</label><input type="text" name="option_4" class="form-control" required></div>
+        <div class="form-group"><label>Question Text (English)</label><textarea name="question_text" class="form-control" rows="3" required></textarea></div>
+        <div class="form-group"><label>Question Text (Gujarati) - Optional</label><textarea name="question_text_gu" class="form-control" rows="2" placeholder="Leave blank to auto-translate later..."></textarea></div>
+        
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 12px;">
+            <div class="form-group"><label>Option A (English)</label><input type="text" name="option_1" class="form-control" required></div>
+            <div class="form-group"><label>Option A (Gujarati)</label><input type="text" name="option_1_gu" class="form-control"></div>
+            
+            <div class="form-group"><label>Option B (English)</label><input type="text" name="option_2" class="form-control" required></div>
+            <div class="form-group"><label>Option B (Gujarati)</label><input type="text" name="option_2_gu" class="form-control"></div>
+            
+            <div class="form-group"><label>Option C (English)</label><input type="text" name="option_3" class="form-control" required></div>
+            <div class="form-group"><label>Option C (Gujarati)</label><input type="text" name="option_3_gu" class="form-control"></div>
+            
+            <div class="form-group"><label>Option D (English)</label><input type="text" name="option_4" class="form-control" required></div>
+            <div class="form-group"><label>Option D (Gujarati)</label><input type="text" name="option_4_gu" class="form-control"></div>
         </div>
+
         <div style="display: grid; grid-template-columns: 1fr 1fr 1fr 1fr; gap: 12px;">
             <div class="form-group"><label>Correct Option</label><select name="correct_option" class="form-control"><option value="1">A</option><option value="2">B</option><option value="3">C</option><option value="4">D</option></select></div>
             <div class="form-group"><label>Marks</label><input type="number" name="marks" class="form-control" value="1"></div>
             <div class="form-group"><label>Negative Marks</label><input type="number" step="0.25" name="negative_marks" class="form-control" value="0"></div>
         </div>
-        <div class="form-group"><label>Explanation</label><textarea name="explanation" class="form-control" rows="2"></textarea></div>
-        <button type="submit" class="btn btn-primary">Add Question</button>
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 12px;">
+            <div class="form-group"><label>Explanation (English)</label><textarea name="explanation" class="form-control" rows="2"></textarea></div>
+            <div class="form-group"><label>Explanation (Gujarati)</label><textarea name="explanation_gu" class="form-control" rows="2"></textarea></div>
+        </div>
+        <button type="submit" class="btn btn-primary" style="margin-top: 12px;">Add Question</button>
     </form>
 </div>
 
