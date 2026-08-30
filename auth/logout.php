@@ -10,6 +10,14 @@ if (ini_get('session.use_cookies')) {
     setcookie(session_name(), '', time() - 42000, $p['path'], $p['domain'], $p['secure'], $p['httponly']);
 }
 
+// Clear Remember Me cookie and token
+if (!empty($_COOKIE['ddcet_remember'])) {
+    setcookie('ddcet_remember', '', time() - 3600, '/', '', true, true);
+    if (!empty($_SESSION['user']['id'])) {
+        supabaseRest('students?id=eq.' . $_SESSION['user']['id'], 'PATCH', ['remember_token' => null]);
+    }
+}
+
 // 2. Clear all session data and destroy the server-side session file.
 $_SESSION = [];
 session_destroy();

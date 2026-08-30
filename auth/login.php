@@ -153,6 +153,10 @@ $errorMsg = $_GET['error'] ?? null;
                         <input type="text" id="otp" class="form-control" placeholder="123456" maxlength="6" style="text-align: center; letter-spacing: 4px; font-family: var(--mono); font-size: 18px;">
                         <div style="font-size: 11px; color: var(--text-muted); margin-top: 4px; text-align: right;">Code sent to <span id="sentTarget" style="font-weight: 600; color: var(--text);"></span> <a href="#" onclick="resetForm(); return false;" style="color: var(--accent);">Change</a></div>
                     </div>
+                    <div style="margin-bottom: 16px; display: flex; align-items: center; gap: 8px;">
+                        <input type="checkbox" id="rememberMe" checked>
+                        <label for="rememberMe" style="font-size: 13px; color: var(--text-secondary); margin: 0; cursor: pointer;">Remember me for 30 days</label>
+                    </div>
                     <button type="button" class="btn-primary" id="btnVerifyOtp" onclick="verifyOtp()" style="width: 100%;">Verify & Login</button>
                 </div>
             </div>
@@ -177,6 +181,7 @@ $errorMsg = $_GET['error'] ?? null;
         success: async (data) => {
             // MSG91 verified successfully! Tell our backend.
             const identifier = document.getElementById('identifier').value.trim();
+            const rememberMe = document.getElementById('rememberMe').checked;
             const btn = document.getElementById('btnVerifyOtp');
             btn.disabled = true;
             btn.innerText = 'Logging in...';
@@ -185,7 +190,7 @@ $errorMsg = $_GET['error'] ?? null;
                 const res = await fetch('<?= BASE_PATH ?>api/auth_verify_otp.php', {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify({ identifier, action: 'login', msg91_verified: true, msg91_data: data })
+                    body: JSON.stringify({ identifier, rememberMe, action: 'login', msg91_verified: true, msg91_data: data })
                 });
                 const responseData = await res.json();
                 

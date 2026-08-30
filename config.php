@@ -773,6 +773,23 @@ function currentUser(): ?array {
             'is_banned' => false,
         ];
     }
+    
+    // Auto-login via Remember Me cookie
+    if (empty($_SESSION['user']) && !empty($_COOKIE['ddcet_remember'])) {
+        $token = $_COOKIE['ddcet_remember'];
+        $hash = hash('sha256', $token);
+        
+        $users = supabaseRest('students?remember_token=eq.' . $hash . '&select=*&limit=1');
+        if (!empty($users[0])) {
+            if (empty($users[0]['is_banned'])) {
+                $_SESSION['user'] = $users[0];
+                $_SESSION['_user_refreshed_at'] = time();
+            } else {
+                setcookie('ddcet_remember', '', time() - 3600, '/', '', true, true);
+            }
+        }
+    }
+    
     return $_SESSION['user'] ?? null;
 }
 

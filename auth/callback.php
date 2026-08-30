@@ -147,6 +147,12 @@ $_SESSION['show_login_success'] = true;
 $_SESSION['has_premium'] = $hasPremium;
 $_SESSION['show_subscription_popup'] = !$hasPremium;
 
+// Set Remember Me token by default for Google logins
+$token = bin2hex(random_bytes(32));
+$hash = hash('sha256', $token);
+supabaseRest('students?id=eq.' . $student['id'], 'PATCH', ['remember_token' => $hash]);
+setcookie('ddcet_remember', $token, time() + 30 * 86400, '/', '', true, true);
+
 // Redirect based on onboarding status
 if (empty($student['onboarded'])) {
     header('Location: ' . BASE_PATH . 'auth/onboarding.php');

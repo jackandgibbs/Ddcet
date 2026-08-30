@@ -48,7 +48,15 @@ if ($action === 'login') {
     $user = $users[0];
     
     // Log them in
-    $_SESSION['user_id'] = $user['id'];
+    $_SESSION['user'] = $user;
+    
+    // Remember me
+    if (!empty($data['rememberMe'])) {
+        $token = bin2hex(random_bytes(32));
+        $hash = hash('sha256', $token);
+        supabaseRest('students?id=eq.' . $user['id'], 'PATCH', ['remember_token' => $hash]);
+        setcookie('ddcet_remember', $token, time() + 30 * 86400, '/', '', true, true);
+    }
     
     echo json_encode(['success' => true, 'redirect' => BASE_PATH . 'dashboard.php']);
     exit;
@@ -95,10 +103,19 @@ if ($action === 'login') {
         exit;
     }
     
-    // Retrieve the newly created user to get the ID
-    $newUser = supabaseRest('students?' . $query . '&select=id&limit=1');
+    // Retrieve the newly created user to get the full object
+    $newUser = supabaseRest('students?' . $query . '&select=*&limit=1');
     if (!empty($newUser[0])) {
-        $_SESSION['user_id'] = $newUser[0]['id'];
+        $_SESSION['user'] = $newUser[0];
+        
+        // Remember me
+        if (!empty($data['rememberMe'])) {
+            $token = bin2hex(random_bytes(32));
+            $hash = hash('sha256', $token);
+            supabaseRest('students?id=eq.' . $newUser[0]['id'], 'PATCH', ['remember_token' => $hash]);
+            setcookie('ddcet_remember', $token, time() + 30 * 86400, '/', '', true, true);
+        }
+        
         echo json_encode(['success' => true, 'redirect' => BASE_PATH . 'dashboard.php']);
     } else {
         echo json_encode(['error' => 'Account created, but auto-login failed.']);
