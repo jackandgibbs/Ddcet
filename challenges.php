@@ -126,7 +126,7 @@ $oppName = function (array $ch) use ($me, $nameMap) {
 };
 
 // Friends list for the "New Challenge" picker (accepted only).
-$friendRows = supabaseRest('friends?or=(student_id.eq.' . $me . ',friend_id.eq.' . $me . ')&status=eq.accepted&select=student_id,friend_id') ?? [];
+$friendRows = supabaseRest('friends?or=(student_id.eq.' . $me . ',friend_id.eq.' . $me . ')&status=eq.accepted&select=student_id,friend_id', 'GET', null, ['no_cache' => true]) ?? [];
 $friendIds = [];
 foreach ($friendRows as $f) $friendIds[] = ((int) $f['student_id'] === $me) ? (int) $f['friend_id'] : (int) $f['student_id'];
 $friends = $friendIds ? (supabaseRest('students?id=in.(' . implode(',', $friendIds) . ')&select=id,name&order=name') ?? []) : [];

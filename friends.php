@@ -52,7 +52,7 @@ $results = supabaseMulti([
     'friends?friend_id=eq.' . $user['id'] . '&status=eq.pending&select=id,student_id',
     'friends?or=(student_id.eq.' . $user['id'] . ',friend_id.eq.' . $user['id'] . ')&status=eq.accepted&select=student_id,friend_id',
     'friends?student_id=eq.' . $user['id'] . '&status=eq.pending&select=id,friend_id',
-]);
+], ['no_cache' => true]);
 
 $pendingRows = $results[0] ?? [];
 $friendRows = $results[1] ?? [];
