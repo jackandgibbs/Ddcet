@@ -136,7 +136,9 @@ $avgTimePerQ = count($answers) > 0 ? round($attempt['time_spent_seconds'] / coun
 // ---------------------------------------------------------------------------
 // Engagement / conversion add-ons
 // ---------------------------------------------------------------------------
-$isPro = isSubscribed('pro');
+$subscription = getSubscription();
+$plan = $subscription['plan'] ?? 'free';
+$isPro = $plan === 'pro';
 
 // Solutions gate: on a scheduled mock, the All-India Rank + analysis are free,
 // but the per-question answer key is a Pro perk. Practice tests stay open (you
@@ -518,14 +520,14 @@ include __DIR__ . '/includes/header.php';
                         <?php if (!$isAi): ?><strong style="color: var(--accent);">Explanation:</strong><?php endif; ?>
                         <?= $expHtml ?>
                     </div>
-                    <?php if (!$isAi && $isPro): ?>
+                    <?php if (!$isAi && ($isPro || $subscription['plan'] === 'basic')): ?>
                         <button class="btn btn-sm" style="background: linear-gradient(135deg, #10b981, #3b82f6); color: #fff; border: none; padding: 4px 12px; font-weight: 600; white-space: nowrap; flex-shrink: 0;" onclick="askAI(<?= $ans['question_id'] ?>)">Ask AI <?= icon('sparkles', 14) ?></button>
                     <?php endif; ?>
                 </div>
             <?php else: ?>
                 <div style="display: flex; align-items: center; justify-content: space-between;">
                     <span style="color: var(--text-muted);">No explanation available.</span>
-                    <?php if ($isPro): ?>
+                    <?php if ($isPro || $subscription['plan'] === 'basic'): ?>
                     <button class="btn btn-sm" style="background: linear-gradient(135deg, #10b981, #3b82f6); color: #fff; border: none; padding: 4px 12px; font-weight: 600;" onclick="askAI(<?= $ans['question_id'] ?>)">Ask AI <?= icon('sparkles', 14) ?></button>
                     <?php endif; ?>
                 </div>

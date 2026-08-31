@@ -12,11 +12,31 @@ if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
 
 $input = json_decode(file_get_contents('php://input'), true);
 $questionId = (int)($input['question_id'] ?? 0);
-$lang = $input['language'] ?? 'en';
+$lang = in_array(strtolower($input['language'] ?? 'en'), ['en', 'gu']) ? strtolower($input['language']) : 'en';
 
-if (!$questionId) {
-    echo json_encode(['error' => 'Invalid question ID']);
+$subscription = getSubscription();
+$plan = $subscription['plan'] ?? 'free';
+
+if ($plan === 'free') {
+    echo json_encode(['error' => 'Ask AI is only available on Basic and Pro plans. Upgrade to unlock AI explanations.']);
     exit;
+}
+
+if ($plan === 'basic') {
+    // Check AI limits for Basic users (50 requests/month)
+    $today = date('Y-m-d');
+    $resetDate = $user['ai_reset_date'] ?? null;
+    $requests = (int)($user['ai_requests'] ?? 0);
+    
+    if (!$resetDate || $today > $resetDate) {
+        // Reset quota and set new reset date to 30 days from now
+        $newResetDate = date('Y-m-d', strtotime('+30 days'));
+        supabaseRest('students?id=eq.' . $user['id'], 'PATCH', ['ai_requests' => 0, 'ai_reset_date' => $newResetDate]);
+        $requests = 0;
+    } elseif ($requests >= 50) {
+        echo json_encode(['error' => 'You have reached your limit of 50 AI requests for this month. Upgrade to Pro for unlimited access.']);
+        exit;
+    }
 }
 
 // 1. Fetch question and check if explanation already exists
@@ -67,19 +87,6 @@ if (!empty($question['question_text_gu'])) {
 $prompt .= "**Options:**\n" . implode("\n", $optionsText) . "\n\n";
 $prompt .= "**Task:**\nExplain step-by-step why the correct answer is '$correctOption'.";
 
-// 4. Check AI credits if not Pro
-$isPro = isSubscribed('pro');
-$credits = 0;
-if (!$isPro) {
-    $studentData = supabaseRest('students?id=eq.' . $user['id'] . '&select=ai_credits');
-    $credits = (int)($studentData[0]['ai_credits'] ?? 0);
-    
-    if ($credits <= 0) {
-        echo json_encode(['error' => 'limit_reached']);
-        exit;
-    }
-}
-
 // 5. Call Gemini
 $aiExplanation = callGemini($prompt, $sysInstruction);
 
@@ -98,9 +105,5 @@ if ($update === null) {
     appLog('error', 'Failed to save AI explanation to DB', ['question_id' => $questionId]);
 }
 
-// 7. Decrement credit if not Pro
-if (!$isPro) {
-    supabaseRest('students?id=eq.' . $user['id'], 'PATCH', ['ai_credits' => $credits - 1]);
-}
 
 echo json_encode(['success' => true, 'explanation' => $aiExplanation]);
