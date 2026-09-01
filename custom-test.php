@@ -201,7 +201,10 @@ form.addEventListener('submit', function(e) {
 function payAndGenerate() {
     fetch('<?= BASE_PATH ?>api/create_order.php', {
         method: 'POST',
-        headers: {'Content-Type': 'application/json'},
+        headers: {
+            'Content-Type': 'application/json',
+            'X-CSRF-Token': '<?= htmlspecialchars(csrfToken()) ?>'
+        },
         body: JSON.stringify({ plan: 'custom_test' })
     })
     .then(r => r.json())
@@ -218,7 +221,10 @@ function payAndGenerate() {
                 // Verify the payment signature SERVER-SIDE before submitting.
                 fetch('<?= BASE_PATH ?>api/verify_payment.php', {
                     method: 'POST',
-                    headers: {'Content-Type': 'application/json'},
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'X-CSRF-Token': '<?= htmlspecialchars(csrfToken()) ?>'
+                    },
                     body: JSON.stringify({
                         razorpay_payment_id: response.razorpay_payment_id,
                         razorpay_order_id: response.razorpay_order_id,
