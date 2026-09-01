@@ -10,6 +10,8 @@ ini_set('session.cookie_secure', $isSecure ? '1' : '0');
 session_start();
 date_default_timezone_set('Asia/Kolkata');
 
+require_once __DIR__ . '/includes/icons.php';
+
 // Security headers — applied to every response that includes config.php.
 // CSP allows inline styles/scripts (legacy codebase), CDN assets, and Razorpay.
 if (!headers_sent()) {
