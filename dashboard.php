@@ -190,7 +190,7 @@ include __DIR__ . '/includes/header.php';
 <div class="card" id="overallAiCard" style="margin-bottom: 20px; border: 1px solid rgba(99, 102, 241, 0.3); overflow: hidden;">
     <div style="display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 12px;">
         <div style="display: flex; align-items: center; gap: 12px;">
-            <div style="width: 40px; height: 40px; border-radius: 12px; background: linear-gradient(135deg, #8b5cf6, #3b82f6); display: flex; align-items: center; justify-content: center; color: #fff; font-size: 20px; flex-shrink: 0;">
+            <div style="width: 40px; height: 40px; border-radius: 12px; background: var(--accent-light); border: 1px solid var(--border); display: flex; align-items: center; justify-content: center; color: var(--accent); font-size: 20px; flex-shrink: 0;">
                 <?= icon('activity', 22) ?>
             </div>
             <div>
@@ -198,8 +198,8 @@ include __DIR__ . '/includes/header.php';
                 <p style="margin: 0; font-size: 12px; color: var(--text-muted);">Get a comprehensive AI assessment of your entire prep journey so far</p>
             </div>
         </div>
-        <button id="analyzeOverallBtn" class="btn btn-sm" onclick="analyzeOverallReport()" style="background: linear-gradient(135deg, #8b5cf6, #3b82f6); color: #fff; border: none; padding: 8px 20px; font-weight: 700; font-size: 13px; border-radius: 8px; white-space: nowrap;">
-            <?= icon('zap', 14) ?> Analyze Trajectory ✨
+        <button id="analyzeOverallBtn" class="btn btn-primary btn-sm" onclick="analyzeOverallReport()" style="padding: 8px 20px; font-weight: 700; font-size: 13px; border-radius: 8px; white-space: nowrap;">
+            <?= icon('zap', 14) ?> Analyze Trajectory
         </button>
     </div>
     <div id="overallAiResult" style="display: none; margin-top: 16px; padding-top: 16px; border-top: 1px solid var(--border);"></div>
