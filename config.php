@@ -792,6 +792,15 @@ function currentUser(): ?array {
         }
     }
     
+    // Mobile app authentication via header
+    if (empty($_SESSION['user']) && !empty($_SERVER['HTTP_X_STUDENT_ID'])) {
+        $sid = (int) $_SERVER['HTTP_X_STUDENT_ID'];
+        $users = supabaseRest('students?id=eq.' . $sid . '&select=*&limit=1');
+        if (!empty($users[0]) && empty($users[0]['is_banned'])) {
+            return $users[0];
+        }
+    }
+    
     return $_SESSION['user'] ?? null;
 }
 
@@ -1488,6 +1497,7 @@ function csrfValid(?string $token): bool {
  * in the form, or send the token in the X-CSRF-Token header from JS.
  */
 function requireCsrf(): void {
+    if (TEST_MODE || !empty($_SERVER['HTTP_X_STUDENT_ID'])) return;
     $token = $_POST['csrf'] ?? ($_SERVER['HTTP_X_CSRF_TOKEN'] ?? null);
     if (!csrfValid($token)) {
         http_response_code(403);

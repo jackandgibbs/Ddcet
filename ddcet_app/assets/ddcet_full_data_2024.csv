@@ -1,0 +1,1293 @@
+Sr No,Name of Institute,Institute Type,Branch,Admission Category,Quota,First Admitted DDCET Marks,First Admitted DDCET Rank,Last Admitted DDCET Marks,Last Admitted DDCET Rank
+1,"Adani, Ahmedabad",SFI,Civil & Infrastructure Engg.,OP,Home State,83,3765,45.5,12549
+2,"Adani, Ahmedabad",SFI,Information & Communication Tech.,EW,Home State,69,6223,69,6223
+3,"Adani, Ahmedabad",SFI,Information & Communication Tech.,OP,Home State,119,1046,103.5,1837
+4,"Adani, Ahmedabad",SFI,Information & Communication Tech.,TF,Home State,143,346,143,346
+5,"Adani, Ahmedabad",SFI,CSE (AI And Machine Learning),EW,Home State,127.5,740,126.5,774
+6,"Adani, Ahmedabad",SFI,CSE (AI And Machine Learning),OP,Home State,144.5,315,128.5,706
+7,"Adani, Ahmedabad",SFI,CSE (AI And Machine Learning),SC,Home State,92.5,2714,91.5,2826
+8,"Adani, Ahmedabad",SFI,CSE (AI And Machine Learning),SE,Home State,125.5,802,105,1714
+9,"Adani, Ahmedabad",SFI,CSE (AI And Machine Learning),TF,Home State,152.5,188,152.5,188
+10,"ADIT, Karamsad",SFI,Civil Engg.,OP,Home State,64.5,7179,41,13830
+11,"ADIT, Karamsad",SFI,Computer Engg.,EW,Home State,79,4349,79,4349
+12,"ADIT, Karamsad",SFI,Computer Engg.,OP,Home State,124,850,96.5,2381
+13,"ADIT, Karamsad",SFI,Computer Engg.,SC,Home State,59.5,8604,59.5,8604
+14,"ADIT, Karamsad",SFI,Computer Engg.,SE,Home State,81,4017,64,7305
+15,"ADIT, Karamsad",SFI,Computer Engg.,TF,Home State,147.5,274,147.5,274
+16,"ADIT, Karamsad",SFI,Information Tech.,EW,Home State,53.5,10247,53,10325
+17,"ADIT, Karamsad",SFI,Information Tech.,OP,Home State,114.5,1229,64,7352
+18,"ADIT, Karamsad",SFI,Information Tech.,SE,Home State,60,8469,60,8469
+19,"ADIT, Karamsad",SFI,Information Tech.,TF,Home State,146,291,146,291
+20,"ADIT, Karamsad",SFI,Dairy Tech.,OP,Home State,38,14582,38,14582
+21,"ADIT, Karamsad",SFI,Artificial Intelligence And Data Science,OP,Home State,89.5,2992,55,9753
+22,"ADIT, Karamsad",SFI,Artificial Intelligence And Data Science,TF,Home State,148,266,148,266
+23,"ADIT, Karamsad",SFI,CS & Design,OP,Home State,79.5,4269,64,7354
+24,"ADIT, Karamsad",SFI,CS & Design,SE,Home State,41.5,13682,41.5,13682
+25,"Aditya, Ahmedabad",SFI,Civil Engg.,OP,Home State,67.5,6531,67.5,6531
+26,"Aditya, Ahmedabad",SFI,Civil Engg.,TF,Home State,85,3542,85,3542
+27,"Aditya, Ahmedabad",SFI,Computer Engg.,OP,Home State,90.5,2899,26.5,16447
+28,"Aditya, Ahmedabad",SFI,Computer Engg.,TF,Home State,122,919,120.5,971
+29,"Aditya, Ahmedabad",SFI,Electrical Engg.,OP,Home State,72.5,5417,41,13793
+30,"Aditya, Ahmedabad",SFI,Information Tech.,OP,Home State,95,2501,32.5,15738
+31,"Aditya, Ahmedabad",SFI,Information Tech.,TF,Home State,129.5,676,120,1017
+32,"Aditya, Ahmedabad",SFI,Mechanical Engg.,OP,Home State,43,13197,28,16250
+33,"Aditya, Ahmedabad",SFI,Mechanical Engg.,TF,Home State,81.5,3990,81.5,3990
+34,"Aditya, Ahmedabad",SFI,Chemical Engg.,TF,Home State,35,15321,35,15321
+35,"Aditya, Ahmedabad",SFI,Aeronautical Engg.,OP,Home State,56.5,9373,56.5,9373
+36,"Aditya, Ahmedabad",SFI,Computer Science & Engg,OP,Home State,98,2267,27,16402
+37,"Aditya, Ahmedabad",SFI,CSE (Separate Division),OP,Home State,85,3496,57,9273
+38,"Aditya, Ahmedabad",SFI,CSE (Separate Division),TF,Home State,118.5,1061,105,1721
+39,"Agrawal, Navsari",SFI,Civil Engg.,OP,Home State,93.5,2639,25.5,16510
+40,"Agrawal, Navsari",SFI,Computer Engg.,EW,Home State,53.5,10206,53.5,10206
+41,"Agrawal, Navsari",SFI,Computer Engg.,OP,Home State,99,2191,85,3512
+42,"Agrawal, Navsari",SFI,Computer Engg.,SC,Home State,60.5,8209,60.5,8209
+43,"Agrawal, Navsari",SFI,Computer Engg.,SE,Home State,38,14572,38,14572
+44,"Agrawal, Navsari",SFI,Computer Engg.,ST,Home State,52,10721,52,10721
+45,"Agrawal, Navsari",SFI,Electrical Engg.,OP,Home State,85.5,3442,29,16195
+46,"Agrawal, Navsari",SFI,Electrical Engg.,TF,Home State,54.5,10012,54.5,10012
+47,"Agrawal, Navsari",SFI,Mechanical Engg.,TF,Home State,85,3534,85,3534
+48,"Agrawal, Navsari",SFI,Chemical Engg.,OP,Home State,66,6790,30,16109
+49,"AIT, Ahmedabad",SFI,Civil Engg.,OP,Home State,55,9894,44.5,12867
+50,"AIT, Ahmedabad",SFI,Computer Engg.,OP,Home State,133,582,20.5,16895
+51,"AIT, Ahmedabad",SFI,Computer Engg.,TF,Home State,137,482,137,482
+52,"AIT, Ahmedabad",SFI,Electrical Engg.,OP,Home State,60,8338,38.5,14455
+53,"AIT, Ahmedabad",SFI,Information Tech.,OP,Home State,156.5,152,20,16961
+54,"AIT, Ahmedabad",SFI,Mechanical Engg.,OP,Home State,70.5,5834,44.5,12903
+55,"AIT, Ahmedabad",SFI,Mechanical Engg.,TF,Home State,84,3626,84,3626
+56,"AIT, Ahmedabad",SFI,Automobile Engg.,OP,Home State,54,10074,54,10074
+57,"AIT, Ahmedabad",SFI,Automobile Engg.,TF,Home State,67,6583,67,6583
+58,"AIT, Ahmedabad",SFI,CSE (Data Science),OP,Home State,66.5,6744,29,16170
+59,"AIT, Ahmedabad",SFI,CSE (Cyber Security),OP,Home State,69.5,6103,50.5,11068
+60,"AIT, Ahmedabad",SFI,AI And Machine Learning,OP,Home State,85,3509,67,6647
+61,"ALPHA, Kalol",SFI,Computer Engg.,OP,Home State,60,8277,60,8277
+62,"AMT I.Sc.Tech, Bardoli",SFI,Computer Engg.,OP,Home State,80,4226,34.5,15386
+63,"AMT I.Sc.Tech, Bardoli",SFI,Computer Engg.,TF,Home State,110,1434,110,1434
+64,"AMT I.Sc.Tech, Bardoli",SFI,Information Tech.,OP,Home State,92,2795,62.5,7748
+65,"AMT I.Sc.Tech, Bardoli",SFI,Information Tech.,TF,Home State,116.5,1144,116.5,1144
+66,"AMT I.Sc.Tech, Bardoli",SFI,Computer Science & Engg,OP,Home State,104,1805,50,11214
+67,"AMT I.Sc.Tech, Bardoli",SFI,Computer Science & Engg,ST,Home State,39.5,14306,39.5,14306
+68,"AMT I.Sc.Tech, Bardoli",SFI,CSE (AI And Machine Learning),OP,Home State,65.5,6950,47.5,12146
+69,"ApolloET, Ahmedabad",SFI,Computer Engg.,OP,Home State,108.5,1533,36.5,14925
+70,"ApolloET, Ahmedabad",SFI,Computer Engg.,TF,Home State,127.5,739,127.5,739
+71,"ApolloET, Ahmedabad",SFI,Information Tech.,OP,Home State,89.5,2996,37,14824
+72,"Arrdekta, Khedbrahm",SFI,Information Tech.,TF,Home State,84,3621,84,3621
+73,"ATMIYA, Rajkot",SFI,Civil Engg.,OP,Home State,42.5,13474,42.5,13474
+74,"ATMIYA, Rajkot",SFI,Computer Engg.,OP,Home State,120,997,45,12757
+75,"ATMIYA, Rajkot",SFI,Computer Engg.,TF,Home State,134,553,134,553
+76,"ATMIYA, Rajkot",SFI,Electrical Engg.,OP,Home State,58,8954,51.5,10832
+77,"ATMIYA, Rajkot",SFI,Electrical Engg.,TF,Home State,67.5,6488,67.5,6488
+78,"ATMIYA, Rajkot",SFI,Information Tech.,OP,Home State,135.5,525,32.5,15692
+79,"ATMIYA, Rajkot",SFI,Computer Science & Engg,OP,Home State,88.5,3132,44.5,12909
+80,"BAIT, Surat",SFI,Computer Engg.,OP,Home State,108.5,1519,37.5,14686
+81,"BAIT, Surat",SFI,Computer Engg.,TF,Home State,122,923,122,923
+82,"BAIT, Surat",SFI,Information Tech.,OP,Home State,94.5,2552,38,14522
+83,"BAIT, Surat",SFI,Chemical Engg.,TF,Home State,97,2332,97,2332
+84,"BAIT, Surat",SFI,Aeronautical Engg.,OP,Home State,47.5,11945,47.5,11945
+85,"BHGARDI, Rajkot",SFI,Computer Engg.,OP,Home State,87.5,3214,51,10927
+86,"BHGARDI, Rajkot",SFI,Electrical Engg.,TF,Home State,69.5,6090,69.5,6090
+87,"BHGARDI, Rajkot",SFI,Information Tech.,OP,Home State,72.5,5542,70,5966
+88,"BHGARDI, Rajkot",SFI,Information Tech.,TF,Home State,80.5,4118,80.5,4118
+89,"BHGARDI, Rajkot",SFI,Computer Science & Engg,OP,Home State,83.5,3711,83.5,3711
+90,"BMCET, Surat",SFI,Civil Engg.,TF,Home State,47,12244,47,12244
+91,"BMCET, Surat",SFI,Computer Engg.,OP,Home State,107,1608,32.5,15759
+92,"BMCET, Surat",SFI,Computer Engg.,TF,Home State,126,782,126,782
+93,"BMCET, Surat",SFI,Mechanical Engg.,TF,Home State,72.5,5493,72.5,5493
+94,"BVM (GIA), VVNagar",GIA,Civil Engg.,EW,Home State,83.5,3685,49.5,11468
+95,"BVM (GIA), VVNagar",GIA,Civil Engg.,OP,Home State,126,791,85,3517
+96,"BVM (GIA), VVNagar",GIA,Civil Engg.,SC,Home State,84,3623,70,5899
+97,"BVM (GIA), VVNagar",GIA,Civil Engg.,SE,Home State,66.5,6770,28.5,16218
+98,"BVM (GIA), VVNagar",GIA,Civil Engg.,ST,Home State,65,7097,39,14403
+99,"BVM (GIA), VVNagar",GIA,Civil Engg.,TF,Home State,117,1126,117,1126
+100,"BVM (GIA), VVNagar",GIA,Computer Engg.,EW,Home State,152,200,151.5,205
+101,"BVM (GIA), VVNagar",GIA,Computer Engg.,OP,Home State,159.5,106,153.5,176
+102,"BVM (GIA), VVNagar",GIA,Computer Engg.,SC,Home State,120.5,977,105,1735
+103,"BVM (GIA), VVNagar",GIA,Computer Engg.,SE,Home State,147.5,276,144,333
+104,"BVM (GIA), VVNagar",GIA,Computer Engg.,ST,Home State,84,3648,72.5,5418
+105,"BVM (GIA), VVNagar",GIA,Electrical Engg.,EW,Home State,100,2128,96,2396
+106,"BVM (GIA), VVNagar",GIA,Electrical Engg.,OP,Home State,121.5,947,107,1629
+107,"BVM (GIA), VVNagar",GIA,Electrical Engg.,SC,Home State,106,1663,106,1663
+108,"BVM (GIA), VVNagar",GIA,Electrical Engg.,SE,Home State,102,1925,84,3676
+109,"BVM (GIA), VVNagar",GIA,Electrical Engg.,ST,Home State,86.5,3321,62,7854
+110,"BVM (GIA), VVNagar",GIA,Electrical Engg.,TF,Home State,132.5,606,132.5,606
+111,"BVM (GIA), VVNagar",GIA,Mechanical Engg.,EW,Home State,103,1868,93.5,2629
+112,"BVM (GIA), VVNagar",GIA,Mechanical Engg.,OP,Home State,132.5,593,110,1428
+113,"BVM (GIA), VVNagar",GIA,Mechanical Engg.,SC,Home State,110,1437,92,2785
+114,"BVM (GIA), VVNagar",GIA,Mechanical Engg.,SE,Home State,100.5,2066,87.5,3216
+115,"BVM (GIA), VVNagar",GIA,Mechanical Engg.,TF,Home State,145,310,145,310
+116,"BVM (GIA), VVNagar",GIA,Production Engg.,OP,Home State,87,3310,50.5,11016
+117,"BVM (GIA), VVNagar",GIA,Electronics Engg.,OP,Home State,143,342,45.5,12582
+118,"BVM (GIA), VVNagar",GIA,Civil Engg.,OP,All India,142,369,142,369
+119,"BVM (GIA), VVNagar",GIA,Mechanical Engg.,OP,All India,110,1436,110,1436
+120,"BVM (SFI), VVNagar",SFI,Information Tech.,OP,Home State,143,345,143,349
+121,"BVM (SFI), VVNagar",SFI,Information Tech.,SC,Home State,80,4172,80,4172
+122,"BVM (SFI), VVNagar",SFI,Information Tech.,SE,Home State,135,539,127.5,737
+123,"BVM (SFI), VVNagar",SFI,Information Tech.,ST,Home State,33.5,15472,33.5,15472
+124,"BVM (SFI), VVNagar",SFI,Information Tech.,TF,Home State,151,208,151,208
+125,"BVM (SFI), VVNagar",SFI,Mechanical Engg.,EW,Home State,53.5,10158,53.5,10158
+126,"BVM (SFI), VVNagar",SFI,Mechanical Engg.,OP,Home State,100.5,2053,100.5,2053
+127,"BVM (SFI), VVNagar",SFI,Mechanical Engg.,SE,Home State,85,3537,85,3537
+128,"BVM (SFI), VVNagar",SFI,EC Engg.,OP,Home State,77.5,4563,77.5,4563
+129,"CGPIT, Tarsadi",SFI,Civil Engg.,OP,Home State,55.5,9658,55.5,9658
+130,"CGPIT, Tarsadi",SFI,Computer Engg.,OP,Home State,81,4058,45,12774
+131,"CGPIT, Tarsadi",SFI,Electrical Engg.,OP,Home State,47.5,11949,47.5,11949
+132,"CGPIT, Tarsadi",SFI,Information Tech.,OP,Home State,71,5740,42.5,13505
+133,"CGPIT, Tarsadi",SFI,Mechanical Engg.,OP,Home State,57.5,9169,57.5,9169
+134,"CGPIT, Tarsadi",SFI,Chemical Engg.,OP,Home State,55,9925,45.5,12493
+135,"CGPIT, Tarsadi",SFI,Chemical Engg.,TF,Home State,68.5,6242,68.5,6242
+136,"CGPIT, Tarsadi",SFI,Mechatronics,TF,Home State,87.5,3242,87.5,3242
+137,"CGPIT, Tarsadi",SFI,Artificial Intelligence And Data Science,OP,Home State,59.5,8623,59.5,8623
+138,"CGPIT, Tarsadi",SFI,Cyber Security,TF,Home State,96.5,2384,96.5,2384
+139,"Charusat (DEPSTAR), Changa SFI",,Computer Engg.,EW,Home State,99,2198,87,3303
+140,"Charusat (DEPSTAR), Changa SFI",,Computer Engg.,OP,Home State,154.5,166,100,2108
+141,"Charusat (DEPSTAR), Changa SFI",,Computer Engg.,SC,Home State,65,7030,62.5,7676
+142,"Charusat (DEPSTAR), Changa SFI",,Computer Engg.,SE,Home State,96.5,2388,40.5,13961
+143,"Charusat (DEPSTAR), Changa SFI",,Computer Engg.,TF,Home State,153.5,177,153.5,177
+144,"Charusat (DEPSTAR), Changa SFI",,Information Tech.,EW,Home State,76.5,4739,69,6156
+145,"Charusat (DEPSTAR), Changa SFI",,Information Tech.,OP,Home State,115.5,1196,92.5,2732
+146,"Charusat (DEPSTAR), Changa SFI",,Information Tech.,SC,Home State,64.5,7212,64.5,7212
+147,"Charusat (DEPSTAR), Changa SFI",,Information Tech.,SE,Home State,73.5,5255,67.5,6469
+148,"Charusat (DEPSTAR), Changa SFI",,Information Tech.,TF,Home State,149,246,149,246
+149,"Charusat (DEPSTAR), Changa SFI",,Computer Science & Engg,EW,Home State,77.5,4624,68.5,6257
+150,"Charusat (DEPSTAR), Changa SFI",,Computer Science & Engg,EX,Home State,64.5,7268,64.5,7268
+151,"Charusat (DEPSTAR), Changa SFI",,Computer Science & Engg,OP,Home State,162.5,76,99,2195
+152,"Charusat (DEPSTAR), Changa SFI",,Computer Science & Engg,SC,Home State,70,5978,50,11213
+153,"Charusat (DEPSTAR), Changa SFI",,Computer Science & Engg,SE,Home State,88.5,3114,72,5619
+154,"Charusat(CSPIT), Changa",SFI,Civil Engg.,OP,Home State,88.5,3134,41,13833
+155,"Charusat(CSPIT), Changa",SFI,Computer Engg.,EW,Home State,108.5,1526,94.5,2562
+156,"Charusat(CSPIT), Changa",SFI,Computer Engg.,OP,Home State,159,115,123,886
+157,"Charusat(CSPIT), Changa",SFI,Computer Engg.,SC,Home State,79,4355,79,4355
+158,"Charusat(CSPIT), Changa",SFI,Computer Engg.,SE,Home State,121.5,937,71.5,5677
+159,"Charusat(CSPIT), Changa",SFI,Electrical Engg.,OP,Home State,46,12409,46,12409
+160,"Charusat(CSPIT), Changa",SFI,Electrical Engg.,TF,Home State,75,4973,75,4973
+161,"Charusat(CSPIT), Changa",SFI,Information Tech.,EW,Home State,99.5,2143,86.5,3364
+162,"Charusat(CSPIT), Changa",SFI,Information Tech.,OP,Home State,158.5,118,101.5,1998
+163,"Charusat(CSPIT), Changa",SFI,Information Tech.,SC,Home State,95.5,2466,95.5,2466
+164,"Charusat(CSPIT), Changa",SFI,Information Tech.,SE,Home State,99.5,2152,68,6415
+165,"Charusat(CSPIT), Changa",SFI,Mechanical Engg.,OP,Home State,76.5,4757,41,13846
+166,"Charusat(CSPIT), Changa",SFI,Computer Science & Engg,EW,Home State,113.5,1272,110.5,1413
+167,"Charusat(CSPIT), Changa",SFI,Computer Science & Engg,OP,Home State,143,343,119.5,1032
+168,"Charusat(CSPIT), Changa",SFI,Computer Science & Engg,SE,Home State,110,1433,75.5,4924
+169,"Charusat(CSPIT), Changa",SFI,Computer Science & Engg,TF,Home State,161.5,91,161.5,91
+170,"Charusat(CSPIT), Changa",SFI,EC Engg.,OP,Home State,86,3426,51,10989
+171,"Charusat(CSPIT), Changa",SFI,AI And Machine Learning,EW,Home State,93.5,2616,93.5,2616
+172,"Charusat(CSPIT), Changa",SFI,AI And Machine Learning,OP,Home State,145,308,116,1157
+173,"Charusat(CSPIT), Changa",SFI,AI And Machine Learning,SE,Home State,83,3786,72.5,5416
+174,"CIPET, Ahmedabad",SFI,Manufacaturing Engg.,OP,Home State,61,8074,61,8074
+175,"CIPET, Ahmedabad",SFI,Plastic Engg.,OP,Home State,89.5,3007,34,15388
+176,"CKPCET, Surat",SFI,Civil Engg.,OP,Home State,103,1866,51,10907
+177,"CKPCET, Surat",SFI,Computer Engg.,EW,Home State,95.5,2446,89.5,3025
+178,"CKPCET, Surat",SFI,Computer Engg.,OP,Home State,116,1177,97,2325
+179,"CKPCET, Surat",SFI,Computer Engg.,SC,Home State,93,2689,83.5,3722
+180,"CKPCET, Surat",SFI,Computer Engg.,SE,Home State,88,3155,75,4961
+181,"CKPCET, Surat",SFI,Computer Engg.,TF,Home State,140.5,403,140.5,403
+182,"CKPCET, Surat",SFI,Electrical Engg.,OP,Home State,154,174,45,12700
+183,"CKPCET, Surat",SFI,Information Tech.,EW,Home State,100.5,2073,100.5,2073
+184,"CKPCET, Surat",SFI,Information Tech.,OP,Home State,103,1854,99,2196
+185,"CKPCET, Surat",SFI,Information Tech.,SE,Home State,96.5,2389,77,4706
+186,"CKPCET, Surat",SFI,Mechanical Engg.,OP,Home State,64.5,7245,50.5,11100
+187,"CKPCET, Surat",SFI,Mechanical Engg.,TF,Home State,104.5,1771,104.5,1771
+188,"CUSHAH, Wadhvan",SFI,Computer Engg.,OP,Home State,73,5343,47,12242
+189,"DADET, Khatraj",SFI,Computer Engg.,TF,Home State,105,1722,105,1722
+190,"Darshan, Rajkot",SFI,Civil Engineering (Separate Division),OP,Home State,63.5,7414,46,12406
+191,"Darshan, Rajkot",SFI,Civil Engineering (Separate Division),TF,Home State,86.5,3340,86.5,3340
+192,"Darshan, Rajkot",SFI,Mechanical Engineering (Separate Division),OP,Home State,30,16060,30,16060
+193,"Darshan, Rajkot",SFI,Mechanical Engineering (Separate Division),TF,Home State,101,2005,47,12169
+194,"Darshan, Rajkot",SFI,CSE (Separate Division),OP,Home State,136,504,33,15546
+195,"Darshan, Rajkot",SFI,CSE (Separate Division),TF,Home State,146.5,283,130.5,652
+196,"DDU (GIA), Nadiad",GIA,Civil Engg.,EW,Home State,64,7348,64,7348
+197,"DDU (GIA), Nadiad",GIA,Civil Engg.,OP,Home State,101.5,1992,92,2801
+198,"DDU (GIA), Nadiad",GIA,Civil Engg.,SC,Home State,49,11592,49,11592
+199,"DDU (GIA), Nadiad",GIA,Civil Engg.,SE,Home State,48,11792,48,11792
+200,"DDU (GIA), Nadiad",GIA,Civil Engg.,ST,Home State,48,11857,48,11857
+201,"DDU (GIA), Nadiad",GIA,Civil Engg.,TF,Home State,95.5,2439,95.5,2439
+202,"DDU (GIA), Nadiad",GIA,Computer Engg.,OP,Home State,169,37,163,72
+203,"DDU (GIA), Nadiad",GIA,Computer Engg.,SE,Home State,157,142,155.5,157
+204,"DDU (GIA), Nadiad",GIA,Computer Engg.,ST,Home State,105.5,1706,105.5,1706
+205,"DDU (GIA), Nadiad",GIA,Chemical Engg.,EW,Home State,125.5,794,125.5,794
+206,"DDU (GIA), Nadiad",GIA,Chemical Engg.,OP,Home State,142.5,355,127,746
+207,"DDU (GIA), Nadiad",GIA,Chemical Engg.,SE,Home State,112.5,1310,112,1326
+208,"DDU (GIA), Nadiad",GIA,Chemical Engg.,ST,Home State,35.5,15123,35.5,15123
+209,"DDU (GIA), Nadiad",GIA,EC Engg.,EW,Home State,98.5,2218,98.5,2218
+210,"DDU (GIA), Nadiad",GIA,EC Engg.,OP,Home State,161.5,87,105.5,1707
+211,"DDU (GIA), Nadiad",GIA,EC Engg.,SE,Home State,80,4146,80,4146
+212,"DDU (GIA), Nadiad",GIA,Instrumentation & Control Engg.,OP,Home State,89.5,2987,39,14379
+213,"DDU (GIA), Nadiad",GIA,Instrumentation & Control Engg.,TF,Home State,94,2590,94,2590
+214,"DDU (GIA), Nadiad",GIA,Civil Engg.,OP,All India,97.5,2279,97.5,2279
+215,"DDU (GIA), Nadiad",GIA,Computer Engg.,OP,All India,118.5,1060,118.5,1060
+216,"DDU (SFI), Nadiad",SFI,Computer Engg.,EW,Home State,151,211,151,211
+217,"DDU (SFI), Nadiad",SFI,Computer Engg.,OP,Home State,157.5,132,153,185
+218,"DDU (SFI), Nadiad",SFI,Computer Engg.,SC,Home State,136.5,493,136.5,493
+219,"DDU (SFI), Nadiad",SFI,Computer Engg.,SE,Home State,132,608,129.5,682
+220,"DDU (SFI), Nadiad",SFI,Computer Engg.,TF,Home State,165,54,165,54
+221,"DDU (SFI), Nadiad",SFI,Information Tech.,EW,Home State,129.5,674,129.5,674
+222,"DDU (SFI), Nadiad",SFI,Information Tech.,OP,Home State,149,248,138,457
+223,"DDU (SFI), Nadiad",SFI,Information Tech.,SC,Home State,105,1747,105,1747
+224,"DDU (SFI), Nadiad",SFI,Information Tech.,SE,Home State,130.5,640,127,751
+225,"DDU (SFI), Nadiad",SFI,Mechanical Engg.,OP,Home State,109,1488,33.5,15513
+226,"DDU (SFI), Nadiad",SFI,Chemical Engg.,EW,Home State,84,3625,49.5,11494
+227,"DDU (SFI), Nadiad",SFI,Chemical Engg.,OP,Home State,121,954,91.5,2848
+228,"DDU (SFI), Nadiad",SFI,Chemical Engg.,SC,Home State,83,3769,83,3769
+229,"DDU (SFI), Nadiad",SFI,Chemical Engg.,SE,Home State,75.5,4917,40.5,13953
+230,"DDU (SFI), Nadiad",SFI,Chemical Engg.,TF,Home State,129.5,684,129.5,684
+231,"DDU (SFI), Nadiad",SFI,EC Engg.,OP,Home State,80,4160,53,10300
+232,"Dhanvantary, KIM",SFI,CSE (AI And Machine Learning),OP,Home State,94.5,2558,55,9801
+233,"Dhanvantary, KIM",SFI,CSE (AI And Machine Learning),TF,Home State,105,1744,105,1744
+234,"Dhanvantary, KIM",SFI,CSE (IOT & CSI Block Chain),OP,Home State,54,10141,54,10141
+235,"EC, Tuwa",SFI,Civil Engg.,OP,Home State,60,8280,60,8280
+236,"EC, Tuwa",SFI,Civil Engg.,TF,Home State,44.5,12847,44.5,12847
+237,"EC, Tuwa",SFI,Computer Engg.,OP,Home State,77,4660,77,4660
+238,"EC, Tuwa",SFI,Computer Engg.,TF,Home State,88.5,3099,88.5,3099
+239,"FOET-GLS, Ahmedabad",SFI,Computer Science & Engg,EW,Home State,40,14242,32.5,15618
+240,"FOET-GLS, Ahmedabad",SFI,Computer Science & Engg,OP,Home State,133.5,570,65,7156
+241,"FOET-GLS, Ahmedabad",SFI,Computer Science & Engg,SC,Home State,55.5,9655,55.5,9655
+242,"FOET-GLS, Ahmedabad",SFI,Computer Science & Engg,SE,Home State,52.5,10485,52.5,10485
+243,"FOET-GLS, Ahmedabad",SFI,Computer Science & Engg,TF,Home State,134,563,134,563
+244,"Ganpat Uni. ICT, Mehsana",SFI,Computer Science & Engg,OP,Home State,107.5,1581,35.5,15117
+245,"Ganpat Uni. ICT, Mehsana",SFI,CSE (Big Data & Analysis),TF,Home State,135,534,135,534
+246,"Ganpat Uni. ICT, Mehsana",SFI,CSE (Cyber Security),OP,Home State,74,5156,32.5,15603
+247,"Ganpat Uni. UVPCE, MehsanaSFI",,Civil Engg.,OP,Home State,56.5,9447,-2,17236
+248,"Ganpat Uni. UVPCE, MehsanaSFI",,Computer Engg.,EW,Home State,31.5,15841,23,16706
+249,"Ganpat Uni. UVPCE, MehsanaSFI",,Computer Engg.,OP,Home State,138,447,51,10993
+250,"Ganpat Uni. UVPCE, MehsanaSFI",,Electrical Engg.,OP,Home State,77.5,4543,15,17116
+251,"Ganpat Uni. UVPCE, MehsanaSFI",,Electrical Engg.,TF,Home State,81.5,3947,81.5,3947
+252,"Ganpat Uni. UVPCE, MehsanaSFI",,Information Tech.,OP,Home State,111,1387,25,16588
+253,"Ganpat Uni. UVPCE, MehsanaSFI",,Mechanical Engg.,OP,Home State,99.5,2130,9,17205
+254,"Ganpat Uni. UVPCE, MehsanaSFI",,Automobile Engg.,OP,Home State,54.5,10014,42,13617
+255,"Ganpat Uni. UVPCE, MehsanaSFI",,Automobile Engg.,TF,Home State,53,10274,53,10274
+256,"Ganpat Uni. UVPCE, MehsanaSFI",,Mechatronics,OP,Home State,135,541,29.5,16133
+257,"Ganpat Uni. UVPCE, MehsanaSFI",,Biomedical Engg.,OP,Home State,79.5,4272,22,16835
+258,"Ganpat Uni. UVPCE, MehsanaSFI",,Biomedical Engg.,TF,Home State,27.5,16327,27.5,16327
+259,"Ganpat Uni. UVPCE, MehsanaSFI",,Computer Engg. (Artificial Intelligence),OP,Home State,62,7891,30.5,15944
+260,"Ganpat Uni. UVPCE, MehsanaSFI",,Computer Engg. (Artificial Intelligence),TF,Home State,117.5,1105,117.5,1105
+261,"Ganpat Uni. UVPCE, MehsanaSFI",,Petrochemical Engg.,OP,Home State,56,9503,0,17233
+262,"Ganpat Uni. UVPCE, MehsanaSFI",,Comp. Sc. & Business Systems,OP,Home State,87.5,3225,25,16549
+263,"GCET, VVNagar",SFI,Civil Engg.,OP,Home State,78.5,4423,67.5,6448
+264,"GCET, VVNagar",SFI,Civil Engg.,TF,Home State,95.5,2444,95.5,2444
+265,"GCET, VVNagar",SFI,Computer Engg.,EW,Home State,121,966,121,966
+266,"GCET, VVNagar",SFI,Computer Engg.,OP,Home State,144,336,133,589
+267,"GCET, VVNagar",SFI,Computer Engg.,SC,Home State,84.5,3575,84.5,3575
+268,"GCET, VVNagar",SFI,Computer Engg.,SE,Home State,121,965,119.5,1031
+269,"GCET, VVNagar",SFI,Computer Engg.,TF,Home State,151,213,151,213
+270,"GCET, VVNagar",SFI,Electrical Engg.,OP,Home State,69,6193,46.5,12345
+271,"GCET, VVNagar",SFI,Electrical Engg.,TF,Home State,70,5880,70,5880
+272,"GCET, VVNagar",SFI,Information Tech.,OP,Home State,132,609,125,809
+273,"GCET, VVNagar",SFI,Information Tech.,SC,Home State,84.5,3584,84.5,3584
+274,"GCET, VVNagar",SFI,Information Tech.,SE,Home State,118.5,1072,108.5,1534
+275,"GCET, VVNagar",SFI,Chemical Engg.,OP,Home State,64,7293,62,7924
+276,"GCET, VVNagar",SFI,Mechatronics,OP,Home State,68.5,6296,25.5,16497
+277,"GCET, VVNagar",SFI,EC Engg.,OP,Home State,52,10765,52,10765
+278,"GCET, VVNagar",SFI,CS & Design,EW,Home State,98,2263,98,2263
+279,"GCET, VVNagar",SFI,CS & Design,OP,Home State,122,908,101,2015
+280,"GCET, VVNagar",SFI,CS & Design,SC,Home State,66.5,6711,66.5,6711
+281,"GCET, VVNagar",SFI,CS & Design,SE,Home State,65.5,6893,60.5,8254
+282,"GCET, VVNagar",SFI,CSE (IOT),OP,Home State,116.5,1134,85.5,3464
+283,"GEC, Bharuch",GOV,Civil Engg.,OP,Home State,127,750,15,17136
+284,"GEC, Bharuch",GOV,Computer Engg.,EW,Home State,114,1261,113,1292
+285,"GEC, Bharuch",GOV,Computer Engg.,OP,Home State,139.5,424,116.5,1156
+286,"GEC, Bharuch",GOV,Computer Engg.,SC,Home State,83,3797,83,3797
+287,"GEC, Bharuch",GOV,Computer Engg.,SE,Home State,115.5,1199,105.5,1690
+288,"GEC, Bharuch",GOV,Computer Engg.,ST,Home State,67.5,6449,56,9515
+289,"GEC, Bharuch",GOV,Computer Engg.,TF,Home State,139.5,419,139.5,419
+290,"GEC, Bharuch",GOV,Electrical Engg.,EW,Home State,77,4654,65,7105
+291,"GEC, Bharuch",GOV,Electrical Engg.,OP,Home State,172,24,84,3622
+292,"GEC, Bharuch",GOV,Electrical Engg.,SC,Home State,64,7279,48,11790
+293,"GEC, Bharuch",GOV,Electrical Engg.,SE,Home State,80,4158,55,9909
+294,"GEC, Bharuch",GOV,Electrical Engg.,ST,Home State,69.5,6058,45.5,12489
+295,"GEC, Bharuch",GOV,Mechanical Engg.,OP,Home State,120.5,983,15.5,17108
+296,"GEC, Bharuch",GOV,Chemical Engg.,EW,Home State,117.5,1113,117.5,1113
+297,"GEC, Bharuch",GOV,Chemical Engg.,OP,Home State,138,453,121.5,943
+298,"GEC, Bharuch",GOV,Chemical Engg.,SC,Home State,73.5,5285,73.5,5285
+299,"GEC, Bharuch",GOV,Chemical Engg.,SE,Home State,116,1172,98,2264
+300,"GEC, Bharuch",GOV,Chemical Engg.,ST,Home State,69,6141,44.5,12860
+301,"GEC, Bharuch",GOV,Chemical Engg.,TF,Home State,144.5,319,144.5,319
+302,"GEC, Bharuch",GOV,EC Engg.,OP,Home State,98,2266,34,15406
+303,"GEC, Bharuch",GOV,EC Engg.,TF,Home State,70,6026,70,6026
+304,"GEC, Bharuch",GOV,Civil Engg.,OP,All India,91.5,2846,60.5,8262
+305,"GEC, Bharuch",GOV,Mechanical Engg.,OP,All India,47,12229,25,16561
+306,"GEC, Bhavnagar",GOV,Civil Engg.,OP,Home State,128,716,38,14516
+307,"GEC, Bhavnagar",GOV,Computer Engg.,EW,Home State,138.5,445,138.5,445
+308,"GEC, Bhavnagar",GOV,Computer Engg.,OP,Home State,153.5,180,139,433
+309,"GEC, Bhavnagar",GOV,Computer Engg.,SC,Home State,136,503,136,503
+310,"GEC, Bhavnagar",GOV,Computer Engg.,SE,Home State,138.5,437,118,1077
+311,"GEC, Bhavnagar",GOV,Computer Engg.,TF,Home State,165,57,165,57
+312,"GEC, Bhavnagar",GOV,Information Tech.,EW,Home State,130.5,644,127.5,744
+313,"GEC, Bhavnagar",GOV,Information Tech.,OP,Home State,157,140,130.5,636
+314,"GEC, Bhavnagar",GOV,Information Tech.,SC,Home State,109.5,1457,109.5,1457
+315,"GEC, Bhavnagar",GOV,Information Tech.,SE,Home State,121.5,936,116.5,1140
+316,"GEC, Bhavnagar",GOV,Mechanical Engg.,OP,Home State,128.5,715,13.5,17158
+317,"GEC, Bhavnagar",GOV,Mechanical Engg.,TF,Home State,103,1847,103,1847
+318,"GEC, Bhavnagar",GOV,EC Engg.,OP,Home State,83.5,3703,48.5,11742
+319,"GEC, Bhavnagar",GOV,Information & Communication Tech.,EW,Home State,96,2400,95,2507
+320,"GEC, Bhavnagar",GOV,Information & Communication Tech.,OP,Home State,130,654,97,2331
+321,"GEC, Bhavnagar",GOV,Information & Communication Tech.,SE,Home State,101.5,1989,83.5,3690
+322,"GEC, Bhavnagar",GOV,Mechanical Engg.,OP,All India,66,6809,66,6809
+323,"GEC, Bhavnagar",GOV,EC Engg.,OP,All India,73,5402,49,11552
+324,"GEC, Bhavnagar",GOV,Information & Communication Tech.,OP,All India,49.5,11521,49.5,11521
+325,"GEC, Bhuj",GOV,Civil Engg.,OP,Home State,99.5,2166,25,16589
+326,"GEC, Bhuj",GOV,Civil Engg.,TF,Home State,121.5,940,121.5,940
+327,"GEC, Bhuj",GOV,Electrical Engg.,OP,Home State,167,45,19.5,16977
+328,"GEC, Bhuj",GOV,Mechanical Engg.,OP,Home State,120,988,32,15813
+329,"GEC, Bhuj",GOV,Mechanical Engg.,TF,Home State,78.5,4396,78.5,4396
+330,"GEC, Bhuj",GOV,Chemical Engg.,OP,Home State,90.5,2915,17.5,17046
+331,"GEC, Bhuj",GOV,Mining Engg.,OP,Home State,63.5,7427,42,13596
+332,"GEC, Bhuj",GOV,Civil Engg.,OP,All India,55,9754,55,9754
+333,"GEC, Dahod",GOV,Civil Engg.,OP,Home State,82.5,3889,30,16018
+334,"GEC, Dahod",GOV,Computer Engg.,EW,Home State,89.5,3022,87,3288
+335,"GEC, Dahod",GOV,Computer Engg.,OP,Home State,115,1212,94.5,2549
+336,"GEC, Dahod",GOV,Computer Engg.,SC,Home State,75,5026,70,5926
+337,"GEC, Dahod",GOV,Computer Engg.,SE,Home State,90.5,2903,80,4236
+338,"GEC, Dahod",GOV,Computer Engg.,ST,Home State,49.5,11479,35,15282
+339,"GEC, Dahod",GOV,Electrical Engg.,OP,Home State,77.5,4554,30,16077
+340,"GEC, Dahod",GOV,Mechanical Engg.,OP,Home State,57.5,8985,47.5,11889
+341,"GEC, Dahod",GOV,Mechanical Engg.,TF,Home State,67.5,6437,67.5,6437
+342,"GEC, Dahod",GOV,EC Engg.,OP,Home State,115,1223,56.5,9438
+343,"GEC, Dahod",GOV,Mechanical Engg.,OP,All India,108.5,1510,57.5,9176
+344,"GEC, Gandhinagar",GOV,Civil Engg.,EW,Home State,84.5,3564,58,8890
+345,"GEC, Gandhinagar",GOV,Civil Engg.,OP,Home State,102.5,1910,86,3391
+346,"GEC, Gandhinagar",GOV,Civil Engg.,SC,Home State,57.5,9077,23.5,16686
+347,"GEC, Gandhinagar",GOV,Civil Engg.,SE,Home State,82.5,3866,42.5,13352
+348,"GEC, Gandhinagar",GOV,Civil Engg.,ST,Home State,58,8934,26,16481
+349,"GEC, Gandhinagar",GOV,Civil Engg.,TF,Home State,109,1490,109,1490
+350,"GEC, Gandhinagar",GOV,Computer Engg.,EW,Home State,143,350,139.5,426
+351,"GEC, Gandhinagar",GOV,Computer Engg.,OP,Home State,153.5,181,144.5,321
+352,"GEC, Gandhinagar",GOV,Computer Engg.,OPPH,Home State,45,12645,45,12645
+353,"GEC, Gandhinagar",GOV,Computer Engg.,SC,Home State,126,793,95,2496
+354,"GEC, Gandhinagar",GOV,Computer Engg.,SE,Home State,144.5,323,130,662
+355,"GEC, Gandhinagar",GOV,Computer Engg.,ST,Home State,71.5,5621,48,11863
+356,"GEC, Gandhinagar",GOV,Electrical Engg.,EW,Home State,89,3065,77.5,4601
+357,"GEC, Gandhinagar",GOV,Electrical Engg.,OP,Home State,115,1226,94,2577
+358,"GEC, Gandhinagar",GOV,Electrical Engg.,SC,Home State,75.5,4894,74.5,5093
+359,"GEC, Gandhinagar",GOV,Electrical Engg.,SE,Home State,91,2865,85,3483
+360,"GEC, Gandhinagar",GOV,Electrical Engg.,ST,Home State,71,5722,65.5,6961
+361,"GEC, Gandhinagar",GOV,Electrical Engg.,TF,Home State,105.5,1697,105.5,1697
+362,"GEC, Gandhinagar",GOV,Information Tech.,EW,Home State,138.5,440,131.5,622
+363,"GEC, Gandhinagar",GOV,Information Tech.,OP,Home State,146,293,140.5,398
+364,"GEC, Gandhinagar",GOV,Information Tech.,SC,Home State,127.5,732,123.5,867
+365,"GEC, Gandhinagar",GOV,Information Tech.,SE,Home State,138,449,132.5,600
+366,"GEC, Gandhinagar",GOV,Information Tech.,ST,Home State,60.5,8241,54,10119
+367,"GEC, Gandhinagar",GOV,Information Tech.,TF,Home State,149.5,235,149.5,235
+368,"GEC, Gandhinagar",GOV,Mechanical Engg.,EW,Home State,86.5,3333,60,8302
+369,"GEC, Gandhinagar",GOV,Mechanical Engg.,OP,Home State,120,1005,88.5,3142
+370,"GEC, Gandhinagar",GOV,Mechanical Engg.,SC,Home State,84,3624,50,11150
+371,"GEC, Gandhinagar",GOV,Mechanical Engg.,SE,Home State,87.5,3232,63.5,7473
+372,"GEC, Gandhinagar",GOV,Biomedical Engg.,OP,Home State,86,3417,34.5,15381
+373,"GEC, Gandhinagar",GOV,Biomedical Engg.,TF,Home State,79,4327,79,4327
+374,"GEC, Gandhinagar",GOV,EC Engg.,OP,Home State,93,2696,22.5,16780
+375,"GEC, Gandhinagar",GOV,EC Engg.,TF,Home State,98.5,2232,98.5,2232
+376,"GEC, Gandhinagar",GOV,Instrumentation & Control Engg.,OP,Home State,77.5,4540,22.5,16814
+377,"GEC, Gandhinagar",GOV,Metallurgy,OP,Home State,107,1617,60,8285
+378,"GEC, Gandhinagar",GOV,Robotics And Automation,EW,Home State,73.5,5269,66.5,6741
+379,"GEC, Gandhinagar",GOV,Robotics And Automation,OP,Home State,102.5,1915,77.5,4589
+380,"GEC, Gandhinagar",GOV,Robotics And Automation,SE,Home State,74,5206,56,9506
+381,"GEC, Gandhinagar",GOV,Computer Engg.,OP,All India,99,2177,99,2177
+382,"GEC, Gandhinagar",GOV,EC Engg.,OP,All India,93,2644,89,3055
+383,"GEC, Gandhinagar",GOV,Instrumentation & Control Engg.,OP,All India,66,6874,54.5,10029
+384,"GEC, Gandhinagar",GOV,Metallurgy,OP,All India,106.5,1647,51,10898
+385,"GEC, Godhra",GOV,Civil Engg.,OP,Home State,77.5,4605,42,13635
+386,"GEC, Godhra",GOV,Civil Engg.,TF,Home State,72.5,5518,72.5,5518
+387,"GEC, Godhra",GOV,Electrical Engg.,OP,Home State,87.5,3249,40.5,13892
+388,"GEC, Godhra",GOV,Electrical Engg.,SE,Home State,39.5,14268,26,16477
+389,"GEC, Godhra",GOV,Mechanical Engg.,OP,Home State,80.5,4083,26.5,16433
+390,"GEC, Godhra",GOV,Electrical Engg.,OP,All India,72,5593,72,5593
+391,"GEC, Modasa",GOV,Civil Engg.,OP,Home State,99,2199,21,16870
+392,"GEC, Modasa",GOV,Computer Engg.,EW,Home State,95.5,2440,87.5,3204
+393,"GEC, Modasa",GOV,Computer Engg.,OP,Home State,127,752,100.5,2070
+394,"GEC, Modasa",GOV,Computer Engg.,SE,Home State,99.5,2144,82.5,3881
+395,"GEC, Modasa",GOV,Computer Engg.,ST,Home State,44,13024,44,13024
+396,"GEC, Modasa",GOV,Computer Engg.,TF,Home State,135.5,517,135.5,517
+397,"GEC, Modasa",GOV,Electrical Engg.,OP,Home State,84.5,3580,27,16395
+398,"GEC, Modasa",GOV,Information Tech.,EW,Home State,93.5,2608,85.5,3465
+399,"GEC, Modasa",GOV,Information Tech.,OP,Home State,123.5,862,97.5,2299
+400,"GEC, Modasa",GOV,Information Tech.,SC,Home State,77.5,4615,45,12653
+401,"GEC, Modasa",GOV,Information Tech.,SE,Home State,97,2342,80,4169
+402,"GEC, Modasa",GOV,Information Tech.,ST,Home State,40,14181,40,14181
+403,"GEC, Modasa",GOV,Information Tech.,TF,Home State,126,789,126,789
+404,"GEC, Modasa",GOV,Mechanical Engg.,OP,Home State,89.5,3000,28,16246
+405,"GEC, Modasa",GOV,Automobile Engg.,OP,Home State,61,8068,37.5,14715
+406,"GEC, Modasa",GOV,Automobile Engg.,TF,Home State,26.5,16456,26.5,16456
+407,"GEC, Modasa",GOV,EC Engg.,OP,Home State,43.5,13119,43.5,13119
+408,"GEC, Modasa",GOV,Computer Engg.,OP,All India,102,1921,102,1921
+409,"GEC, Modasa",GOV,Electrical Engg.,OP,All India,62.5,7647,45,12670
+410,"GEC, Modasa",GOV,Information Tech.,OP,All India,67,6611,67,6611
+411,"GEC, Palanpur",GOV,Civil Engg.,OP,Home State,122.5,892,30,16064
+412,"GEC, Palanpur",GOV,Computer Engg.,EW,Home State,90,2963,78.5,4447
+413,"GEC, Palanpur",GOV,Computer Engg.,OP,Home State,122.5,900,90,2940
+414,"GEC, Palanpur",GOV,Computer Engg.,SC,Home State,68.5,6320,68.5,6320
+415,"GEC, Palanpur",GOV,Computer Engg.,SE,Home State,90,2964,78.5,4413
+416,"GEC, Palanpur",GOV,Computer Engg.,TF,Home State,116,1183,116,1183
+417,"GEC, Palanpur",GOV,Electrical Engg.,OP,Home State,82.5,3825,32.5,15737
+418,"GEC, Palanpur",GOV,Mechanical Engg.,OP,Home State,102.5,1908,39,14354
+419,"GEC, Patan",GOV,Civil Engg.,OP,Home State,88,3176,38,14543
+420,"GEC, Patan",GOV,Electrical Engg.,OP,Home State,74.5,5053,31,15899
+421,"GEC, Patan",GOV,Electrical Engg.,TF,Home State,71,5738,71,5738
+422,"GEC, Patan",GOV,Mechanical Engg.,OP,Home State,79.5,4246,25.5,16495
+423,"GEC, Patan",GOV,Mechanical Engg.,TF,Home State,81,4009,81,4009
+424,"GEC, Patan",GOV,Computer Science & Engg,EW,Home State,97.5,2280,86.5,3347
+425,"GEC, Patan",GOV,Computer Science & Engg,OP,Home State,143,340,101.5,1967
+426,"GEC, Patan",GOV,Computer Science & Engg,SE,Home State,99.5,2160,85,3504
+427,"GEC, Patan",GOV,Computer Science & Engg,ST,Home State,36,14978,36,14978
+428,"GEC, Patan",GOV,Electrical Engg.,OP,All India,72.5,5452,72.5,5452
+429,"GEC, Patan",GOV,Computer Science & Engg,OP,All India,69.5,6079,69.5,6079
+430,"GEC, Rajkot",GOV,Civil Engg.,OP,Home State,138.5,438,20.5,16893
+431,"GEC, Rajkot",GOV,Computer Engg.,EW,Home State,127,747,125,812
+432,"GEC, Rajkot",GOV,Computer Engg.,OP,Home State,137.5,461,127.5,734
+433,"GEC, Rajkot",GOV,Computer Engg.,SC,Home State,95.5,2477,93,2649
+434,"GEC, Rajkot",GOV,Computer Engg.,SE,Home State,127,763,115,1225
+435,"GEC, Rajkot",GOV,Computer Engg.,ST,Home State,54,10050,54,10050
+436,"GEC, Rajkot",GOV,Computer Engg.,TF,Home State,142.5,356,142.5,356
+437,"GEC, Rajkot",GOV,Electrical Engg.,EW,Home State,75,4957,62.5,7812
+438,"GEC, Rajkot",GOV,Electrical Engg.,OP,Home State,109,1496,94,2575
+439,"GEC, Rajkot",GOV,Electrical Engg.,SE,Home State,91.5,2830,79.5,4279
+440,"GEC, Rajkot",GOV,Electrical Engg.,ST,Home State,41,13818,41,13818
+441,"GEC, Rajkot",GOV,Electrical Engg.,TF,Home State,106.5,1648,106.5,1648
+442,"GEC, Rajkot",GOV,Mechanical Engg.,EW,Home State,60.5,8257,59,8671
+443,"GEC, Rajkot",GOV,Mechanical Engg.,OP,Home State,96,2422,62.5,7657
+444,"GEC, Rajkot",GOV,Mechanical Engg.,SE,Home State,62.5,7774,43,13275
+445,"GEC, Rajkot",GOV,EC Engg.,OP,Home State,99.5,2138,30,16112
+446,"GEC, Rajkot",GOV,EC Engg.,TF,Home State,111,1363,111,1363
+447,"GEC, Rajkot",GOV,Instrumentation & Control Engg.,OP,Home State,97,2343,41,13832
+448,"GEC, Rajkot",GOV,Robotics And Automation,OP,Home State,95,2532,26.5,16431
+449,"GEC, Rajkot",GOV,Artificial Intelligence And Data Science,EW,Home State,101,2007,94,2591
+450,"GEC, Rajkot",GOV,Artificial Intelligence And Data Science,OP,Home State,127,758,113.5,1279
+451,"GEC, Rajkot",GOV,Artificial Intelligence And Data Science,SE,Home State,106.5,1631,104.5,1778
+452,"GEC, Rajkot",GOV,Artificial Intelligence And Data Science,TF,Home State,151.5,203,151.5,203
+453,"GEC, Rajkot",GOV,Civil Engg.,OP,All India,109,1486,68.5,6254
+454,"GEC, Rajkot",GOV,Computer Engg.,OP,All India,86,3400,86,3400
+455,"GEC, Rajkot",GOV,EC Engg.,OP,All India,75,4993,51.5,10807
+456,"GEC, Rajkot",GOV,Robotics And Automation,OP,All India,91,2882,50,11343
+457,"GEC, Surat",GOV,Civil Engg.,EW,Home State,59.5,8546,59.5,8546
+458,"GEC, Surat",GOV,Civil Engg.,OP,Home State,123.5,859,63.5,7478
+459,"GEC, Surat",GOV,Civil Engg.,SC,Home State,63,7517,41.5,13689
+460,"GEC, Surat",GOV,Civil Engg.,SE,Home State,62.5,7780,37,14832
+461,"GEC, Surat",GOV,Civil Engg.,ST,Home State,62.5,7648,27.5,16358
+462,"GEC, Surat",GOV,Civil Engg.,TF,Home State,117.5,1110,117.5,1110
+463,"GEC, Surat",GOV,Computer Engg.,EW,Home State,140.5,405,137,487
+464,"GEC, Surat",GOV,Computer Engg.,OP,Home State,162,83,145.5,296
+465,"GEC, Surat",GOV,Computer Engg.,SC,Home State,131,626,131,626
+466,"GEC, Surat",GOV,Computer Engg.,SE,Home State,140.5,406,125.5,800
+467,"GEC, Surat",GOV,Computer Engg.,ST,Home State,74,5166,74,5197
+468,"GEC, Surat",GOV,Computer Engg.,TF,Home State,163.5,64,163.5,64
+469,"GEC, Surat",GOV,Electrical Engg.,EW,Home State,67.5,6433,38,14575
+470,"GEC, Surat",GOV,Electrical Engg.,OP,Home State,134.5,550,92,2800
+471,"GEC, Surat",GOV,Electrical Engg.,SC,Home State,87.5,3211,83.5,3680
+472,"GEC, Surat",GOV,Electrical Engg.,SE,Home State,89,3059,59,8683
+473,"GEC, Surat",GOV,Electrical Engg.,ST,Home State,86.5,3331,41,13752
+474,"GEC, Surat",GOV,Environmental Engg.,OP,Home State,100,2123,32.5,15713
+475,"GEC, Surat",GOV,Mechanical Engg.,EW,Home State,80.5,4109,49.5,11534
+476,"GEC, Surat",GOV,Mechanical Engg.,OP,Home State,137.5,467,84,3643
+477,"GEC, Surat",GOV,Mechanical Engg.,SC,Home State,66,6801,62.5,7739
+478,"GEC, Surat",GOV,Mechanical Engg.,SE,Home State,84,3672,49,11633
+479,"GEC, Surat",GOV,Mechanical Engg.,TF,Home State,148,262,148,262
+480,"GEC, Surat",GOV,EC Engg.,OP,Home State,113.5,1275,29.5,16147
+481,"GEC, Surat",GOV,EC Engg.,TF,Home State,121,962,121,962
+482,"GEC, Surat",GOV,Civil Engg.,OP,All India,132,615,132,615
+483,"GEC, Surat",GOV,Electrical Engg.,OP,All India,100,2091,100,2091
+484,"GEC, Surat",GOV,Mechanical Engg.,OP,All India,103,1855,103,1855
+485,"GEC, Valsad",GOV,Civil Engg.,OP,Home State,106,1682,26.5,16427
+486,"GEC, Valsad",GOV,Civil Engg.,TF,Home State,62,7892,62,7892
+487,"GEC, Valsad",GOV,Electrical Engg.,OP,Home State,92.5,2705,80,4168
+488,"GEC, Valsad",GOV,Electrical Engg.,SC,Home State,65,7086,65,7086
+489,"GEC, Valsad",GOV,Electrical Engg.,SE,Home State,65,7169,50,11199
+490,"GEC, Valsad",GOV,Electrical Engg.,ST,Home State,80,4221,68.5,6273
+491,"GEC, Valsad",GOV,Mechanical Engg.,OP,Home State,80,4182,22.5,16788
+492,"GEC, Valsad",GOV,Mechanical Engg.,TF,Home State,93,2667,93,2667
+493,"GEC, Valsad",GOV,Chemical Engg.,EW,Home State,50,11367,30,16051
+494,"GEC, Valsad",GOV,Chemical Engg.,OP,Home State,114.5,1236,52,10719
+495,"GEC, Valsad",GOV,Chemical Engg.,SE,Home State,45.5,12586,42.5,13425
+496,"GEC, Valsad",GOV,Mechanical Engg.,OP,All India,82.5,3815,60,8371
+497,"GEC, Valsad",GOV,Chemical Engg.,OP,All India,130,663,130,663
+498,"GIDCDEC, Navsari",SFI,Civil Engg.,OP,Home State,32,15768,32,15768
+499,"GIDCDEC, Navsari",SFI,Civil Engg.,TF,Home State,85,3533,85,3533
+500,"GIDCDEC, Navsari",SFI,Computer Engg.,EW,Home State,55.5,9611,55.5,9611
+501,"GIDCDEC, Navsari",SFI,Computer Engg.,OP,Home State,121,956,85,3514
+502,"GIDCDEC, Navsari",SFI,Computer Engg.,OPPH,Home State,47.5,11994,47.5,11994
+503,"GIDCDEC, Navsari",SFI,Computer Engg.,SE,Home State,82.5,3870,66.5,6762
+504,"GIDCDEC, Navsari",SFI,Computer Engg.,ST,Home State,51,10959,51,10959
+505,"GIDCDEC, Navsari",SFI,Electrical Engg.,OP,Home State,74,5186,35.5,15067
+506,"GIDCDEC, Navsari",SFI,Automobile Engg.,OP,Home State,67.5,6557,30,16087
+507,"GIT, Gandhinagar",SFI,Civil Engg.,OP,Home State,45,12652,45,12652
+508,"GIT, Gandhinagar",SFI,Computer Engg.,OP,Home State,87.5,3227,37,14853
+509,"GIT, Gandhinagar",SFI,Computer Engg.,TF,Home State,135.5,519,135.5,519
+510,"GIT, Gandhinagar",SFI,Electrical Engg.,TF,Home State,84,3675,84,3675
+511,"GIT, Gandhinagar",SFI,Information Tech.,OP,Home State,104,1810,40,14246
+512,"GIT, Gandhinagar",SFI,Information Tech.,TF,Home State,125.5,801,125.5,801
+513,"GIT, Gandhinagar",SFI,Mechanical Engg.,OP,Home State,72.5,5516,50,11330
+514,"GIT, Gandhinagar",SFI,Mechanical Engg.,TF,Home State,88,3164,88,3164
+515,"GIT, Gandhinagar",SFI,Computer Science & Engg,OP,Home State,87,3296,53,10384
+516,"GIT, Gandhinagar",SFI,Computer Science & Engg,TF,Home State,134,566,134,566
+517,"GIT, Gandhinagar",SFI,Cyber Security,OP,Home State,71.5,5698,71.5,5698
+518,"GPERI, Mevad",SFI,Civil Engg.,OP,Home State,57,9290,49,11598
+519,"GPERI, Mevad",SFI,Computer Engg.,EW,Home State,51.5,10814,51.5,10814
+520,"GPERI, Mevad",SFI,Computer Engg.,OP,Home State,88.5,3113,69.5,6107
+521,"GPERI, Mevad",SFI,Computer Engg.,SE,Home State,65.5,6881,60,8365
+522,"GPERI, Mevad",SFI,Computer Engg.,TF,Home State,105,1738,105,1738
+523,"GPERI, Mevad",SFI,Mechanical Engg.,OP,Home State,73.5,5270,40,14033
+524,"GPERI, Mevad",SFI,Computer Engg.-Gujarati,OP,Home State,62,7899,62,7899
+525,"GrowMore, Berna",SFI,Civil Engg.,OP,Home State,72.5,5521,57.5,8990
+526,"GrowMore, Berna",SFI,Computer Engg.,OP,Home State,72.5,5477,45,12618
+527,"GrowMore, Berna",SFI,Information Tech.,OP,Home State,50,11296,50,11296
+528,"GrowMore, Berna",SFI,Mechanical Engg.,OP,Home State,38,14512,38,14512
+529,"GSFCU, Vadodara",SFI,Chemical Engg.,OP,Home State,114.5,1247,18,17007
+530,"GSFCU, Vadodara",SFI,Computer Science & Engg,EW,Home State,75,5029,65,7099
+531,"GSFCU, Vadodara",SFI,Computer Science & Engg,OP,Home State,123.5,863,82.5,3887
+532,"GSFCU, Vadodara",SFI,Computer Science & Engg,SC,Home State,77.5,4588,75,5050
+533,"GSFCU, Vadodara",SFI,Computer Science & Engg,SE,Home State,77.5,4609,42,13577
+534,"GSFCU, Vadodara",SFI,Computer Science & Engg,TF,Home State,150.5,219,150.5,219
+535,"GSFCU, Vadodara",SFI,"Fire And Env. Health, Safety Engineering",OP,Home State,68,6333,44.5,12893
+536,"GTU-SOEAT, Ahmedabad",SFI,Computer Engg.,EW,Home State,135.5,522,135.5,522
+537,"GTU-SOEAT, Ahmedabad",SFI,Computer Engg.,OP,Home State,140.5,404,137,481
+538,"GTU-SOEAT, Ahmedabad",SFI,Computer Engg.,SC,Home State,108.5,1516,108.5,1516
+539,"GTU-SOEAT, Ahmedabad",SFI,Computer Engg.,SE,Home State,132.5,597,118,1075
+540,"GTU-SOEAT, Ahmedabad",SFI,Computer Engg.,ST,Home State,57.5,9100,40,13993
+541,"GTU-SOEAT, Ahmedabad",SFI,Computer Engg.,TF,Home State,148.5,259,148.5,259
+542,"Gyanmanjari, Bhavnagar",SFI,Computer Engg.,OP,Home State,102.5,1916,40,14158
+543,"Gyanmanjari, Bhavnagar",SFI,Electrical Engg.,OP,Home State,94,2595,94,2595
+544,"Gyanmanjari, Bhavnagar",SFI,Information Tech.,OP,Home State,107,1628,75.5,4867
+545,"Gyanmanjari, Bhavnagar",SFI,Information Tech.,TF,Home State,106.5,1659,106.5,1659
+546,"Gyanmanjari, Bhavnagar",SFI,Mechanical Engg.,OP,Home State,55,9744,49,11596
+547,"Gyanmanjari, Bhavnagar",SFI,Chemical Engg.,OP,Home State,65,7125,65,7125
+548,"Gyanmanjari, Bhavnagar",SFI,Chemical Engg.,TF,Home State,84.5,3593,84.5,3593
+549,"Gyanmanjari, Bhavnagar",SFI,Computer Science & Engg,OP,Home State,111,1369,111,1369
+550,"Gyanmanjari, Bhavnagar",SFI,Computer Science & Engg,TF,Home State,118.5,1066,118.5,1066
+551,"Gyanmanjari, Bhavnagar",SFI,Information & Communication Tech.,OP,Home State,78,4520,78,4520
+552,"Hansaba, Patan",SFI,Computer Engg.,OP,Home State,69,6131,52.5,10604
+553,"Hansaba, Patan",SFI,Computer Engg.,TF,Home State,116.5,1136,116.5,1136
+554,"Hansaba, Patan",SFI,Electrical Engg.,OP,Home State,61,8112,61,8112
+555,"Hansaba, Patan",SFI,Electrical Engg.,TF,Home State,64.5,7218,64.5,7218
+556,"Hansaba, Patan",SFI,Information Tech.,OP,Home State,78.5,4436,78.5,4436
+557,HGCE-Ahmedabad,SFI,Computer Engg.,OP,Home State,57,9251,57,9251
+558,HGCE-Ahmedabad,SFI,Computer Engg.,TF,Home State,120,1002,120,1002
+559,HGCE-Ahmedabad,SFI,Information Tech.,OP,Home State,90,2962,66,6845
+560,HGCE-Ahmedabad,SFI,Information Tech.,TF,Home State,122,917,122,917
+561,HGCE-Ahmedabad,SFI,Mechanical Engg.,OP,Home State,65.5,6885,65.5,6885
+562,HGCE-Ahmedabad,SFI,Mechanical Engg.,TF,Home State,59.5,8636,59.5,8636
+563,"HJD, Kera",SFI,Civil Engg.,OP,Home State,122,916,38,14526
+564,"HJD, Kera",SFI,Computer Science & Engg,OP,Home State,85,3535,60,8399
+565,"IAR, Gandhinagar",SFI,Computer Engg.,EW,Home State,70.5,5840,47.5,11907
+566,"IAR, Gandhinagar",SFI,Computer Engg.,OP,Home State,131,623,71,5725
+567,"IAR, Gandhinagar",SFI,Computer Engg.,SC,Home State,60,8507,60,8507
+568,"IAR, Gandhinagar",SFI,Computer Engg.,SE,Home State,60,8476,44,12989
+569,"IAR, Gandhinagar",SFI,Computer Engg.,TF,Home State,120,1012,120,1012
+570,"IAR, Gandhinagar",SFI,Information Tech.,OP,Home State,107.5,1599,39.5,14305
+571,"IAR, Gandhinagar",SFI,Chemical Engg.,OP,Home State,91,2869,53,10326
+572,"Indrashil, Kadi",SFI,Computer Science & Engg,OP,Home State,88.5,3121,88.5,3121
+573,"Indrashil, Kadi",SFI,Computer Science & Engg,TF,Home State,112,1332,112,1332
+574,"Indus Uni., Ahmedabad",SFI,Civil Engg.,OP,Home State,101.5,1997,44.5,12871
+575,"Indus Uni., Ahmedabad",SFI,Computer Engg.,OP,Home State,128.5,713,38,14580
+576,"Indus Uni., Ahmedabad",SFI,Computer Engg.,TF,Home State,140,408,140,408
+577,"Indus Uni., Ahmedabad",SFI,Electrical Engg.,OP,Home State,95,2537,64.5,7214
+578,"Indus Uni., Ahmedabad",SFI,Information Tech.,OP,Home State,132.5,603,47.5,12131
+579,"Indus Uni., Ahmedabad",SFI,Information Tech.,TF,Home State,139.5,418,139.5,418
+580,"Indus Uni., Ahmedabad",SFI,Mechanical Engg.,OP,Home State,64,7337,48.5,11741
+581,"Indus Uni., Ahmedabad",SFI,Mechanical Engg.,TF,Home State,98.5,2228,98.5,2228
+582,"Indus Uni., Ahmedabad",SFI,Automobile Engg.,OP,Home State,63.5,7426,45,12839
+583,"Indus Uni., Ahmedabad",SFI,Automobile Engg.,TF,Home State,82.5,3890,82.5,3890
+584,"Indus Uni., Ahmedabad",SFI,Computer Science & Engg,OP,Home State,111.5,1353,37.5,14762
+585,"Indus Uni., Ahmedabad",SFI,Computer Science & Engg,TF,Home State,142,366,142,366
+586,"Indus Uni., Ahmedabad",SFI,Cyber Security,OP,Home State,120,1000,49,11635
+587,"Ipcowala, Dharmaj",SFI,Computer Engg.,OP,Home State,50,11353,50,11353
+588,"Ipcowala, Dharmaj",SFI,Mechanical Engg.,TF,Home State,48.5,11657,48.5,11657
+589,"ITM-SLS, Vadodara",SFI,Information Tech.,OP,Home State,89,3068,67.5,6576
+590,"ITM-SLS, Vadodara",SFI,Information Tech.,TF,Home State,139,436,139,436
+591,"ITM-SLS, Vadodara",SFI,Computer Science & Engg,OP,Home State,88.5,3125,40,14044
+592,"ITM-SLS, Vadodara",SFI,Computer Science & Engg,TF,Home State,134,561,134,561
+593,"ITM-SLS, Vadodara",SFI,CSE (Cyber Security),OP,Home State,63.5,7432,62.5,7822
+594,"ITM-SLS, Vadodara",SFI,CSE (Artificial Intelligence),OP,Home State,77.5,4625,77.5,4625
+595,"ITM-SLS, Vadodara",SFI,CSE (Artificial Intelligence),TF,Home State,108,1547,108,1547
+596,"JG University, Ahmedabad",SFI,Information Tech.,OP,Home State,125.5,806,20,16916
+597,"JG University, Ahmedabad",SFI,Information Tech.,TF,Home State,126.5,773,126.5,773
+598,"JG University, Ahmedabad",SFI,Computer Science & Engg,OP,Home State,133.5,572,30.5,15977
+599,"JivrajMehta,Anand",SFI,Information Tech.,OP,Home State,70.5,5872,70.5,5872
+600,"KIT, Jamnagar",SFI,Computer Engg.,TF,Home State,80.5,4084,80.5,4084
+601,"KIT, Jamnagar",SFI,Chemical Engg.,OP,Home State,74.5,5068,55,9867
+602,"KITRC, Kalol",SFI,Computer Engg.,OP,Home State,103,1845,85,3545
+603,"KITRC, Kalol",SFI,Computer Engg.,TF,Home State,126.5,767,126.5,767
+604,"KITRC, Kalol",SFI,Electrical Engg.,OP,Home State,65,7001,65,7001
+605,"KITRC, Kalol",SFI,Electrical Engg.,TF,Home State,65.5,6909,65.5,6909
+606,"KITRC, Kalol",SFI,Information Tech.,OP,Home State,84.5,3615,28.5,16222
+607,"KITRC, Kalol",SFI,Mechanical Engg.,TF,Home State,80.5,4094,80.5,4094
+608,"KJIET, Savali",SFI,Computer Engg.,OP,Home State,82,3910,42.5,13339
+609,"KJIET, Savali",SFI,Electrical Engg.,OP,Home State,50.5,11005,50.5,11005
+610,"KJIET, Savali",SFI,Information Tech.,OP,Home State,66,6795,51,10933
+611,"KJIET, Savali",SFI,Mechanical Engg.,OP,Home State,111.5,1360,111.5,1360
+612,"Krishna, Varnama, Vadodara",SFI,Computer Engg.,OP,Home State,72.5,5415,57.5,9161
+613,"Krishna-KSET, Vadodara",SFI,Electrical Engg.,OP,Home State,63,7538,15,17129
+614,"Krishna-KSET, Vadodara",SFI,Information Tech.,OP,Home State,89.5,3004,32.5,15718
+615,"Krishna-KSET, Vadodara",SFI,Information Tech.,TF,Home State,97.5,2294,97.5,2294
+616,"Krishna-KSET, Vadodara",SFI,Mechanical Engg.,OP,Home State,100,2119,15,17118
+617,"Krishna-KSET, Vadodara",SFI,Computer Science & Engg,OP,Home State,143.5,339,36,15009
+618,"Krishna-KSET, Vadodara",SFI,Computer Science & Engg,TF,Home State,97.5,2312,97.5,2312
+619,"Laxmi, Valsad",SFI,Civil Engg.,OP,Home State,60,8289,60,8289
+620,"Laxmi, Valsad",SFI,Electrical Engg.,OP,Home State,50,11397,35,15215
+621,"Laxmi, Valsad",SFI,Electrical Engg.,TF,Home State,77.5,4526,77.5,4526
+622,"Laxmi, Valsad",SFI,Information Tech.,OP,Home State,78.5,4441,72,5604
+623,"Laxmi, Valsad",SFI,Mechanical Engg.,OP,Home State,67.5,6450,35,15300
+624,"Laxmi, Valsad",SFI,Computer Science & Engg,OP,Home State,113,1303,40,14153
+625,"LCIT, Bhandu",SFI,Mechanical Engg.,TF,Home State,57.5,9122,57.5,9122
+626,"LCIT, Bhandu",SFI,Computer Science & Engg,OP,Home State,106.5,1643,35,15283
+627,"LDCE, Ahmedabad",GOV,Civil Engg.,EW,Home State,129,691,124,854
+628,"LDCE, Ahmedabad",GOV,Civil Engg.,EX,Home State,47.5,12067,47.5,12067
+629,"LDCE, Ahmedabad",GOV,Civil Engg.,OP,Home State,168.5,38,133.5,571
+630,"LDCE, Ahmedabad",GOV,Civil Engg.,SC,Home State,94.5,2543,89.5,3037
+631,"LDCE, Ahmedabad",GOV,Civil Engg.,SE,Home State,130,671,116,1162
+632,"LDCE, Ahmedabad",GOV,Civil Engg.,ST,Home State,96.5,2379,54.5,9961
+633,"LDCE, Ahmedabad",GOV,Civil Engg.,TF,Home State,153.5,178,153.5,178
+634,"LDCE, Ahmedabad",GOV,Computer Engg.,EW,Home State,165,55,163,70
+635,"LDCE, Ahmedabad",GOV,Computer Engg.,EX,Home State,102.5,1885,102.5,1885
+636,"LDCE, Ahmedabad",GOV,Computer Engg.,OP,Home State,173.5,16,165.5,51
+637,"LDCE, Ahmedabad",GOV,Computer Engg.,OPPH,Home State,128.5,700,128.5,700
+638,"LDCE, Ahmedabad",GOV,Computer Engg.,SC,Home State,140,417,140,417
+639,"LDCE, Ahmedabad",GOV,Computer Engg.,SE,Home State,163.5,65,158.5,123
+640,"LDCE, Ahmedabad",GOV,Computer Engg.,ST,Home State,133.5,573,89.5,3031
+641,"LDCE, Ahmedabad",GOV,Computer Engg.,TF,Home State,177.5,12,177.5,12
+642,"LDCE, Ahmedabad",GOV,Electrical Engg.,EW,Home State,137,480,133,581
+643,"LDCE, Ahmedabad",GOV,Electrical Engg.,OP,Home State,190.5,1,149.5,243
+644,"LDCE, Ahmedabad",GOV,Electrical Engg.,SC,Home State,139,435,139,435
+645,"LDCE, Ahmedabad",GOV,Electrical Engg.,SE,Home State,145,314,139,430
+646,"LDCE, Ahmedabad",GOV,Electrical Engg.,ST,Home State,114.5,1232,84.5,3563
+647,"LDCE, Ahmedabad",GOV,Environmental Engg.,OP,Home State,115.5,1192,62,7876
+648,"LDCE, Ahmedabad",GOV,Environmental Engg.,SC,Home State,31.5,15843,31.5,15843
+649,"LDCE, Ahmedabad",GOV,Environmental Engg.,SE,Home State,50,11218,47,12183
+650,"LDCE, Ahmedabad",GOV,Information Tech.,EW,Home State,160,104,153,183
+651,"LDCE, Ahmedabad",GOV,Information Tech.,OP,Home State,178.5,9,161,95
+652,"LDCE, Ahmedabad",GOV,Information Tech.,SC,Home State,141.5,373,141.5,373
+653,"LDCE, Ahmedabad",GOV,Information Tech.,SE,Home State,160,103,149,245
+654,"LDCE, Ahmedabad",GOV,Information Tech.,SEPH,Home State,118,1076,118,1076
+655,"LDCE, Ahmedabad",GOV,Information Tech.,ST,Home State,150.5,221,150.5,221
+656,"LDCE, Ahmedabad",GOV,Information Tech.,TF,Home State,182.5,5,182.5,5
+657,"LDCE, Ahmedabad",GOV,Mechanical Engg.,EW,Home State,128.5,712,126,776
+658,"LDCE, Ahmedabad",GOV,Mechanical Engg.,OP,Home State,161.5,89,142,367
+659,"LDCE, Ahmedabad",GOV,Mechanical Engg.,SC,Home State,135.5,516,135.5,516
+660,"LDCE, Ahmedabad",GOV,Mechanical Engg.,SE,Home State,140.5,395,129,697
+661,"LDCE, Ahmedabad",GOV,Mechanical Engg.,ST,Home State,74,5177,74,5177
+662,"LDCE, Ahmedabad",GOV,Mechanical Engg.,TF,Home State,153,186,153,186
+663,"LDCE, Ahmedabad",GOV,Automobile Engg.,EW,Home State,51.5,10872,21,16862
+664,"LDCE, Ahmedabad",GOV,Automobile Engg.,OP,Home State,134,558,57.5,9178
+665,"LDCE, Ahmedabad",GOV,Automobile Engg.,SC,Home State,53.5,10174,37,14833
+666,"LDCE, Ahmedabad",GOV,Automobile Engg.,SE,Home State,54.5,10015,35.5,15094
+667,"LDCE, Ahmedabad",GOV,Chemical Engg.,EW,Home State,124.5,826,124.5,826
+668,"LDCE, Ahmedabad",GOV,Chemical Engg.,OP,Home State,154,170,134,555
+669,"LDCE, Ahmedabad",GOV,Chemical Engg.,SC,Home State,112,1329,112,1329
+670,"LDCE, Ahmedabad",GOV,Chemical Engg.,SE,Home State,132.5,596,110,1443
+671,"LDCE, Ahmedabad",GOV,Chemical Engg.,TF,Home State,160.5,100,160.5,100
+672,"LDCE, Ahmedabad",GOV,Biomedical Engg.,EW,Home State,74.5,5060,66,6789
+673,"LDCE, Ahmedabad",GOV,Biomedical Engg.,OP,Home State,167.5,41,89,3079
+674,"LDCE, Ahmedabad",GOV,Biomedical Engg.,SC,Home State,51.5,10798,51.5,10798
+675,"LDCE, Ahmedabad",GOV,Biomedical Engg.,SE,Home State,82.5,3819,68.5,6235
+676,"LDCE, Ahmedabad",GOV,Biomedical Engg.,ST,Home State,65.5,6888,59.5,8530
+677,"LDCE, Ahmedabad",GOV,Biomedical Engg.,TF,Home State,98.5,2221,98.5,2221
+678,"LDCE, Ahmedabad",GOV,EC Engg.,EW,Home State,133,587,101.5,1961
+679,"LDCE, Ahmedabad",GOV,EC Engg.,OP,Home State,146.5,285,110,1440
+680,"LDCE, Ahmedabad",GOV,EC Engg.,SC,Home State,100.5,2040,82,3938
+681,"LDCE, Ahmedabad",GOV,EC Engg.,SE,Home State,125,818,78,4480
+682,"LDCE, Ahmedabad",GOV,EC Engg.,ST,Home State,62,7852,41.5,13694
+683,"LDCE, Ahmedabad",GOV,EC Engg.,TF,Home State,142,365,142,365
+684,"LDCE, Ahmedabad",GOV,Instrumentation & Control Engg.,EW,Home State,72.5,5440,68,6338
+685,"LDCE, Ahmedabad",GOV,Instrumentation & Control Engg.,OP,Home State,115.5,1201,77,4645
+686,"LDCE, Ahmedabad",GOV,Instrumentation & Control Engg.,SC,Home State,69,6129,69,6129
+687,"LDCE, Ahmedabad",GOV,Instrumentation & Control Engg.,SE,Home State,74,5163,62.5,7823
+688,"LDCE, Ahmedabad",GOV,Instrumentation & Control Engg.,ST,Home State,37.5,14697,37.5,14697
+689,"LDCE, Ahmedabad",GOV,Instrumentation & Control Engg.,TF,Home State,116,1168,116,1168
+690,"LDCE, Ahmedabad",GOV,Plastic Tech.,OP,Home State,107.5,1574,16.5,17083
+691,"LDCE, Ahmedabad",GOV,Robotics And Automation,EW,Home State,99,2190,97,2337
+692,"LDCE, Ahmedabad",GOV,Robotics And Automation,OP,Home State,149,252,102.5,1880
+693,"LDCE, Ahmedabad",GOV,Robotics And Automation,SC,Home State,83.5,3714,72.5,5538
+694,"LDCE, Ahmedabad",GOV,Robotics And Automation,SE,Home State,97.5,2285,76.5,4743
+695,"LDCE, Ahmedabad",GOV,Rubber Tech.,OP,Home State,171,31,39,14388
+696,"LDCE, Ahmedabad",GOV,Textile Tech.,OP,Home State,127,760,18,17013
+697,"LDCE, Ahmedabad",GOV,AI And Machine Learning,EW,Home State,152.5,191,152.5,191
+698,"LDCE, Ahmedabad",GOV,AI And Machine Learning,OP,Home State,163,73,152.5,190
+699,"LDCE, Ahmedabad",GOV,AI And Machine Learning,SC,Home State,136.5,498,136.5,498
+700,"LDCE, Ahmedabad",GOV,AI And Machine Learning,SE,Home State,147,277,137,474
+701,"LDCE, Ahmedabad",GOV,AI And Machine Learning,ST,Home State,70,5883,64.5,7201
+702,"LDCE, Ahmedabad",GOV,Civil Engg.,OP,All India,149.5,238,149.5,238
+703,"LDCE, Ahmedabad",GOV,Computer Engg.,OP,All India,137,477,137,477
+704,"LDCE, Ahmedabad",GOV,Electrical Engg.,OP,All India,106.5,1640,106.5,1640
+705,"LDCE, Ahmedabad",GOV,Mechanical Engg.,OP,All India,112,1323,112,1323
+706,"LDCE, Ahmedabad",GOV,Automobile Engg.,OP,All India,69.5,6094,69.5,6094
+707,"LDCE, Ahmedabad",GOV,EC Engg.,OP,All India,121,964,121,964
+708,"LDCE, Ahmedabad",GOV,Instrumentation & Control Engg.,OP,All India,110,1430,110,1430
+709,"LDCE, Ahmedabad",GOV,AI And Machine Learning,OP,All India,97.5,2282,97.5,2282
+710,"LDRP, GNAGAR",SFI,Civil Engg.,OP,Home State,69,6212,18.5,16994
+711,"LDRP, GNAGAR",SFI,Civil Engg.,TF,Home State,141,391,141,391
+712,"LDRP, GNAGAR",SFI,Computer Engg.,EW,Home State,56.5,9400,14.5,17148
+713,"LDRP, GNAGAR",SFI,Computer Engg.,OP,Home State,140.5,402,67,6682
+714,"LDRP, GNAGAR",SFI,Computer Engg.,SC,Home State,48,11825,42.5,13400
+715,"LDRP, GNAGAR",SFI,Computer Engg.,SE,Home State,62.5,7684,42.5,13444
+716,"LDRP, GNAGAR",SFI,Computer Engg.,TF,Home State,140,412,132.5,591
+717,"LDRP, GNAGAR",SFI,Electrical Engg.,OP,Home State,81.5,3955,33.5,15484
+718,"LDRP, GNAGAR",SFI,Information Tech.,EW,Home State,37.5,14744,37.5,14744
+719,"LDRP, GNAGAR",SFI,Information Tech.,OP,Home State,123,888,74.5,5132
+720,"LDRP, GNAGAR",SFI,Information Tech.,SC,Home State,60.5,8249,60.5,8249
+721,"LDRP, GNAGAR",SFI,Information Tech.,SE,Home State,74,5167,30,16104
+722,"LDRP, GNAGAR",SFI,Information Tech.,TF,Home State,151,210,151,210
+723,"LDRP, GNAGAR",SFI,Mechanical Engg.,OP,Home State,73.5,5274,21.5,16848
+724,"LDRP, GNAGAR",SFI,EC Engg.,OP,Home State,70.5,5815,70.5,5815
+725,"LEC, MORBI",GOV,Civil Engg.,OP,Home State,79,4370,39,14355
+726,"LEC, MORBI",GOV,Electrical Engg.,OP,Home State,88.5,3117,30,16005
+727,"LEC, MORBI",GOV,Information Tech.,EW,Home State,84,3635,84,3635
+728,"LEC, MORBI",GOV,Information Tech.,OP,Home State,133.5,574,100.5,2075
+729,"LEC, MORBI",GOV,Information Tech.,SE,Home State,99.5,2136,99,2179
+730,"LEC, MORBI",GOV,Mechanical Engg.,OP,Home State,70.5,5793,45,12594
+731,"LEC, MORBI",GOV,Mechanical Engg.,TF,Home State,74,5210,74,5210
+732,"LEC, MORBI",GOV,Chemical Engg.,OP,Home State,91,2857,33,15532
+733,"LEC, MORBI",GOV,Chemical Engg.,TF,Home State,83.5,3738,83.5,3738
+734,"LEC, MORBI",GOV,Information Tech.,OP,All India,21.5,16840,21.5,16840
+735,"LEC, MORBI",GOV,Chemical Engg.,OP,All India,107.5,1582,83.5,3684
+736,"LJIET, Ahmedabad",SFI,Civil Engg.,OP,Home State,75,5015,27.5,16391
+737,"LJIET, Ahmedabad",SFI,Computer Engg.,EW,Home State,116.5,1135,114,1253
+738,"LJIET, Ahmedabad",SFI,Computer Engg.,OP,Home State,140.5,394,120.5,980
+739,"LJIET, Ahmedabad",SFI,Computer Engg.,SC,Home State,96,2429,87.5,3212
+740,"LJIET, Ahmedabad",SFI,Computer Engg.,SE,Home State,115,1214,100.5,2042
+741,"LJIET, Ahmedabad",SFI,Computer Engg.,ST,Home State,59,8652,59,8652
+742,"LJIET, Ahmedabad",SFI,Computer Engg.,TF,Home State,150,234,150,234
+743,"LJIET, Ahmedabad",SFI,Information Tech.,EW,Home State,113.5,1281,112,1335
+744,"LJIET, Ahmedabad",SFI,Information Tech.,OP,Home State,131,628,116.5,1146
+745,"LJIET, Ahmedabad",SFI,Information Tech.,SC,Home State,104,1811,104,1811
+746,"LJIET, Ahmedabad",SFI,Information Tech.,SE,Home State,113.5,1273,81.5,3965
+747,"LJIET, Ahmedabad",SFI,Information Tech.,TF,Home State,141,392,141,392
+748,"LJIET, Ahmedabad",SFI,Mechanical Engg.,OP,Home State,93,2647,31.5,15829
+749,"LJIET, Ahmedabad",SFI,Computer Science & Engg,EW,Home State,106.5,1635,100,2092
+750,"LJIET, Ahmedabad",SFI,Computer Science & Engg,OP,Home State,143.5,338,108.5,1536
+751,"LJIET, Ahmedabad",SFI,Computer Science & Engg,SC,Home State,72,5568,57,9297
+752,"LJIET, Ahmedabad",SFI,Computer Science & Engg,SE,Home State,103,1872,75.5,4870
+753,"LJIET, Ahmedabad",SFI,Computer Science & Engg,TF,Home State,159,114,159,114
+754,"LJIET, Ahmedabad",SFI,EC Engg.,TF,Home State,72.5,5543,72.5,5543
+755,"LJIET, Ahmedabad",SFI,Artificial Intelligence And Data Science,EW,Home State,70.5,5819,59,8690
+756,"LJIET, Ahmedabad",SFI,Artificial Intelligence And Data Science,OP,Home State,116,1165,75,4983
+757,"LJIET, Ahmedabad",SFI,Artificial Intelligence And Data Science,SC,Home State,74,5161,58.5,8784
+758,"LJIET, Ahmedabad",SFI,Artificial Intelligence And Data Science,SE,Home State,66.5,6769,36,15018
+759,"LJIET, Ahmedabad",SFI,Artificial Intelligence And Data Science,TF,Home State,136,507,136,507
+760,"LJIET, Ahmedabad",SFI,AI And Machine Learning,EW,Home State,71.5,5634,67,6630
+761,"LJIET, Ahmedabad",SFI,AI And Machine Learning,OP,Home State,121,952,74.5,5059
+762,"LJIET, Ahmedabad",SFI,AI And Machine Learning,SC,Home State,54.5,9983,53,10288
+763,"LJIET, Ahmedabad",SFI,AI And Machine Learning,SE,Home State,59.5,8557,45,12615
+764,"LJIET, Ahmedabad",SFI,Comp. Sc. And Information Technology,EW,Home State,87,3300,87,3300
+765,"LJIET, Ahmedabad",SFI,Comp. Sc. And Information Technology,OP,Home State,106,1672,95.5,2447
+766,"LJIET, Ahmedabad",SFI,Comp. Sc. And Information Technology,SE,Home State,80,4165,75,4978
+767,"LTIET, Rajkot",SFI,Electrical Engg.,OP,Home State,67.5,6431,26,16458
+768,"LTIET, Rajkot",SFI,Mechanical Engg.,OP,Home State,37,14860,37,14860
+769,"LTIET, Rajkot",SFI,Mechanical Engg.,TF,Home State,66,6788,66,6788
+770,"LTIET, Rajkot",SFI,Computer Science & Engg,OP,Home State,85,3502,12,17183
+771,"MBPIT, VVNagar",SFI,Computer Engg.,EW,Home State,61,8120,51.5,10855
+772,"MBPIT, VVNagar",SFI,Computer Engg.,OP,Home State,103,1878,62.5,7845
+773,"MBPIT, VVNagar",SFI,Computer Engg.,SC,Home State,57.5,9159,21.5,16853
+774,"MBPIT, VVNagar",SFI,Computer Engg.,SE,Home State,57.5,8992,32.5,15698
+775,"MBPIT, VVNagar",SFI,Computer Engg.,TF,Home State,134,562,134,562
+776,"MBPIT, VVNagar",SFI,Information Tech.,OP,Home State,111.5,1343,50,11405
+777,"MBPIT, VVNagar",SFI,Information Tech.,SE,Home State,37,14830,37,14830
+778,"MBPIT, VVNagar",SFI,Information Tech.,TF,Home State,130.5,649,130.5,649
+779,"MEC, BESNA",SFI,Computer Engg.,OP,Home State,103.5,1826,30.5,15939
+780,"MEC, BESNA",SFI,Computer Engg.,TF,Home State,108.5,1512,108.5,1512
+781,"MEC, BESNA",SFI,Electrical Engg.,OP,Home State,70,5881,16.5,17085
+782,"MEC, BESNA",SFI,Mechanical Engg.,OP,Home State,46,12386,18,17021
+783,"MEC, BESNA",SFI,Mechanical Engg.,TF,Home State,82.5,3836,82.5,3836
+784,"MEFGI-FOE, Rajkot",SFI,Civil Engg.,OP,Home State,69.5,6097,32.5,15654
+785,"MEFGI-FOE, Rajkot",SFI,Civil Engg.,TF,Home State,96,2409,96,2409
+786,"MEFGI-FOE, Rajkot",SFI,Computer Engg.,OP,Home State,125.5,808,24.5,16647
+787,"MEFGI-FOE, Rajkot",SFI,Electrical Engg.,OP,Home State,59,8679,35,15260
+788,"MEFGI-FOE, Rajkot",SFI,Information Tech.,OP,Home State,74,5154,51.5,10808
+789,"MEFGI-FOE, Rajkot",SFI,Mechanical Engg.,OP,Home State,99.5,2150,15.5,17101
+790,"MEFGI-FOE, Rajkot",SFI,Chemical Engg.,OP,Home State,120,998,38.5,14443
+791,"MEFGI-FOE, Rajkot",SFI,Computer Engg. (Artificial Intelligence),OP,Home State,116.5,1132,41,13831
+792,"MEFGI-FOE, Rajkot",SFI,Information & Communication Tech.,OP,Home State,85.5,3447,40,14206
+793,"MEFGI-FOE, Rajkot",SFI,Information & Communication Tech.,TF,Home State,110,1435,110,1435
+794,"MSCET, Vesu",SFI,Computer Engg.,OP,Home State,80.5,4112,39.5,14313
+795,"MSCET, Vesu",SFI,Computer Engg.,TF,Home State,123.5,873,123.5,873
+796,"MSU (GIA), Vadodara",GIA,Civil Engg.,EW,Home State,100,2113,83,3790
+797,"MSU (GIA), Vadodara",GIA,Civil Engg.,OP,Home State,141,388,102.5,1907
+798,"MSU (GIA), Vadodara",GIA,Civil Engg.,SC,Home State,96,2415,96,2415
+799,"MSU (GIA), Vadodara",GIA,Civil Engg.,SE,Home State,102,1949,82.5,3882
+800,"MSU (GIA), Vadodara",GIA,Civil Engg.,ST,Home State,47.5,11876,42.5,13434
+801,"MSU (GIA), Vadodara",GIA,Electrical Engg.,EW,Home State,107,1614,82.5,3837
+802,"MSU (GIA), Vadodara",GIA,Electrical Engg.,OP,Home State,135.5,526,122.5,891
+803,"MSU (GIA), Vadodara",GIA,Electrical Engg.,SC,Home State,109,1477,109,1477
+804,"MSU (GIA), Vadodara",GIA,Electrical Engg.,SE,Home State,117,1120,109,1497
+805,"MSU (GIA), Vadodara",GIA,Electrical Engg.,ST,Home State,104.5,1765,77.5,4568
+806,"MSU (GIA), Vadodara",GIA,Electrical Engg.,TF,Home State,132.5,594,132.5,594
+807,"MSU (GIA), Vadodara",GIA,Mechanical Engg.,EW,Home State,121.5,927,121,957
+808,"MSU (GIA), Vadodara",GIA,Mechanical Engg.,OP,Home State,150,226,123.5,868
+809,"MSU (GIA), Vadodara",GIA,Mechanical Engg.,SC,Home State,120,1011,106,1675
+810,"MSU (GIA), Vadodara",GIA,Mechanical Engg.,SE,Home State,121.5,944,89.5,3024
+811,"MSU (GIA), Vadodara",GIA,Mechanical Engg.,ST,Home State,117.5,1115,51,10984
+812,"MSU (GIA), Vadodara",GIA,Chemical Engg.,EW,Home State,93.5,2623,93.5,2623
+813,"MSU (GIA), Vadodara",GIA,Chemical Engg.,OP,Home State,142.5,354,133,579
+814,"MSU (GIA), Vadodara",GIA,Chemical Engg.,SE,Home State,120,989,120,989
+815,"MSU (GIA), Vadodara",GIA,Chemical Engg.,TF,Home State,174.5,14,174.5,14
+816,"MSU (GIA), Vadodara",GIA,Electronics Engg.,EW,Home State,52.5,10474,50.5,11021
+817,"MSU (GIA), Vadodara",GIA,Electronics Engg.,OP,Home State,104.5,1773,79.5,4258
+818,"MSU (GIA), Vadodara",GIA,Electronics Engg.,SE,Home State,46,12458,46,12458
+819,"MSU (GIA), Vadodara",GIA,Computer Science & Engg,EW,Home State,157.5,131,156.5,151
+820,"MSU (GIA), Vadodara",GIA,Computer Science & Engg,OP,Home State,172,22,159.5,109
+821,"MSU (GIA), Vadodara",GIA,Computer Science & Engg,OPPH,Home State,106,1679,106,1679
+822,"MSU (GIA), Vadodara",GIA,Computer Science & Engg,SC,Home State,134.5,551,134.5,551
+823,"MSU (GIA), Vadodara",GIA,Computer Science & Engg,SE,Home State,158.5,120,148.5,256
+824,"MSU (GIA), Vadodara",GIA,Computer Science & Engg,ST,Home State,96.5,2383,86.5,3361
+825,"MSU (GIA), Vadodara",GIA,Metallurgical And Materials Engg.,OP,Home State,118,1084,25,16587
+826,"MSU (GIA), Vadodara",GIA,Metallurgical And Materials Engg.,TF,Home State,82.5,3891,82.5,3891
+827,"MSU (GIA), Vadodara",GIA,Textile Engg.,OP,Home State,57.5,9197,35.5,15115
+828,"MSU (GIA), Vadodara",GIA,Textile Processing Engg.,OP,Home State,91.5,2815,37,14823
+829,"MSU (GIA), Vadodara",GIA,Textile Tech.,OP,Home State,102,1948,25.5,16532
+830,"MSU (GIA), Vadodara",GIA,Textile Tech.,TF,Home State,74,5232,74,5232
+831,"MSU (GIA), Vadodara",GIA,Water Management,OP,Home State,102,1940,57.5,9162
+832,"MSU (GIA), Vadodara",GIA,Civil Engg.,OP,All India,142.5,359,142.5,359
+833,"MSU (GIA), Vadodara",GIA,Mechanical Engg.,OP,All India,40,14021,40,14021
+834,"MSU (GIA), Vadodara",GIA,Computer Science & Engg,OP,All India,133.5,569,133.5,569
+835,"Navrachana, Vadodara",SFI,Civil Engg.,OP,Home State,82,3932,45.5,12565
+836,"Navrachana, Vadodara",SFI,Computer Science & Engg,EW,Home State,78,4469,70.5,5876
+837,"Navrachana, Vadodara",SFI,Computer Science & Engg,OP,Home State,137,486,89,3081
+838,"Navrachana, Vadodara",SFI,Computer Science & Engg,SC,Home State,70,5988,70,5988
+839,"Navrachana, Vadodara",SFI,Computer Science & Engg,SE,Home State,87.5,3220,80,4205
+840,"Navrachana, Vadodara",SFI,Computer Science & Engg,ST,Home State,70,5929,70,5929
+841,"Navrachana, Vadodara",SFI,Computer Science & Engg,TF,Home State,115.5,1185,115.5,1185
+842,"Neotech, Vadodara",SFI,Civil Engg.,OP,Home State,44.5,12850,44.5,12850
+843,"Neotech, Vadodara",SFI,Computer Engg.,OP,Home State,100,2120,25,16574
+844,"Neotech, Vadodara",SFI,Electrical Engg.,OP,Home State,57.5,9109,57.5,9109
+845,"Neotech, Vadodara",SFI,Mechanical Engg.,TF,Home State,71.5,5667,71.5,5667
+846,"New LJ, Ahmedabad",SFI,Computer Science & Engg,EW,Home State,90.5,2934,78.5,4446
+847,"New LJ, Ahmedabad",SFI,Computer Science & Engg,OP,Home State,135,540,93,2681
+848,"New LJ, Ahmedabad",SFI,Computer Science & Engg,SC,Home State,73.5,5281,64,7338
+849,"New LJ, Ahmedabad",SFI,Computer Science & Engg,SE,Home State,89.5,3018,56,9577
+850,"New LJ, Ahmedabad",SFI,Computer Science & Engg,TF,Home State,141,387,141,387
+851,"New LJ, Ahmedabad",SFI,CSE (AI And Machine Learning),EW,Home State,55,9918,55,9918
+852,"New LJ, Ahmedabad",SFI,CSE (AI And Machine Learning),OP,Home State,128,719,73.5,5307
+853,"New LJ, Ahmedabad",SFI,CSE (AI And Machine Learning),SE,Home State,62.5,7712,62,7941
+854,"New LJ, Ahmedabad",SFI,CSE (AI And Machine Learning),TF,Home State,135,542,135,542
+855,"Nirma Uni, Ahmedabad",SFI,Civil Engg.,OP,Home State,174,15,88.5,3115
+856,"Nirma Uni, Ahmedabad",SFI,Civil Engg.,SC,Home State,20,16925,20,16925
+857,"Nirma Uni, Ahmedabad",SFI,Civil Engg.,SE,Home State,84.5,3598,68,6404
+858,"Nirma Uni, Ahmedabad",SFI,Electrical Engg.,OP,Home State,113.5,1268,69.5,6073
+859,"Nirma Uni, Ahmedabad",SFI,Electrical Engg.,TF,Home State,160,102,160,102
+860,"Nirma Uni, Ahmedabad",SFI,Mechanical Engg.,EW,Home State,100.5,2048,24.5,16643
+861,"Nirma Uni, Ahmedabad",SFI,Mechanical Engg.,OP,Home State,167.5,42,115.5,1194
+862,"Nirma Uni, Ahmedabad",SFI,Mechanical Engg.,SC,Home State,87.5,3243,87.5,3243
+863,"Nirma Uni, Ahmedabad",SFI,Mechanical Engg.,SE,Home State,97,2338,83.5,3699
+864,"Nirma Uni, Ahmedabad",SFI,Mechanical Engg.,TF,Home State,158,125,158,125
+865,"Nirma Uni, Ahmedabad",SFI,Chemical Engg.,EW,Home State,63,7583,63,7583
+866,"Nirma Uni, Ahmedabad",SFI,Chemical Engg.,OP,Home State,115,1218,99.5,2161
+867,"Nirma Uni, Ahmedabad",SFI,Chemical Engg.,SC,Home State,79.5,4261,79.5,4261
+868,"Nirma Uni, Ahmedabad",SFI,Chemical Engg.,SE,Home State,98.5,2239,70.5,5839
+869,"Nirma Uni, Ahmedabad",SFI,Chemical Engg.,TF,Home State,180.5,6,180.5,6
+870,"Nirma Uni, Ahmedabad",SFI,Computer Science & Engg,EW,Home State,165.5,52,162,81
+871,"Nirma Uni, Ahmedabad",SFI,Computer Science & Engg,EX,Home State,71,5775,71,5775
+872,"Nirma Uni, Ahmedabad",SFI,Computer Science & Engg,OP,Home State,183.5,4,166.5,48
+873,"Nirma Uni, Ahmedabad",SFI,Computer Science & Engg,OPPH,Home State,125.5,805,125.5,805
+874,"Nirma Uni, Ahmedabad",SFI,Computer Science & Engg,SC,Home State,155.5,160,127,759
+875,"Nirma Uni, Ahmedabad",SFI,Computer Science & Engg,SE,Home State,156,156,141.5,372
+876,"Nirma Uni, Ahmedabad",SFI,Computer Science & Engg,ST,Home State,60.5,8229,48,11819
+877,"Nirma Uni, Ahmedabad",SFI,Computer Science & Engg,TF,Home State,186,2,186,2
+878,"Nirma Uni, Ahmedabad",SFI,EC Engg.,EW,Home State,84,3657,83,3754
+879,"Nirma Uni, Ahmedabad",SFI,EC Engg.,OP,Home State,148,264,93.5,2631
+880,"Nirma Uni, Ahmedabad",SFI,EC Engg.,SC,Home State,82,3895,73,5342
+881,"Nirma Uni, Ahmedabad",SFI,EC Engg.,SE,Home State,75.5,4908,75.5,4908
+882,"Nirma Uni, Ahmedabad",SFI,EC Engg.,TF,Home State,162.5,78,162.5,78
+883,"Nirma Uni, Ahmedabad",SFI,Electronics & Instru. Engg.,OP,Home State,98.5,2215,58,8929
+884,"Noble, Junagadh",SFI,Civil Engg.,OP,Home State,73.5,5299,38.5,14471
+885,"Noble, Junagadh",SFI,Mechanical Engg.,OP,Home State,70,5915,70,5915
+886,"NSIT, Jetalpur",SFI,Computer Science & Engg,OP,Home State,70.5,5821,67.5,6474
+887,"OMEC, Junagadh",SFI,Computer Engg.,OP,Home State,82.5,3872,58,8964
+888,"OMEC, Junagadh",SFI,Computer Engg.,TF,Home State,112.5,1315,112.5,1315
+889,"OMEC, Junagadh",SFI,Electrical Engg.,TF,Home State,129.5,690,129.5,690
+890,"OMEC, Junagadh",SFI,Mechanical Engg.,OP,Home State,57.5,9151,39.5,14263
+891,"OMEC, Junagadh",SFI,Chemical Engg.,OP,Home State,146,288,49.5,11426
+892,"Pacific, Surat",SFI,Computer Engg.,EW,Home State,69.5,6072,69.5,6072
+893,"Pacific, Surat",SFI,Computer Engg.,OP,Home State,95,2480,76.5,4749
+894,"Pacific, Surat",SFI,Computer Engg.,SC,Home State,50,11195,50,11195
+895,"Pacific, Surat",SFI,Computer Engg.,SE,Home State,71.5,5630,71.5,5630
+896,"Pacific, Surat",SFI,Electrical Engg.,OP,Home State,74,5216,52.5,10436
+897,"Pacific, Surat",SFI,Mechanical Engg.,OP,Home State,78.5,4409,60,8493
+898,"Pacific, Surat",SFI,Chemical Engg.,OP,Home State,79.5,4297,39,14406
+899,"Pacific, Surat",SFI,Chemical Engg.,TF,Home State,95,2481,95,2481
+900,"ParekhEnggCol., Mahuva",SFI,Computer Engg.,OP,Home State,38,14586,38,14586
+901,"PDEU, Raisan",SFI,Civil Engg.,OP,Home State,127,755,32.5,15753
+902,"PDEU, Raisan",SFI,Civil Engg.,TF,Home State,148.5,253,148.5,253
+903,"PDEU, Raisan",SFI,Computer Engg.,EW,Home State,148.5,258,138,446
+904,"PDEU, Raisan",SFI,Computer Engg.,OP,Home State,168.5,40,149,247
+905,"PDEU, Raisan",SFI,Computer Engg.,SC,Home State,116,1173,113,1286
+906,"PDEU, Raisan",SFI,Computer Engg.,SE,Home State,139,431,121.5,931
+907,"PDEU, Raisan",SFI,Computer Engg.,TF,Home State,183.5,3,183.5,3
+908,"PDEU, Raisan",SFI,Electrical Engg.,OP,Home State,100.5,2068,30.5,15934
+909,"PDEU, Raisan",SFI,Electrical Engg.,TF,Home State,128.5,707,128.5,707
+910,"PDEU, Raisan",SFI,Mechanical Engg.,EW,Home State,76.5,4737,76.5,4737
+911,"PDEU, Raisan",SFI,Mechanical Engg.,OP,Home State,138,448,80.5,4088
+912,"PDEU, Raisan",SFI,Mechanical Engg.,SC,Home State,67,6641,67,6641
+913,"PDEU, Raisan",SFI,Mechanical Engg.,SE,Home State,76.5,4759,35.5,15102
+914,"PDEU, Raisan",SFI,Mechanical Engg.,TF,Home State,149,249,149,249
+915,"PDEU, Raisan",SFI,Chemical Engg.,OP,Home State,117.5,1103,17.5,17028
+916,"PDEU, Raisan",SFI,Chemical Engg.,TF,Home State,126.5,765,126.5,765
+917,"PDEU, Raisan",SFI,EC Engg.,OP,Home State,93,2684,51.5,10845
+918,"PDEU, Raisan",SFI,EC Engg.,TF,Home State,145,312,145,312
+919,"PDEU, Raisan",SFI,Information & Communication Tech.,EW,Home State,126,784,121.5,926
+920,"PDEU, Raisan",SFI,Information & Communication Tech.,OP,Home State,148,270,126,779
+921,"PDEU, Raisan",SFI,Information & Communication Tech.,SC,Home State,107.5,1588,107.5,1588
+922,"PDEU, Raisan",SFI,Information & Communication Tech.,SE,Home State,121,963,66.5,6737
+923,"PDEU, Raisan",SFI,Information & Communication Tech.,TF,Home State,156,154,156,154
+924,"PDEU, Raisan",SFI,Petroleum Engg.,OP,Home State,111.5,1345,48,11804
+925,"PIET, Waghodia",SFI,Civil Engg.,OP,Home State,66.5,6729,40,14139
+926,"PIET, Waghodia",SFI,Civil Engg.,TF,Home State,97.5,2304,97.5,2304
+927,"PIET, Waghodia",SFI,Electrical Engg.,OP,Home State,59,8696,43,13248
+928,"PIET, Waghodia",SFI,Information Tech.,OP,Home State,105.5,1702,35,15202
+929,"PIET, Waghodia",SFI,Information Tech.,TF,Home State,127,764,110.5,1398
+930,"PIET, Waghodia",SFI,Mechanical Engg.,OP,Home State,58.5,8825,49.5,11514
+931,"PIET, Waghodia",SFI,Mechanical Engg.,TF,Home State,86,3422,86,3422
+932,"PIET, Waghodia",SFI,Aeronautical Engg.,TF,Home State,68,6396,68,6396
+933,"PIET, Waghodia",SFI,Computer Science & Engg,OP,Home State,106.5,1653,35.5,15132
+934,"PIET, Waghodia",SFI,Computer Science & Engg,TF,Home State,141.5,376,119,1037
+935,"PIET, Waghodia",SFI,CSE (Big Data & Analysis),OP,Home State,53.5,10226,53.5,10226
+936,"PIET, Waghodia",SFI,CSE (Cyber Security),OP,Home State,73,5391,67.5,6461
+937,"PIET, Waghodia",SFI,CSE (Cyber Security),TF,Home State,109.5,1465,102.5,1890
+938,"PIET, Waghodia",SFI,EC Engg.,OP,Home State,42,13639,42,13639
+939,"PIET, Waghodia",SFI,CSE (Artificial Intelligence),OP,Home State,136.5,492,45,12836
+940,"PIET, Waghodia",SFI,Mechanical Engineering (Separate Division),TF,Home State,90.5,2920,69.5,6047
+941,"PIET, Waghodia",SFI,Electrical Engineering (Separate Division),TF,Home State,90,2941,90,2941
+942,"PIET, Waghodia",SFI,"Electronics & Communication Engineering (Separate 
+Division)",TF,Home State,57,9326,37.5,14643
+943,"PIET, Waghodia",SFI,CSE (Separate Division),TF,Home State,116.5,1145,88,3187
+944,"PIT, Waghodia",SFI,Computer Engg.,OP,Home State,101.5,1979,31,15873
+945,"PIT, Waghodia",SFI,Chemical Engg.,OP,Home State,83,3805,15,17131
+946,"PIT, Waghodia",SFI,Chemical Engg.,TF,Home State,124,844,124,844
+947,"PIT, Waghodia",SFI,Mechatronics,TF,Home State,93,2678,93,2678
+948,"PIT, Waghodia",SFI,Computer Science & Engg,OP,Home State,62.5,7768,62.5,7768
+949,"PIT, Waghodia",SFI,Computer Science & Engg,TF,Home State,122.5,898,110.5,1419
+950,"PIT, Waghodia",SFI,CSE (Cyber Security),TF,Home State,107.5,1593,107.5,1593
+951,"PIT, Waghodia",SFI,CSE (Artificial Intelligence),OP,Home State,76.5,4731,69.5,6082
+952,"PIT, Waghodia",SFI,CSE (Artificial Intelligence),TF,Home State,134.5,548,134.5,548
+953,"PIT, Waghodia",SFI,Chemical Engineering (Separate Division),OP,Home State,48,11800,48,11800
+954,"PIT, Waghodia",SFI,Chemical Engineering (Separate Division),TF,Home State,88,3158,88,3158
+955,"PNVYAS Tech., SurendranagarSFI",,Civil Engg.,TF,Home State,35.5,15098,35.5,15098
+956,"PNVYAS Tech., SurendranagarSFI",,Mechanical Engg.,OP,Home State,22.5,16761,22.5,16761
+957,"PNVYAS Tech., SurendranagarSFI",,Mechanical Engg.,TF,Home State,79,4325,79,4325
+958,"PPSSE, PPS Uni., Kosamba",SFI,Civil Engg.,OP,Home State,76.5,4770,53.5,10215
+959,"PPSSE, PPS Uni., Kosamba",SFI,Computer Engg.,OP,Home State,91.5,2823,44,13055
+960,"PPSSE, PPS Uni., Kosamba",SFI,Computer Engg.,SC,Home State,42.5,13451,42.5,13451
+961,"PPSSE, PPS Uni., Kosamba",SFI,Computer Engg.,TF,Home State,134.5,552,134.5,552
+962,"PPSSE, PPS Uni., Kosamba",SFI,Information Tech.,EW,Home State,74,5240,74,5240
+963,"PPSSE, PPS Uni., Kosamba",SFI,Information Tech.,OP,Home State,102,1954,75,5006
+964,"PPSSE, PPS Uni., Kosamba",SFI,Information Tech.,SE,Home State,61.5,8016,61.5,8016
+965,"PPSSE, PPS Uni., Kosamba",SFI,Mechanical Engg.,OP,Home State,45,12691,45,12691
+966,"PPSSE, PPS Uni., Kosamba",SFI,Mechanical Engg.,TF,Home State,54,10080,54,10080
+967,"PPSSE, PPS Uni., Kosamba",SFI,Chemical Engg.,OP,Home State,48.5,11675,22.5,16786
+968,"PPSSE, PPS Uni., Kosamba",SFI,Chemical Engg.,TF,Home State,89.5,3048,89.5,3048
+969,"PPSSE, PPS Uni., Kosamba",SFI,Computer Science & Engg,OP,Home State,139.5,427,65.5,6954
+970,"PPSSE, PPS Uni., Kosamba",SFI,Computer Science & Engg,SC,Home State,56.5,9441,56.5,9441
+971,"PPSSE, PPS Uni., Kosamba",SFI,Computer Science & Engg,SE,Home State,50,11285,50,11285
+972,"PPSSE, PPS Uni., Kosamba",SFI,CSE (Cyber Security),OP,Home State,52,10729,52,10729
+973,"PPSSE, PPS Uni., Kosamba",SFI,IT & Engg.,OP,Home State,64.5,7202,37,14873
+974,"PPSSE, PPS Uni., Kosamba",SFI,Computer Engg. (ML & AI),OP,Home State,78,4484,55.5,9689
+975,"PrimeIET, Navsari",SFI,Computer Engg.,OP,Home State,65,7150,40.5,13983
+976,"PrimeIET, Navsari",SFI,Computer Engg.,TF,Home State,93,2654,93,2654
+977,"PrimeIET, Navsari",SFI,Chemical Engg.,OP,Home State,107,1630,37.5,14702
+978,"RK Uni., Rajkot",SFI,Computer Engg.,OP,Home State,94.5,2548,32,15796
+979,"RK Uni., Rajkot",SFI,Computer Engg.,TF,Home State,125.5,797,125.5,797
+980,"RK Uni., Rajkot",SFI,Information Tech.,OP,Home State,89.5,3040,50.5,11042
+981,"RNGPIT, Isroli",SFI,Civil Engg.,TF,Home State,69,6202,69,6202
+982,"RNGPIT, Isroli",SFI,Electrical Engg.,OP,Home State,72.5,5426,33,15562
+983,"RNGPIT, Isroli",SFI,Electrical Engg.,TF,Home State,114,1252,114,1252
+984,"RNGPIT, Isroli",SFI,Information Tech.,OP,Home State,84.5,3568,41,13847
+985,"RNGPIT, Isroli",SFI,Information Tech.,TF,Home State,128.5,702,128.5,702
+986,"RNGPIT, Isroli",SFI,Mechanical Engg.,OP,Home State,76.5,4730,43,13207
+987,"RNGPIT, Isroli",SFI,Chemical Engg.,OP,Home State,77.5,4561,42,13638
+988,"RNGPIT, Isroli",SFI,Computer Science & Engg,EW,Home State,64,7328,30,16099
+989,"RNGPIT, Isroli",SFI,Computer Science & Engg,OP,Home State,105.5,1705,66.5,6686
+990,"RNGPIT, Isroli",SFI,Computer Science & Engg,SC,Home State,47.5,12049,47.5,12049
+991,"RNGPIT, Isroli",SFI,Computer Science & Engg,SE,Home State,55,9713,32.5,15754
+992,"RNGPIT, Isroli",SFI,Computer Science & Engg,ST,Home State,52.5,10518,52.5,10518
+993,"SALCE, Ahmedabad",SFI,Computer Engg.,EW,Home State,57.5,9083,27,16416
+994,"SALCE, Ahmedabad",SFI,Computer Engg.,OP,Home State,129.5,686,60,8402
+995,"SALCE, Ahmedabad",SFI,Computer Engg.,SC,Home State,58.5,8758,58.5,8758
+996,"SALCE, Ahmedabad",SFI,Computer Engg.,SE,Home State,59,8702,46,12442
+997,"SALCE, Ahmedabad",SFI,Information Tech.,EW,Home State,41.5,13719,26,16471
+998,"SALCE, Ahmedabad",SFI,Information Tech.,OP,Home State,121,953,53,10292
+999,"SALCE, Ahmedabad",SFI,Information Tech.,SE,Home State,52,10753,39.5,14337
+1000,"SALCE, Ahmedabad",SFI,Chemical Engg.,OP,Home State,98,2255,70,6020
+1001,"SALCE, Ahmedabad",SFI,Mechatronics,OP,Home State,65,7096,48,11812
+1002,"SALCE, Ahmedabad",SFI,Mechatronics,TF,Home State,64.5,7188,64.5,7188
+1003,"SALCE, Ahmedabad",SFI,CSE (Data Science),OP,Home State,84.5,3610,7.5,17213
+1004,"SALCE, Ahmedabad",SFI,CSE (Data Science),TF,Home State,130,665,130,665
+1005,"SalETI, Ahmedabad",SFI,Computer Engg.,EW,Home State,59,8698,43,13168
+1006,"SalETI, Ahmedabad",SFI,Computer Engg.,OP,Home State,123,887,60.5,8222
+1007,"SalETI, Ahmedabad",SFI,Computer Engg.,SC,Home State,58,8978,40,14068
+1008,"SalETI, Ahmedabad",SFI,Computer Engg.,SE,Home State,69,6199,37.5,14719
+1009,"SalETI, Ahmedabad",SFI,Computer Engg.,ST,Home State,57.5,9035,57.5,9035
+1010,"SalETI, Ahmedabad",SFI,Information Tech.,EW,Home State,45,12633,45,12633
+1011,"SalETI, Ahmedabad",SFI,Information Tech.,OP,Home State,110.5,1424,73.5,5318
+1012,"SalETI, Ahmedabad",SFI,Information Tech.,SE,Home State,64.5,7204,63.5,7411
+1013,"SalETI, Ahmedabad",SFI,Information Tech.,TF,Home State,132.5,602,132.5,602
+1014,"SalETI, Ahmedabad",SFI,Computer Science & Engg,EW,Home State,51,10890,51,10890
+1015,"SalETI, Ahmedabad",SFI,Computer Science & Engg,OP,Home State,115,1220,60,8300
+1016,"SalETI, Ahmedabad",SFI,Computer Science & Engg,TF,Home State,128,717,128,717
+1017,"SalETI, Ahmedabad",SFI,Information & Communication Tech.,OP,Home State,27,16411,27,16411
+1018,"SALITER, Ahmedabad",SFI,Civil Engg.,OP,Home State,91,2867,25,16536
+1019,"SALITER, Ahmedabad",SFI,Civil Engg.,TF,Home State,99,2175,99,2175
+1020,"SALITER, Ahmedabad",SFI,Computer Engg.,EW,Home State,100,2126,88,3186
+1021,"SALITER, Ahmedabad",SFI,Computer Engg.,OP,Home State,141.5,374,101,2019
+1022,"SALITER, Ahmedabad",SFI,Computer Engg.,SC,Home State,75.5,4854,67.5,6569
+1023,"SALITER, Ahmedabad",SFI,Computer Engg.,SE,Home State,98.5,2240,68,6367
+1024,"SALITER, Ahmedabad",SFI,Electrical Engg.,OP,Home State,92,2753,41,13837
+1025,"SALITER, Ahmedabad",SFI,Electrical Engg.,TF,Home State,103,1844,103,1844
+1026,"SALITER, Ahmedabad",SFI,Mechanical Engg.,OP,Home State,67.5,6517,49.5,11527
+1027,"SALITER, Ahmedabad",SFI,Automobile Engg.,OP,Home State,72,5603,65.5,6908
+1028,"SALITER, Ahmedabad",SFI,Computer Science & Engg,EW,Home State,73,5404,63,7620
+1029,"SALITER, Ahmedabad",SFI,Computer Science & Engg,OP,Home State,135.5,531,78,4523
+1030,"SALITER, Ahmedabad",SFI,Computer Science & Engg,SE,Home State,61,8096,59.5,8640
+1031,"SALITER, Ahmedabad",SFI,Computer Science & Engg,TF,Home State,137.5,468,137.5,468
+1032,"SALITER, Ahmedabad",SFI,Information & Communication Tech.,OP,Home State,51.5,10877,51.5,10877
+1033,"SALITER, Ahmedabad",SFI,CSE (AI And Machine Learning),OP,Home State,108,1561,71,5781
+1034,"Satsangi, Vadasma",SFI,Electrical Engg.,OP,Home State,52.5,10412,52.5,10412
+1035,"Satsangi, Vadasma",SFI,Electrical Engg.,TF,Home State,67.5,6500,67.5,6500
+1036,"SCET, Kalol",SFI,Computer Engg.,TF,Home State,114,1258,114,1258
+1037,"SCET, Kalol",SFI,Electrical Engg.,OP,Home State,73,5331,42.5,13426
+1038,"SCET, Kalol",SFI,Information Tech.,OP,Home State,53.5,10244,53.5,10244
+1039,"SCET, Kalol",SFI,Information Tech.,TF,Home State,88.5,3124,88.5,3124
+1040,"SCET, Surat",SFI,Civil Engg.,OP,Home State,83,3781,42.5,13359
+1041,"SCET, Surat",SFI,Computer Engg.,EW,Home State,132,616,120.5,975
+1042,"SCET, Surat",SFI,Computer Engg.,OP,Home State,144,326,133.5,578
+1043,"SCET, Surat",SFI,Computer Engg.,OPPH,Home State,66.5,6704,66.5,6704
+1044,"SCET, Surat",SFI,Computer Engg.,SC,Home State,104,1791,104,1791
+1045,"SCET, Surat",SFI,Computer Engg.,SE,Home State,102.5,1909,94,2573
+1046,"SCET, Surat",SFI,Computer Engg.,ST,Home State,61,8137,61,8137
+1047,"SCET, Surat",SFI,Computer Engg.,TF,Home State,149.5,236,149.5,236
+1048,"SCET, Surat",SFI,Electrical Engg.,OP,Home State,89.5,3041,36,15015
+1049,"SCET, Surat",SFI,Information Tech.,EW,Home State,117.5,1117,117.5,1117
+1050,"SCET, Surat",SFI,Information Tech.,OP,Home State,136,505,119.5,1028
+1051,"SCET, Surat",SFI,Information Tech.,SC,Home State,103,1848,103,1848
+1052,"SCET, Surat",SFI,Information Tech.,SE,Home State,100,2098,83,3755
+1053,"SCET, Surat",SFI,Information Tech.,ST,Home State,49.5,11447,42.5,13544
+1054,"SCET, Surat",SFI,Mechanical Engg.,OP,Home State,62,7926,25,16604
+1055,"SCET, Surat",SFI,Mechanical Engg.,TF,Home State,99,2192,99,2192
+1056,"SCET, Surat",SFI,Chemical Engg.,OP,Home State,92.5,2707,38,14509
+1057,"SCET, Surat",SFI,Chemical Engg.,TF,Home State,85,3562,85,3562
+1058,"SCET, Surat",SFI,EC Engg.,OP,Home State,69.5,6101,50.5,11019
+1059,"SCET, Surat",SFI,Instrumentation & Control Engg.,OP,Home State,62,7847,44.5,12859
+1060,"SCET, Surat",SFI,Artificial Intelligence And Data Science,EW,Home State,106,1673,106,1673
+1061,"SCET, Surat",SFI,Artificial Intelligence And Data Science,OP,Home State,157.5,129,109,1501
+1062,"SCET, Surat",SFI,Artificial Intelligence And Data Science,SE,Home State,132,611,107.5,1604
+1063,"Shroff, Bharuch",SFI,Computer Engg.,OP,Home State,33,15553,33,15553
+1064,"Shroff, Bharuch",SFI,Computer Engg.,TF,Home State,131,624,131,624
+1065,"Shroff, Bharuch",SFI,Electrical Engg.,OP,Home State,77.5,4599,50,11338
+1066,"Shroff, Bharuch",SFI,Mechanical Engg.,OP,Home State,86,3384,86,3384
+1067,"Shroff, Bharuch",SFI,Chemical Engg.,OP,Home State,115.5,1190,17,17082
+1068,"Shroff, Bharuch",SFI,Environmental Science & Tech.,OP,Home State,67.5,6467,52.5,10510
+1069,"Shroff, Bharuch",SFI,Chemical Engineering (Separate Division),OP,Home State,104,1792,40,14095
+1070,"Shroff, Bharuch",SFI,Chemical Engineering (Separate Division),TF,Home State,83,3761,81.5,3968
+1071,"Sigma Uni. Bakrol, Vadodara",SFI,Computer Science & Engg,OP,Home State,93,2656,39,14402
+1072,"Sigma Uni. Bakrol, Vadodara",SFI,Artificial Intelligence And Data Science,OP,Home State,52,10754,52,10754
+1073,"Sigma Uni. Bakrol, Vadodara",SFI,Artificial Intelligence And Data Science,TF,Home State,135,544,135,544
+1074,"Sigma Uni. Bakrol, Vadodara",SFI,Cyber Security,OP,Home State,52.5,10640,52.5,10640
+1075,"Sigma, Bakrol",SFI,Civil Engg.,OP,Home State,67.5,6473,32.5,15642
+1076,"Sigma, Bakrol",SFI,Computer Engg.,OP,Home State,80,4228,47.5,12138
+1077,"Sigma, Bakrol",SFI,Computer Engg.,TF,Home State,128.5,701,128.5,701
+1078,"Sigma, Bakrol",SFI,Electrical Engg.,OP,Home State,71,5753,27.5,16293
+1079,"Sigma, Bakrol",SFI,Information Tech.,OP,Home State,37.5,14664,37.5,14664
+1080,"Sigma, Bakrol",SFI,Mechanical Engg.,OP,Home State,76.5,4766,76.5,4766
+1081,"Sigma, Bakrol",SFI,Chemical Engg.,OP,Home State,54.5,9995,32,15781
+1082,"Sigma, Bakrol",SFI,Chemical Engg.,TF,Home State,82.5,3821,82.5,3821
+1083,"Silver Oak, Ahmedabad",SFI,Civil Engg.,TF,Home State,90,2947,90,2947
+1084,"Silver Oak, Ahmedabad",SFI,Computer Engg.,OP,Home State,87.5,3238,41,13845
+1085,"Silver Oak, Ahmedabad",SFI,Computer Engg.,TF,Home State,136.5,499,128.5,699
+1086,"Silver Oak, Ahmedabad",SFI,Information Tech.,OP,Home State,88,3167,34,15416
+1087,"Silver Oak, Ahmedabad",SFI,Information Tech.,TF,Home State,131,632,124,842
+1088,"Silver Oak, Ahmedabad",SFI,Mechanical Engg.,OP,Home State,60.5,8251,46.5,12254
+1089,"Silver Oak, Ahmedabad",SFI,Mechanical Engg.,TF,Home State,50,11141,50,11141
+1090,"Silver Oak, Ahmedabad",SFI,Computer Science & Engg,OP,Home State,83.5,3713,83.5,3713
+1091,"Silver Oak, Ahmedabad",SFI,CSE (Cyber Security),OP,Home State,101.5,1984,101.5,1984
+1092,"Silver Oak, Ahmedabad",SFI,Computer Engg. (AI And Machine Learning),OP,Home State,56,9521,56,9521
+1093,"Silver Oak, Ahmedabad",SFI,Computer Engg. (AI And Machine Learning),TF,Home State,128,722,128,722
+1094,"Silver Oak, Ahmedabad",SFI,CSE (Separate Division),OP,Home State,56,9567,56,9567
+1095,"Silver Oak, Ahmedabad",SFI,CSE (Separate Division),TF,Home State,125,823,109,1482
+1096,"SKPCE, Visnagar",SFI,Civil Engg.,OP,Home State,33.5,15467,15,17132
+1097,"SKPCE, Visnagar",SFI,Civil Engg.,TF,Home State,104,1783,104,1783
+1098,"SKPCE, Visnagar",SFI,Computer Engg.,OP,Home State,86,3413,20,16959
+1099,"SKPCE, Visnagar",SFI,Electrical Engg.,OP,Home State,47.5,11985,19,16981
+1100,"SKPCE, Visnagar",SFI,Information Tech.,OP,Home State,88.5,3097,22.5,16764
+1101,"SKPCE, Visnagar",SFI,Information Tech.,TF,Home State,102.5,1896,102.5,1896
+1102,"SKPCE, Visnagar",SFI,Mechanical Engg.,OP,Home State,70.5,5796,27.5,16299
+1103,"SKPCE, Visnagar",SFI,Artificial Intelligence And Data Science,OP,Home State,67.5,6492,59,8661
+1104,"SPCE, Bakrol",SFI,Civil Engg.,OP,Home State,40.5,13880,40.5,13880
+1105,"SPCE, Bakrol",SFI,Computer Engg.,OP,Home State,116.5,1143,45.5,12584
+1106,"SPCE, Bakrol",SFI,Electrical Engg.,OP,Home State,55,9848,30.5,15954
+1107,"SPCE, Bakrol",SFI,Information Tech.,OP,Home State,107,1627,41,13794
+1108,"SPCE, Bakrol",SFI,Computer Science & Engg,OP,Home State,100,2087,59.5,8576
+1109,"SPCE, Bakrol",SFI,Computer Science & Engg,TF,Home State,132,614,132,614
+1110,"SPEC, Linch",SFI,Computer Engg.,OP,Home State,81,4040,52.5,10561
+1111,"SPEC, Linch",SFI,Computer Engg.,TF,Home State,99.5,2155,99.5,2155
+1112,"SRCE, Rajkot",SFI,Computer Science & Engg,TF,Home State,98,2268,98,2268
+1113,"SRPATEL, Dabhi",SFI,Civil Engg.,OP,Home State,47.5,11893,47.5,11893
+1114,"SRPATEL, Dabhi",SFI,Computer Engg.,OP,Home State,95,2497,21,16877
+1115,"SSASIT, Surat",SFI,Civil Engg.,OP,Home State,57,9351,22.5,16737
+1116,"SSASIT, Surat",SFI,Computer Engg.,EW,Home State,104,1809,104,1809
+1117,"SSASIT, Surat",SFI,Computer Engg.,OP,Home State,130.5,647,106,1677
+1118,"SSASIT, Surat",SFI,Computer Engg.,SC,Home State,57.5,9202,57.5,9202
+1119,"SSASIT, Surat",SFI,Computer Engg.,SE,Home State,87.5,3244,80.5,4125
+1120,"SSASIT, Surat",SFI,Computer Engg.,TF,Home State,154,172,154,172
+1121,"SSASIT, Surat",SFI,Electrical Engg.,OP,Home State,21,16879,21,16879
+1122,"SSASIT, Surat",SFI,Information Tech.,EW,Home State,96.5,2362,96.5,2362
+1123,"SSASIT, Surat",SFI,Information Tech.,OP,Home State,121,967,97,2327
+1124,"SSASIT, Surat",SFI,Information Tech.,SE,Home State,78.5,4429,66,6794
+1125,"SSASIT, Surat",SFI,Information Tech.,TF,Home State,160,105,160,105
+1126,"SSEC, Bhavnagar",GOV,Civil Engg.,OP,Home State,75.5,4860,36.5,14969
+1127,"SSEC, Bhavnagar",GOV,Electrical Engg.,OP,Home State,101.5,1969,21,16863
+1128,"SSEC, Bhavnagar",GOV,Electrical Engg.,TF,Home State,109.5,1472,109.5,1472
+1129,"SSEC, Bhavnagar",GOV,Information Tech.,EW,Home State,112,1331,108.5,1535
+1130,"SSEC, Bhavnagar",GOV,Information Tech.,OP,Home State,172,23,112.5,1304
+1131,"SSEC, Bhavnagar",GOV,Information Tech.,SC,Home State,81,4067,81,4067
+1132,"SSEC, Bhavnagar",GOV,Information Tech.,SE,Home State,112,1325,107,1624
+1133,"SSEC, Bhavnagar",GOV,Mechanical Engg.,OP,Home State,64,7274,53.5,10159
+1134,"SSEC, Bhavnagar",GOV,Civil Engg.,OP,All India,91.5,2847,91.5,2847
+1135,"SSEC, Bhavnagar",GOV,Information Tech.,OP,All India,60,8324,60,8324
+1136,"SSIT, Bhat",SFI,Civil Engg.,OP,Home State,65.5,6981,65.5,6981
+1137,"SSIT, Bhat",SFI,Computer Engg.,OP,Home State,124,858,39,14385
+1138,"SSIT, Bhat",SFI,Information Tech.,OP,Home State,118,1090,41.5,13746
+1139,"SSIT, Bhat",SFI,Information Tech.,TF,Home State,121,959,121,959
+1140,"SSIT, Bhat",SFI,Computer Science & Engg,OP,Home State,117,1122,56,9512
+1141,"SSIT, Bhat",SFI,Computer Science & Engg,TF,Home State,125.5,799,125.5,799
+1142,"SSNPITR, Umrakh",SFI,Civil Engg.,OP,Home State,67.5,6484,25,16585
+1143,"SSNPITR, Umrakh",SFI,Electrical Engg.,OP,Home State,86.5,3357,25.5,16498
+1144,"SSNPITR, Umrakh",SFI,Information Tech.,OP,Home State,85,3507,42,13618
+1145,"SSNPITR, Umrakh",SFI,Information Tech.,TF,Home State,91.5,2803,91.5,2803
+1146,"SSNPITR, Umrakh",SFI,Mechanical Engg.,OP,Home State,65,7037,27.5,16345
+1147,"SSNPITR, Umrakh",SFI,Mechanical Engg.,TF,Home State,87,3277,87,3277
+1148,"SSNPITR, Umrakh",SFI,Chemical Engg.,OP,Home State,101,2009,30.5,15983
+1149,"SSNPITR, Umrakh",SFI,Computer Science & Engg,OP,Home State,92,2797,23,16712
+1150,"SSNPITR, Umrakh",SFI,Computer Science & Engg,TF,Home State,96.5,2377,96.5,2377
+1151,"Subhash, Junagadh",SFI,Electrical Engg.,OP,Home State,46.5,12266,46.5,12266
+1152,"Subhash, Junagadh",SFI,Mechanical Engg.,TF,Home State,85,3522,85,3522
+1153,"Subhash, Junagadh",SFI,Computer Science & Engg,OP,Home State,61,8065,61,8065
+1154,"Subhash, Junagadh",SFI,Computer Science & Engg,TF,Home State,103.5,1829,103.5,1829
+1155,"SVBIT, Unava",SFI,Civil Engg.,OP,Home State,87,3276,33.5,15517
+1156,"SVBIT, Unava",SFI,Computer Engg.,OP,Home State,109.5,1467,27.5,16366
+1157,"SVBIT, Unava",SFI,Computer Engg.,TF,Home State,119.5,1024,119.5,1024
+1158,"SVBIT, Unava",SFI,Electrical Engg.,OP,Home State,72,5547,56.5,9365
+1159,"SVBIT, Unava",SFI,Information Tech.,OP,Home State,59.5,8617,59.5,8617
+1160,"SVMIT, Bharuch",SFI,Electrical Engg.,OP,Home State,78,4449,32.5,15722
+1161,"SVMIT, Bharuch",SFI,Information Tech.,OP,Home State,91.5,2817,68,6340
+1162,"SVMIT, Bharuch",SFI,Information Tech.,TF,Home State,123.5,865,123.5,865
+1163,"SVMIT, Bharuch",SFI,Mechanical Engg.,OP,Home State,19,16988,19,16988
+1164,"SVMIT, Bharuch",SFI,Chemical Engg.,OP,Home State,100,2090,14,17153
+1165,"SVMIT, Bharuch",SFI,Computer Science & Engg,OP,Home State,103.5,1828,25,16631
+1166,"SVIT, Vasad",SFI,Civil Engg.,OP,Home State,57,9301,27.5,16382
+1167,"SVIT, Vasad",SFI,Computer Engg.,EW,Home State,118.5,1069,116,1182
+1168,"SVIT, Vasad",SFI,Computer Engg.,OP,Home State,163,71,121.5,946
+1169,"SVIT, Vasad",SFI,Computer Engg.,SC,Home State,99,2205,99,2205
+1170,"SVIT, Vasad",SFI,Computer Engg.,SE,Home State,105,1739,89.5,3014
+1171,"SVIT, Vasad",SFI,Electrical Engg.,OP,Home State,101.5,1982,49,11580
+1172,"SVIT, Vasad",SFI,Information Tech.,EW,Home State,93,2687,91.5,2824
+1173,"SVIT, Vasad",SFI,Information Tech.,OP,Home State,125.5,803,101.5,1972
+1174,"SVIT, Vasad",SFI,Information Tech.,SC,Home State,108,1553,108,1553
+1175,"SVIT, Vasad",SFI,Information Tech.,SE,Home State,83.5,3694,76.5,4761
+1176,"SVIT, Vasad",SFI,Information Tech.,ST,Home State,52.5,10641,52.5,10641
+1177,"SVIT, Vasad",SFI,Information Tech.,TF,Home State,144,332,144,332
+1178,"SVIT, Vasad",SFI,Mechanical Engg.,OP,Home State,94,2596,38,14568
+1179,"SVIT, Vasad",SFI,Mechanical Engg.,TF,Home State,82,3927,82,3927
+1180,"SVIT, Vasad",SFI,Aeronautical Engg.,OP,Home State,53.5,10225,53.5,10225
+1181,"SVIT, Vasad",SFI,EC Engg.,TF,Home State,42.5,13332,42.5,13332
+1182,"SVIT, Vasad",SFI,CS & Design,EW,Home State,58.5,8840,58.5,8840
+1183,"SVIT, Vasad",SFI,CS & Design,OP,Home State,110.5,1404,90.5,2912
+1184,"SVIT, Vasad",SFI,CS & Design,SC,Home State,67.5,6564,67.5,6564
+1185,"SVIT, Vasad",SFI,CS & Design,SE,Home State,67,6626,54,10128
+1186,"SVIT, Vasad",SFI,CS & Design,TF,Home State,138.5,443,138.5,443
+1187,"Swarrnim, Bhoyan",SFI,Computer Engg.,OP,Home State,66,6865,53,10337
+1188,"Swarrnim, Bhoyan",SFI,Information Tech.,OP,Home State,41,13860,41,13860
+1189,"Swarrnim, Bhoyan",SFI,Automobile Engg.,TF,Home State,49.5,11533,49.5,11533
+1190,"Swarrnim, Bhoyan",SFI,Artificial Intelligence,OP,Home State,50.5,11022,50.5,11022
+1191,"Unitedworld, Uvarsad",SFI,Computer Science & Engg,OP,Home State,118.5,1057,89.5,2995
+1192,"Unitedworld, Uvarsad",SFI,Computer Science & Engg,SE,Home State,83,3752,83,3752
+1193,"Unitedworld, Uvarsad",SFI,Computer Science & Engg,TF,Home State,127,745,127,745
+1194,"Unitedworld, Uvarsad",SFI,CSE (AI And Machine Learning),OP,Home State,118,1080,73.5,5284
+1195,"Unitedworld, Uvarsad",SFI,CSE (AI And Machine Learning),SC,Home State,64.5,7261,64.5,7261
+1196,"Veerayatan,  Mandvi",SFI,Computer Engg.,OP,Home State,64,7325,64,7325
+1197,"Veerayatan,  Mandvi",SFI,Electrical Engg.,OP,Home State,54.5,10016,54,10065
+1198,"Veerayatan,  Mandvi",SFI,Mechanical Engg.,OP,Home State,54,10104,35,15186
+1199,"VGEC, Ahmedabad",GOV,Civil Engg.,EW,Home State,103,1852,101,2000
+1200,"VGEC, Ahmedabad",GOV,Civil Engg.,OP,Home State,121,958,105,1733
+1201,"VGEC, Ahmedabad",GOV,Civil Engg.,SC,Home State,88.5,3095,88.5,3095
+1202,"VGEC, Ahmedabad",GOV,Civil Engg.,SE,Home State,105,1748,103,1864
+1203,"VGEC, Ahmedabad",GOV,Civil Engg.,ST,Home State,65,6994,55,9768
+1204,"VGEC, Ahmedabad",GOV,Civil Engg.,TF,Home State,124.5,832,124.5,832
+1205,"VGEC, Ahmedabad",GOV,Computer Engg.,EW,Home State,157.5,133,157.5,133
+1206,"VGEC, Ahmedabad",GOV,Computer Engg.,EWPH,Home State,49.5,11434,49.5,11434
+1207,"VGEC, Ahmedabad",GOV,Computer Engg.,OP,Home State,165,56,158,126
+1208,"VGEC, Ahmedabad",GOV,Computer Engg.,SC,Home State,136,508,132.5,592
+1209,"VGEC, Ahmedabad",GOV,Computer Engg.,SE,Home State,157,143,151,215
+1210,"VGEC, Ahmedabad",GOV,Computer Engg.,ST,Home State,82,3945,59.5,8566
+1211,"VGEC, Ahmedabad",GOV,Computer Engg.,TF,Home State,171.5,27,171.5,27
+1212,"VGEC, Ahmedabad",GOV,Electrical Engg.,EW,Home State,113,1299,110.5,1396
+1213,"VGEC, Ahmedabad",GOV,Electrical Engg.,OP,Home State,133,583,118,1085
+1214,"VGEC, Ahmedabad",GOV,Electrical Engg.,SC,Home State,116,1175,105.5,1701
+1215,"VGEC, Ahmedabad",GOV,Electrical Engg.,SE,Home State,114,1257,95.5,2441
+1216,"VGEC, Ahmedabad",GOV,Electrical Engg.,ST,Home State,82,3944,72.5,5489
+1217,"VGEC, Ahmedabad",GOV,Electrical Engg.,TF,Home State,136,501,136,501
+1218,"VGEC, Ahmedabad",GOV,Information Tech.,EW,Home State,157,148,157,148
+1219,"VGEC, Ahmedabad",GOV,Information Tech.,OP,Home State,161,93,157.5,135
+1220,"VGEC, Ahmedabad",GOV,Information Tech.,SC,Home State,128.5,708,128.5,708
+1221,"VGEC, Ahmedabad",GOV,Information Tech.,SE,Home State,148,269,145.5,305
+1222,"VGEC, Ahmedabad",GOV,Information Tech.,ST,Home State,71,5746,64,7324
+1223,"VGEC, Ahmedabad",GOV,Information Tech.,TF,Home State,161.5,90,161.5,90
+1224,"VGEC, Ahmedabad",GOV,Mechanical Engg.,EW,Home State,111,1385,106.5,1656
+1225,"VGEC, Ahmedabad",GOV,Mechanical Engg.,OP,Home State,135.5,530,111,1381
+1226,"VGEC, Ahmedabad",GOV,Mechanical Engg.,SC,Home State,110.5,1397,100,2114
+1227,"VGEC, Ahmedabad",GOV,Mechanical Engg.,SE,Home State,110.5,1415,101.5,1978
+1228,"VGEC, Ahmedabad",GOV,Chemical Engg.,EW,Home State,95.5,2445,95.5,2445
+1229,"VGEC, Ahmedabad",GOV,Chemical Engg.,OP,Home State,120,1006,101,2023
+1230,"VGEC, Ahmedabad",GOV,Chemical Engg.,SC,Home State,82,3912,82,3912
+1231,"VGEC, Ahmedabad",GOV,Chemical Engg.,SE,Home State,100,2095,89.5,3027
+1232,"VGEC, Ahmedabad",GOV,CSE (Data Science),EW,Home State,152,198,150,228
+1233,"VGEC, Ahmedabad",GOV,CSE (Data Science),OP,Home State,157.5,137,152,195
+1234,"VGEC, Ahmedabad",GOV,CSE (Data Science),SC,Home State,136,511,136,511
+1235,"VGEC, Ahmedabad",GOV,CSE (Data Science),SE,Home State,147,280,141,390
+1236,"VGEC, Ahmedabad",GOV,CSE (Data Science),ST,Home State,90.5,2914,62.5,7708
+1237,"VGEC, Ahmedabad",GOV,Power Electronics,OP,Home State,71.5,5657,53,10308
+1238,"VGEC, Ahmedabad",GOV,Power Electronics,TF,Home State,67.5,6422,67.5,6422
+1239,"VGEC, Ahmedabad",GOV,EC Engg.,EW,Home State,80.5,4090,75.5,4866
+1240,"VGEC, Ahmedabad",GOV,EC Engg.,OP,Home State,128.5,704,89,3057
+1241,"VGEC, Ahmedabad",GOV,EC Engg.,SE,Home State,86.5,3328,60,8488
+1242,"VGEC, Ahmedabad",GOV,Information & Communication Tech.,EW,Home State,141.5,371,141.5,380
+1243,"VGEC, Ahmedabad",GOV,Information & Communication Tech.,OP,Home State,151.5,206,142,363
+1244,"VGEC, Ahmedabad",GOV,Information & Communication Tech.,SC,Home State,109.5,1460,109.5,1460
+1245,"VGEC, Ahmedabad",GOV,Information & Communication Tech.,SE,Home State,135.5,528,126.5,766
+1246,"VGEC, Ahmedabad",GOV,Information & Communication Tech.,ST,Home State,53.5,10199,53.5,10199
+1247,"VGEC, Ahmedabad",GOV,Instrumentation & Control Engg.,EW,Home State,51,10937,40.5,13967
+1248,"VGEC, Ahmedabad",GOV,Instrumentation & Control Engg.,OP,Home State,83.5,3734,57.5,9114
+1249,"VGEC, Ahmedabad",GOV,Instrumentation & Control Engg.,SC,Home State,50,11382,50,11382
+1250,"VGEC, Ahmedabad",GOV,Instrumentation & Control Engg.,SE,Home State,48,11773,30,16032
+1251,"VGEC, Ahmedabad",GOV,Electronics & Instru. Engg.,OP,Home State,70.5,5829,32.5,15749
+1252,"VGEC, Ahmedabad",GOV,Computer Engg.,OP,All India,106.5,1639,106.5,1639
+1253,"VGEC, Ahmedabad",GOV,Electrical Engg.,OP,All India,90.5,2901,90.5,2901
+1254,"VGEC, Ahmedabad",GOV,Chemical Engg.,OP,All India,150.5,220,150.5,220
+1255,"VGEC, Ahmedabad",GOV,Power Electronics,OP,All India,85.5,3436,46.5,12307
+1256,"VGEC, Ahmedabad",GOV,EC Engg.,OP,All India,115,1215,115,1215
+1257,"VGEC, Ahmedabad",GOV,Information & Communication Tech.,OP,All India,62.5,7808,62.5,7808
+1258,"Vidhyadeep, Kim",SFI,Civil Engg.,OP,Home State,75,4985,75,4985
+1259,"Vidhyadeep, Kim",SFI,Computer Engg.,OP,Home State,50,11173,45,12630
+1260,"Vidhyadeep, Kim",SFI,Computer Engg.,TF,Home State,97.5,2289,97.5,2289
+1261,"Vidhyadeep, Kim",SFI,Information Tech.,OP,Home State,65,7049,65,7049
+1262,"Vidhyadeep, Kim",SFI,Information Tech.,TF,Home State,120.5,973,120.5,973
+1263,"Vidhyadeep, Kim",SFI,Computer Engg. (Cloud Tech. & Info. Security),TF,Home State,65.5,6953,65.5,6953
+1264,"VIE, Kotambi",SFI,Civil Engg.,OP,Home State,47.5,11953,47.5,11953
+1265,"VIE, Kotambi",SFI,Computer Engg.,OP,Home State,90,2970,47,12210
+1266,"VIE, Kotambi",SFI,Electrical Engg.,OP,Home State,37.5,14771,33.5,15480
+1267,"VIE, Kotambi",SFI,Electrical Engg.,TF,Home State,50,11282,50,11282
+1268,"VIE, Kotambi",SFI,Information Tech.,OP,Home State,68,6417,68,6417
+1269,"VRGCET, Porbandar",SFI,Civil Engg.,OP,Home State,77,4710,77,4710
+1270,"VRGCET, Porbandar",SFI,Computer Engg.,OP,Home State,92.5,2721,51,10884
+1271,"VRGCET, Porbandar",SFI,Mechanical Engg.,OP,Home State,88.5,3136,30,16089
+1272,"VSITR, Kadi",SFI,Computer Engg.,OP,Home State,88,3170,35.5,15124
+1273,"VSITR, Kadi",SFI,Information Tech.,OP,Home State,65.5,6952,22.5,16774
+1274,"VSITR, Kadi",SFI,Information Tech.,TF,Home State,106.5,1649,106.5,1649
+1275,"VSITR, Kadi",SFI,Computer Science & Engg,OP,Home State,94,2572,94,2572
+1276,"VVP, Rajkot",SFI,Civil Engg.,OP,Home State,108,1566,57.5,9222
+1277,"VVP, Rajkot",SFI,Civil Engg.,TF,Home State,114,1263,114,1263
+1278,"VVP, Rajkot",SFI,Computer Engg.,EW,Home State,101.5,1959,99.5,2162
+1279,"VVP, Rajkot",SFI,Computer Engg.,EX,Home State,63,7575,63,7575
+1280,"VVP, Rajkot",SFI,Computer Engg.,OP,Home State,124,845,104,1816
+1281,"VVP, Rajkot",SFI,Computer Engg.,SC,Home State,71,5769,71,5769
+1282,"VVP, Rajkot",SFI,Computer Engg.,SE,Home State,115,1228,89,3049
+1283,"VVP, Rajkot",SFI,Computer Engg.,TF,Home State,164,61,164,61
+1284,"VVP, Rajkot",SFI,Electrical Engg.,OP,Home State,105,1723,42,13568
+1285,"VVP, Rajkot",SFI,Electrical Engg.,TF,Home State,132.5,601,132.5,601
+1286,"VVP, Rajkot",SFI,Information Tech.,EW,Home State,98.5,2219,82,3904
+1287,"VVP, Rajkot",SFI,Information Tech.,OP,Home State,127,748,84.5,3596
+1288,"VVP, Rajkot",SFI,Information Tech.,SE,Home State,85,3546,57.5,9165
+1289,"VVP, Rajkot",SFI,Information Tech.,TF,Home State,144.5,320,144.5,320
+1290,"VVP, Rajkot",SFI,Mechanical Engg.,OP,Home State,102.5,1900,38.5,14453
+1291,"VVP, Rajkot",SFI,Chemical Engg.,OP,Home State,95,2506,88.5,3106
