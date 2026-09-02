@@ -60,7 +60,8 @@ $daysLeft = max(0, (int) $today->diff($examDate)->format('%r%a'));
 $heatmapData = [];
 if ($attemptCount > 0) {
     foreach ($attempts as $a) {
-        $day = date('Y-m-d', strtotime($a['completed_at']));
+        $completedAt = $a['completed_at'] ?? $a['created_at'] ?? 'now';
+        $day = date('Y-m-d', strtotime($completedAt));
         $heatmapData[$day] = ($heatmapData[$day] ?? 0) + 1;
     }
 }
