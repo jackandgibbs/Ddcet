@@ -797,6 +797,10 @@ function currentUser(): ?array {
         $sid = (int) $_SERVER['HTTP_X_STUDENT_ID'];
         $users = supabaseRest('students?id=eq.' . $sid . '&select=*&limit=1');
         if (!empty($users[0]) && empty($users[0]['is_banned'])) {
+            $clientToken = $_SERVER['HTTP_X_SESSION_TOKEN'] ?? '';
+            if (!empty($users[0]['current_session_token']) && $users[0]['current_session_token'] !== $clientToken) {
+                return null; // Session token mismatch -> kicked out
+            }
             return $users[0];
         }
     }
@@ -829,6 +833,16 @@ function requireAuth(): array {
                 header('Location: ' . BASE_PATH . 'auth/login.php?error=banned');
                 exit;
             }
+            
+            // Check Simultaneous Session Kick
+            if (!empty($fresh[0]['current_session_token']) && !empty($_SESSION['session_token'])) {
+                if ($fresh[0]['current_session_token'] !== $_SESSION['session_token']) {
+                    session_destroy();
+                    header('Location: ' . BASE_PATH . 'auth/login.php?error=session_expired');
+                    exit;
+                }
+            }
+            
             // Preserve admin flag (comes from the admins table, set at login).
             $fresh[0]['is_admin'] = $user['is_admin'] ?? false;
             $_SESSION['user'] = $fresh[0];

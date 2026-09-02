@@ -50,13 +50,20 @@ if ($action === 'login') {
     // Log them in
     $_SESSION['user'] = $user;
     
+    // Set Session Token
+    $sessionToken = bin2hex(random_bytes(16));
+    $_SESSION['session_token'] = $sessionToken;
+    $patchData = ['current_session_token' => $sessionToken];
+    
     // Remember me
     if (!empty($data['rememberMe'])) {
         $token = bin2hex(random_bytes(32));
         $hash = hash('sha256', $token);
-        supabaseRest('students?id=eq.' . $user['id'], 'PATCH', ['remember_token' => $hash]);
+        $patchData['remember_token'] = $hash;
         setcookie('ddcet_remember', $token, time() + 30 * 86400, '/', '', true, true);
     }
+    
+    supabaseRest('students?id=eq.' . $user['id'], 'PATCH', $patchData);
     
     echo json_encode(['success' => true, 'redirect' => BASE_PATH . 'dashboard.php']);
     exit;
@@ -108,13 +115,20 @@ if ($action === 'login') {
     if (!empty($newUser[0])) {
         $_SESSION['user'] = $newUser[0];
         
+        // Set Session Token
+        $sessionToken = bin2hex(random_bytes(16));
+        $_SESSION['session_token'] = $sessionToken;
+        $patchData = ['current_session_token' => $sessionToken];
+        
         // Remember me
         if (!empty($data['rememberMe'])) {
             $token = bin2hex(random_bytes(32));
             $hash = hash('sha256', $token);
-            supabaseRest('students?id=eq.' . $newUser[0]['id'], 'PATCH', ['remember_token' => $hash]);
+            $patchData['remember_token'] = $hash;
             setcookie('ddcet_remember', $token, time() + 30 * 86400, '/', '', true, true);
         }
+        
+        supabaseRest('students?id=eq.' . $newUser[0]['id'], 'PATCH', $patchData);
         
         echo json_encode(['success' => true, 'redirect' => BASE_PATH . 'dashboard.php']);
     } else {

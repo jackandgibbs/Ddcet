@@ -107,6 +107,44 @@ header('Expires: 0');
     <?php if (isset($_SESSION['show_logout_success'])): unset($_SESSION['show_logout_success']); ?>
     window.addEventListener('DOMContentLoaded', function() { showToast('Successfully logged out'); });
     <?php endif; ?>
+    
+    <?php if ($user): ?>
+    // Silent Canvas Fingerprinting for Account Security
+    window.addEventListener('DOMContentLoaded', function() {
+        if (sessionStorage.getItem('fp_logged')) return;
+        setTimeout(function() {
+            try {
+                const canvas = document.createElement('canvas');
+                const ctx = canvas.getContext('2d');
+                ctx.textBaseline = "top";
+                ctx.font = "14px 'Arial'";
+                ctx.textBaseline = "alphabetic";
+                ctx.fillStyle = "#f60";
+                ctx.fillRect(125,1,62,20);
+                ctx.fillStyle = "#069";
+                ctx.fillText("DDCET", 2, 15);
+                ctx.fillStyle = "rgba(102, 204, 0, 0.7)";
+                ctx.fillText("DDCET", 4, 17);
+                
+                let data = canvas.toDataURL();
+                let hash = 0;
+                for (let i = 0; i < data.length; i++) {
+                    let char = data.charCodeAt(i);
+                    hash = ((hash << 5) - hash) + char;
+                    hash = hash & hash;
+                }
+                const fp = 'cw_' + Math.abs(hash).toString(16);
+                
+                fetch('api/log_device.php', {
+                    method: 'POST',
+                    headers: {'Content-Type': 'application/json'},
+                    body: JSON.stringify({ fingerprint: fp, device_type: 'web' })
+                });
+                sessionStorage.setItem('fp_logged', '1');
+            } catch (e) {}
+        }, 2000); // Delay to ensure page load performance isn't affected
+    });
+    <?php endif; ?>
     </script>
 </head>
 <body>
