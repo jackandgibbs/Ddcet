@@ -348,15 +348,15 @@ function closeSubscriptionModal() {
 
 <!-- Stats Grid -->
 <div class="stats-grid">
-    <div class="stat-card accent">
+    <div class="stat-card">
         <div class="stat-value"><?= $daysLeft ?></div>
         <div class="stat-label">Days to DDCET</div>
     </div>
-    <div class="stat-card green">
+    <div class="stat-card">
         <div class="stat-value"><?= $readiness ?>%</div>
         <div class="stat-label">Readiness Score</div>
     </div>
-    <div class="stat-card blue">
+    <div class="stat-card">
         <div class="stat-value"><?= $attemptCount ?></div>
         <div class="stat-label">Tests Completed</div>
     </div>
@@ -365,7 +365,7 @@ function closeSubscriptionModal() {
         <div class="stat-label">Global Rank</div>
     </div>
     <?php if ($collegeRk): ?>
-    <div class="stat-card accent">
+    <div class="stat-card">
         <div class="stat-value">#<?= number_format($collegeRk['rank']) ?></div>
         <div class="stat-label">In Your College</div>
     </div>
